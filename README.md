@@ -1,1 +1,2 @@
 # InverterControl
+This library allows to control inverters via CiA402 supported communications (ie. EtherCAT) in advanced applications eg. position control or torque control. Library recreates PLCOpen motion control blocks for inverters, that does not support AXIS_REFs elements in CODESYS or CODESYS based softwares. At all times durign creating this library, the goal was to keep those motion blocks as close to the originals as possible, so user will not have to learn new functionality. If any difference occurs - suitable note will be included near block description.
