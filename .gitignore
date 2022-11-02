@@ -1,0 +1,7 @@
+#CODESYS ingore files#
+*.bootinfo
+*.bootinfo_guids
+*.compileinfo
+*.project
+*.tgs
+*.opt
