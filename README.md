@@ -40,6 +40,23 @@ When block is being executed output **Busy** is `TRUE`, when axis is reset succe
 |        | Error                | `BOOL`              | `TRUE`: Error has occured during function block execution         |
 |        | ErrorID              | `IC_Error`          | Error identification - see description of type IC_Error           |
 
+### IC_SetVelocityUnits
+Configuration function block, that allows for switching velocity units of Inverter_Axis_Ref. The block is executed once, when rising edge of input **Execute** is detected. Velocity units are set with input VelocityUnits.
+
+When block is being executed output **Busy** is `TRUE`, when axis is reset succesfully output changes it's value to `FALSE` and output **Done** is set to `TRUE`. If error during execution of block occur output **Error** will be set to `TRUE`. Error code will be indicated in output **ErrorID**.
+
+![obraz](https://user-images.githubusercontent.com/109360131/199768707-93224d2d-34a5-43f5-833e-aed756fed1f9.png)
+
+| Scope  | Name                 | Type                | Comment                                                           |
+| ------ | -------------------- | ------------------- | -------------                                                     |
+| InOut  | Inverter             | `Inverter_Axis_Ref` | Reference to inverter - see description of type Inverter_Axis_Ref |
+| Input  | Execute              | `BOOL`              | Rising edge: Starts the execution of the function block           |
+|        | VelocityUnits        | `IMC_VelocityUnits` | Allows for selection of velocity units of axis ref                |
+| Output | Done                 | `BOOL`              | `TRUE`: Reset has been succesfully executed                       |
+|        | Busy                 | `BOOL`              | `TRUE`: Function block is executing                               |
+|        | Error                | `BOOL`              | `TRUE`: Error has occured during function block execution         |
+|        | ErrorID              | `IC_Error`          | Error identification - see description of type IC_Error           |
+
 ## Library defined data types
 Library defines several data types. Their descripition you may find below.
 
