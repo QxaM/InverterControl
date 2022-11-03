@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <project xmlns="http://www.plcopen.org/xml/tc6_0200">
-  <fileHeader companyName="Delta Electronics, Inc." productName="DIADesigner-AX" productVersion="DIADesigner-AX 1.3" creationDateTime="2022-11-03T17:03:01.2039843" />
-  <contentHeader name="InverterControl" version="3.5.15.30" modificationDateTime="2022-11-03T17:02:53.8549766" organization="Indpurogress" author="Piotr Gliszczyński">
+  <fileHeader companyName="Delta Electronics, Inc." productName="DIADesigner-AX" productVersion="DIADesigner-AX 1.3" creationDateTime="2022-11-03T17:29:56.2635276" />
+  <contentHeader name="InverterControl" version="3.5.15.30" modificationDateTime="2022-11-03T17:29:45.8101007" organization="Indpurogress" author="Piotr Gliszczyński">
     <Comment>Library project template with all possible element types, docu and a sample project structure</Comment>
     <coordinateInfo>
       <fbd>
@@ -836,6 +836,99 @@ END_IF</xhtml>
           </data>
         </addData>
       </pou>
+      <pou name="IC_ReadActualPosition" pouType="functionBlock">
+        <interface>
+          <inOutVars>
+            <variable name="Inverter">
+              <type>
+                <derived name="Inverter_Axis_Ref" />
+              </type>
+            </variable>
+          </inOutVars>
+          <inputVars>
+            <variable name="Enable">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+          </inputVars>
+          <outputVars>
+            <variable name="Valid">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="Busy">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="Error">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="ErrorID">
+              <type>
+                <derived name="IMC_Error" />
+              </type>
+            </variable>
+            <variable name="Position">
+              <type>
+                <DINT />
+              </type>
+            </variable>
+          </outputVars>
+        </interface>
+        <body>
+          <ST>
+            <xhtml xmlns="http://www.w3.org/1999/xhtml">IF Enable THEN
+	Position := ActPosition;
+	Valid := TRUE;
+	Busy := TRUE;
+ELSE
+	Valid := FALSE;
+	Busy := FALSE;
+	Error := FALSE;
+	ErrorID := IMC_Error.IMC_No_Error;
+END_IF</xhtml>
+          </ST>
+        </body>
+        <addData>
+          <data name="http://www.3s-software.com/plcopenxml/property" handleUnknown="implementation">
+            <Property name="ActPosition" ObjectId="2ca7f488-2931-4814-aea8-8369b98249d0">
+              <interface>
+                <returnType>
+                  <DINT />
+                </returnType>
+              </interface>
+              <GetAccessor>
+                <interface />
+                <body>
+                  <ST>
+                    <xhtml xmlns="http://www.w3.org/1999/xhtml">{warning disable C0371}
+
+IF __ISVALIDREF (Inverter) THEN
+	ActPosition := Inverter.ActPosition;
+ELSE
+	RETURN;
+END_IF
+
+
+
+{warning restore C0371}</xhtml>
+                  </ST>
+                </body>
+                <addData />
+              </GetAccessor>
+              <addData />
+            </Property>
+          </data>
+          <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+            <ObjectId>02eb2a41-a6ff-4c37-b031-cc4e3f68070a</ObjectId>
+          </data>
+        </addData>
+      </pou>
       <pou name="IC_MoveVelocity" pouType="functionBlock">
         <interface>
           <inOutVars>
@@ -1135,106 +1228,6 @@ END_IF
           </data>
           <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
             <ObjectId>bd61fcde-a18d-4ba3-99cd-73d566abd047</ObjectId>
-          </data>
-        </addData>
-      </pou>
-      <pou name="IC_ReadActualPosition" pouType="functionBlock">
-        <interface>
-          <inOutVars>
-            <variable name="Inverter">
-              <type>
-                <derived name="Inverter_Axis_Ref" />
-              </type>
-            </variable>
-          </inOutVars>
-          <inputVars>
-            <variable name="Enable">
-              <type>
-                <BOOL />
-              </type>
-            </variable>
-          </inputVars>
-          <outputVars>
-            <variable name="Valid">
-              <type>
-                <BOOL />
-              </type>
-            </variable>
-            <variable name="Busy">
-              <type>
-                <BOOL />
-              </type>
-            </variable>
-            <variable name="Error">
-              <type>
-                <BOOL />
-              </type>
-            </variable>
-            <variable name="ErrorID">
-              <type>
-                <derived name="IMC_Error" />
-              </type>
-            </variable>
-            <variable name="Position">
-              <type>
-                <DINT />
-              </type>
-            </variable>
-          </outputVars>
-          <addData>
-            <data name="http://www.3s-software.com/plcopenxml/pouinheritance" handleUnknown="implementation">
-              <Inheritance>
-                <Implements>I_ActPosition</Implements>
-              </Inheritance>
-            </data>
-          </addData>
-        </interface>
-        <body>
-          <ST>
-            <xhtml xmlns="http://www.w3.org/1999/xhtml">IF Enable THEN
-	Position := ActPosition;
-	Valid := TRUE;
-	Busy := TRUE;
-ELSE
-	Valid := FALSE;
-	Busy := FALSE;
-	Error := FALSE;
-	ErrorID := IMC_Error.IMC_No_Error;
-END_IF</xhtml>
-          </ST>
-        </body>
-        <addData>
-          <data name="http://www.3s-software.com/plcopenxml/property" handleUnknown="implementation">
-            <Property name="ActPosition" ObjectId="2ca7f488-2931-4814-aea8-8369b98249d0">
-              <interface>
-                <returnType>
-                  <DINT />
-                </returnType>
-              </interface>
-              <GetAccessor>
-                <interface />
-                <body>
-                  <ST>
-                    <xhtml xmlns="http://www.w3.org/1999/xhtml">{warning disable C0371}
-
-IF __ISVALIDREF (Inverter) THEN
-	ActPosition := Inverter.ActPosition;
-ELSE
-	RETURN;
-END_IF
-
-
-
-{warning restore C0371}</xhtml>
-                  </ST>
-                </body>
-                <addData />
-              </GetAccessor>
-              <addData />
-            </Property>
-          </data>
-          <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
-            <ObjectId>02eb2a41-a6ff-4c37-b031-cc4e3f68070a</ObjectId>
           </data>
         </addData>
       </pou>
@@ -2338,9 +2331,6 @@ END_IF
             <Object Name="IC_ReadActualVelocity" ObjectId="f9c25350-a033-4f21-8a04-00c4f3c73da7">
               <Object Name="ActVelocity" ObjectId="5bc09f8c-2e70-4354-b273-35c42a20487e" />
             </Object>
-            <Object Name="IC_ReadActualPosition" ObjectId="02eb2a41-a6ff-4c37-b031-cc4e3f68070a">
-              <Object Name="ActPosition" ObjectId="2ca7f488-2931-4814-aea8-8369b98249d0" />
-            </Object>
             <Object Name="IC_ReadActualTorque" ObjectId="fbe5678a-bb44-42fb-b958-640b298ed8ac" />
             <Object Name="iC_ReadAxisError" ObjectId="07fb1592-e3e5-4d1f-bef2-6a9d18d6daa8" />
             <Object Name="Test_SDO" ObjectId="26a606ae-7b47-459f-93c9-fcf6443c4fbc" />
@@ -2375,6 +2365,11 @@ END_IF
               <Object Name="IC_SetVelocityUnits" ObjectId="c725c660-7e8f-4318-969a-4e4b41b3614f" />
               <Object Name="IC_SetControllerMode" ObjectId="1adf80bc-ecf9-4bb3-9430-6a761fa5fdaa">
                 <Object Name="ControllerMode" ObjectId="974438dd-e473-4ed5-9e76-cdf675560487" />
+              </Object>
+            </Folder>
+            <Folder Name="Diagnostics">
+              <Object Name="IC_ReadActualPosition" ObjectId="02eb2a41-a6ff-4c37-b031-cc4e3f68070a">
+                <Object Name="ActPosition" ObjectId="2ca7f488-2931-4814-aea8-8369b98249d0" />
               </Object>
             </Folder>
           </Folder>
