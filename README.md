@@ -51,7 +51,7 @@ When block is being executed output **Busy** is `TRUE`, when axis is reset succe
 | ------ | -------------------- | ------------------- | -------------                                                     |
 | InOut  | Inverter             | `Inverter_Axis_Ref` | Reference to inverter - see description of type Inverter_Axis_Ref |
 | Input  | Execute              | `BOOL`              | Rising edge: Starts the execution of the function block           |
-|        | VelocityUnits        | `IMC_VelocityUnits` | Allows for selection of velocity units of axis ref                |
+|        | VelocityUnits        | `IMC_VelocityUnits` | Allows for selection of velocity units of axis ref. Available units are RPM, Pulse/s, mm/min. See `IMC_VelocityUnits` data type description for further details |
 | Output | Done                 | `BOOL`              | `TRUE`: Reset has been succesfully executed                       |
 |        | Busy                 | `BOOL`              | `TRUE`: Function block is executing                               |
 |        | Error                | `BOOL`              | `TRUE`: Error has occured during function block execution         |
