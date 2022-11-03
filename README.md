@@ -24,6 +24,22 @@ When the block is executing outputs **Busy** will be enabled (`TRUE`), if axis i
 |        | Error                | `BOOL`              | `TRUE`: Error has occured during function block execution         |
 |        | ErrorID              | `IC_Error`          | Error identification - see description of type IC_Error           |
 
+### IC_Reset
+Administrative function block, that allows for reseting drive errors if such occur. The block is executed once, when rising edge of input **Execute** is detected. 
+
+When block is being executed output **Busy** is `TRUE`, when axis is reset succesfully output changes it's value to `FALSE` and output **Done** is set to `TRUE`. If error during execution of block occur output **Error** will be set to `TRUE`. Error code will be indicated in output **ErrorID**.
+
+![obraz](https://user-images.githubusercontent.com/109360131/199761197-dbb923f2-c1f3-4f0e-a4df-dbb14e5e72ab.png)
+
+| Scope  | Name                 | Type                | Comment                                                           |
+| ------ | -------------------- | ------------------- | -------------                                                     |
+| InOut  | Inverter             | `Inverter_Axis_Ref` | Reference to inverter - see description of type Inverter_Axis_Ref |
+| Input  | Execute              | `BOOL`              | Rising edge: Starts the execution of the function block           |
+| Output | Done                 | `BOOL`              | `TRUE`: Reset has been succesfully executed                       |
+|        | Busy                 | `BOOL`              | `TRUE`: Function block is executing                               |
+|        | Error                | `BOOL`              | `TRUE`: Error has occured during function block execution         |
+|        | ErrorID              | `IC_Error`          | Error identification - see description of type IC_Error           |
+
 ## Library defined data types
 Library defines several data types. Their descripition you may find below.
 
