@@ -1,0 +1,2241 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<project xmlns="http://www.plcopen.org/xml/tc6_0200">
+  <fileHeader companyName="Delta Electronics, Inc." productName="DIADesigner-AX" productVersion="DIADesigner-AX 1.3" creationDateTime="2022-11-03T13:34:40.344919" />
+  <contentHeader name="InverterControl" version="3.5.15.30" modificationDateTime="2022-11-03T13:34:20.6434693" organization="Indpurogress" author="Piotr Gliszczyński">
+    <Comment>Library project template with all possible element types, docu and a sample project structure</Comment>
+    <coordinateInfo>
+      <fbd>
+        <scaling x="1" y="1" />
+      </fbd>
+      <ld>
+        <scaling x="1" y="1" />
+      </ld>
+      <sfc>
+        <scaling x="1" y="1" />
+      </sfc>
+    </coordinateInfo>
+    <addData>
+      <data name="http://www.3s-software.com/plcopenxml/projectinformation" handleUnknown="implementation">
+        <ProjectInformation>
+          <property name="Author" type="string">Piotr Gliszczyński</property>
+          <property name="AutoResolveUnbound" type="boolean">true</property>
+          <property name="Company" type="string">Indpurogress</property>
+          <property name="CompiledLibraryCompatibilityVersion" type="string">DIADesigner-AX 1.2</property>
+          <property name="DefaultNamespace" type="string">PG</property>
+          <property name="Description" type="string">Library project template with all possible element types, docu and a sample project structure</property>
+          <property name="DocFormat" type="string">reStructuredText</property>
+          <property name="IsEndUserLibrary" type="boolean">false</property>
+          <property name="LanguageModelAttribute" type="string">qualified-access-only</property>
+          <property name="Placeholder" type="string">PG</property>
+          <property name="Project" type="string">InverterControl</property>
+          <property name="Released" type="boolean">false</property>
+          <property name="SourceLibrary" type="boolean">false</property>
+          <property name="Title" type="string">InverterControl</property>
+          <property name="Version" type="version">3.5.15.30</property>
+          <property name="library-category-list" type="library-category-list">Application</property>
+        </ProjectInformation>
+      </data>
+    </addData>
+  </contentHeader>
+  <types>
+    <dataTypes>
+      <dataType name="IMC_ControllerMode">
+        <baseType>
+          <enum>
+            <values>
+              <value name="IMC_Position" value="1" />
+              <value name="IMC_Velocity" value="2" />
+              <value name="IMC_Torque" value="3" />
+              <value name="IMC_Home" value="6" />
+            </values>
+          </enum>
+        </baseType>
+        <addData>
+          <data name="http://www.3s-software.com/plcopenxml/attributes" handleUnknown="implementation">
+            <Attributes>
+              <Attribute Name="qualified_only" Value="" />
+              <Attribute Name="strict" Value="" />
+            </Attributes>
+          </data>
+          <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+            <ObjectId>b01ca257-462f-4dc2-8e8f-d56d9f0c1292</ObjectId>
+          </data>
+        </addData>
+      </dataType>
+      <dataType name="IMC_Direction">
+        <baseType>
+          <enum>
+            <values>
+              <value name="IMC_Positive" value="1" />
+              <value name="IMC_Negative" value="3" />
+            </values>
+          </enum>
+        </baseType>
+        <addData>
+          <data name="http://www.3s-software.com/plcopenxml/attributes" handleUnknown="implementation">
+            <Attributes>
+              <Attribute Name="qualified_only" Value="" />
+              <Attribute Name="strict" Value="" />
+            </Attributes>
+          </data>
+          <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+            <ObjectId>d3b88ce3-c7ed-4363-91b9-f88ddb3d449e</ObjectId>
+          </data>
+        </addData>
+      </dataType>
+      <dataType name="IMC_Error">
+        <baseType>
+          <enum>
+            <values>
+              <value name="IMC_No_Error" value="0" />
+              <value name="IMC_Inverter_No_Error" />
+              <value name="IMC_Could_Not_Read_SDO" />
+              <value name="IMC_Axis_Error" />
+              <value name="IMC_Axis_Not_Startup" />
+              <value name="IMC_Axis_Wrong_ControllerMode" />
+              <value name="IMC_Axis_Not_In_Motion" />
+              <value name="IMC_Drive_Not_Read_For_Switch_ON" />
+              <value name="IMC_Opertaion_Not_Enabled" />
+              <value name="IMC_Voltage_Disabled" />
+            </values>
+          </enum>
+        </baseType>
+        <addData>
+          <data name="http://www.3s-software.com/plcopenxml/attributes" handleUnknown="implementation">
+            <Attributes>
+              <Attribute Name="qualified_only" Value="" />
+              <Attribute Name="strict" Value="" />
+            </Attributes>
+          </data>
+          <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+            <ObjectId>bbfe9e38-1359-4d02-91a2-7f5ef04dc0a7</ObjectId>
+          </data>
+        </addData>
+      </dataType>
+      <dataType name="IMC_MotionStatus">
+        <baseType>
+          <enum>
+            <values>
+              <value name="IMC_ConstantVelocity" value="1" />
+              <value name="IMC_Accelerating" value="2" />
+              <value name="IMC_Decelerating" value="3" />
+              <value name="IMC_Standstill" value="4" />
+            </values>
+          </enum>
+        </baseType>
+        <addData>
+          <data name="http://www.3s-software.com/plcopenxml/attributes" handleUnknown="implementation">
+            <Attributes>
+              <Attribute Name="qualified_only" Value="" />
+              <Attribute Name="strict" Value="" />
+            </Attributes>
+          </data>
+          <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+            <ObjectId>1cf57172-8588-4b53-9766-e909811d6d00</ObjectId>
+          </data>
+        </addData>
+      </dataType>
+      <dataType name="IMC_VelocityUnits">
+        <baseType>
+          <enum>
+            <values>
+              <value name="IMC_RPM" value="0" />
+              <value name="IMC_PUU_PER_SEC" />
+              <value name="IMC_MM_PER_MIN" />
+            </values>
+          </enum>
+        </baseType>
+        <addData>
+          <data name="http://www.3s-software.com/plcopenxml/attributes" handleUnknown="implementation">
+            <Attributes>
+              <Attribute Name="qualified_only" Value="" />
+              <Attribute Name="strict" Value="" />
+            </Attributes>
+          </data>
+          <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+            <ObjectId>0ed1c4de-a435-4b87-8105-08f97cbe287e</ObjectId>
+          </data>
+        </addData>
+      </dataType>
+      <dataType name="Inverter_Axis_Ref">
+        <baseType>
+          <struct>
+            <variable name="VelocityUnits">
+              <type>
+                <derived name="IMC_VelocityUnits" />
+              </type>
+            </variable>
+            <variable name="DistancePerRevolution">
+              <type>
+                <LREAL />
+              </type>
+            </variable>
+            <variable name="ModeOfOperation">
+              <type>
+                <SINT />
+              </type>
+            </variable>
+            <variable name="ModeOfOperationDisplay">
+              <type>
+                <SINT />
+              </type>
+            </variable>
+            <variable name="Controlword">
+              <type>
+                <UINT />
+              </type>
+            </variable>
+            <variable name="Statusword">
+              <type>
+                <UINT />
+              </type>
+            </variable>
+            <variable name="ActVelocity">
+              <type>
+                <INT />
+              </type>
+            </variable>
+            <variable name="ActPosition">
+              <type>
+                <DINT />
+              </type>
+            </variable>
+            <variable name="TargetVelocity">
+              <type>
+                <INT />
+              </type>
+            </variable>
+          </struct>
+        </baseType>
+        <addData>
+          <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+            <ObjectId>f69d4bac-490d-4a25-be08-9436661369b9</ObjectId>
+          </data>
+        </addData>
+      </dataType>
+    </dataTypes>
+    <pous>
+      <pou name="IC_Power" pouType="functionBlock">
+        <interface>
+          <inOutVars>
+            <variable name="Inverter">
+              <type>
+                <derived name="Inverter_Axis_Ref" />
+              </type>
+            </variable>
+          </inOutVars>
+          <inputVars>
+            <variable name="Enable">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="bRegulatorON">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="bDriveStart">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+          </inputVars>
+          <outputVars>
+            <variable name="Status">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="bRegulatorRealState">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="bDriveStartRealState">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="Busy">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="Error">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="ErrorID">
+              <type>
+                <derived name="IMC_Error" />
+              </type>
+            </variable>
+          </outputVars>
+          <addData>
+            <data name="http://www.3s-software.com/plcopenxml/pouinheritance" handleUnknown="implementation">
+              <Inheritance>
+                <Implements>I_ErrorStatus</Implements>
+              </Inheritance>
+            </data>
+            <data name="http://www.3s-software.com/plcopenxml/attributes" handleUnknown="implementation">
+              <Attributes>
+                <Attribute Name="conditionalshow" Value="" />
+              </Attributes>
+            </data>
+          </addData>
+          <documentation>
+            <xhtml xmlns="http://www.w3.org/1999/xhtml">
+* Function Block allows to control drive power stage and quick stop option.
+* By setting bRegulatorON - power stage is enabled
+* By setting bDriveStart - quick stop option is being disabled
+</xhtml>
+          </documentation>
+        </interface>
+        <body>
+          <ST>
+            <xhtml xmlns="http://www.w3.org/1999/xhtml">IF Enable THEN
+	//Initializing drive
+	Inverter.Controlword.1 := TRUE;
+	Inverter.Controlword.3 := TRUE;
+	
+	//Motion interfaces control based on block inputs
+	setRegulatorON(bRegulatorON);
+	setDriveStart(bDriveStart);
+	
+	//outputs update
+	bRegulatorRealState := regulatorRealState;
+	bDriveStartRealState := driveStartRealState;
+	Status := TRUE;
+	Busy := TRUE;
+	
+	//Error hanlding
+	IF errorStatus THEN
+		Error := TRUE;
+		ErrorID := IMC_Error.IMC_Axis_Error;
+	END_IF
+	IF bRegulatorON THEN
+		IF NOT Inverter.Statusword.0 THEN
+			Error := TRUE;
+			ErrorID := IMC_Error.IMC_Drive_Not_Read_For_Switch_ON;
+		END_IF
+		IF NOT Inverter.Statusword.2 THEN
+			Error := TRUE;
+			ErrorID := IMC_Error.IMC_Opertaion_Not_Enabled;
+		END_IF
+		IF NOT Inverter.Statusword.4 THEN
+			Error := TRUE;
+			ErrorID := IMC_Error.IMC_Voltage_Disabled;
+		END_IF
+	END_IF
+ELSE
+	Status := FALSE;
+	Busy := FALSE;
+	Error := FALSE;
+	ErrorID := IMC_Error.IMC_No_Error;
+END_IF
+</xhtml>
+          </ST>
+        </body>
+        <addData>
+          <data name="http://www.3s-software.com/plcopenxml/method" handleUnknown="implementation">
+            <Method name="setRegulatorON" ObjectId="bd3fc6e2-b202-458e-a944-be60d7f5ca76">
+              <interface>
+                <returnType>
+                  <BOOL />
+                </returnType>
+                <inputVars>
+                  <variable name="i_bRegulatorON">
+                    <type>
+                      <BOOL />
+                    </type>
+                  </variable>
+                </inputVars>
+                <addData>
+                  <data name="http://www.3s-software.com/plcopenxml/accessmodifiers" handleUnknown="implementation">
+                    <AccessModifiers Private="true" />
+                  </data>
+                </addData>
+              </interface>
+              <body>
+                <ST>
+                  <xhtml xmlns="http://www.w3.org/1999/xhtml">{warning disable C0371}
+
+IF __ISVALIDREF (Inverter) THEN
+	Inverter.Controlword.0 := i_bRegulatorON;
+	setRegulatorON := regulatorRealState;
+ELSE
+	RETURN;
+END_IF
+
+
+
+{warning restore C0371}
+</xhtml>
+                </ST>
+              </body>
+              <addData />
+            </Method>
+          </data>
+          <data name="http://www.3s-software.com/plcopenxml/method" handleUnknown="implementation">
+            <Method name="setDriveStart" ObjectId="8c441cfd-329f-4d7b-924a-c916f0645f8a">
+              <interface>
+                <returnType>
+                  <BOOL />
+                </returnType>
+                <inputVars>
+                  <variable name="i_bDriveStart">
+                    <type>
+                      <BOOL />
+                    </type>
+                  </variable>
+                </inputVars>
+                <addData>
+                  <data name="http://www.3s-software.com/plcopenxml/accessmodifiers" handleUnknown="implementation">
+                    <AccessModifiers Private="true" />
+                  </data>
+                  <data name="http://www.3s-software.com/plcopenxml/attributes" handleUnknown="implementation">
+                    <Attributes>
+                      <Attribute Name="conditionalshow" Value="" />
+                    </Attributes>
+                  </data>
+                </addData>
+              </interface>
+              <body>
+                <ST>
+                  <xhtml xmlns="http://www.w3.org/1999/xhtml">{warning disable C0371}
+
+IF __ISVALIDREF (Inverter) THEN
+	Inverter.Controlword.2 := i_bDriveStart;
+	setDriveStart := driveStartRealState;
+ELSE
+	RETURN;
+END_IF
+
+
+
+{warning restore C0371}
+</xhtml>
+                </ST>
+              </body>
+              <addData />
+            </Method>
+          </data>
+          <data name="http://www.3s-software.com/plcopenxml/property" handleUnknown="implementation">
+            <Property name="driveStartRealState" ObjectId="5fb33c9e-a720-4c84-9236-e7918b2c079e">
+              <interface>
+                <returnType>
+                  <BOOL />
+                </returnType>
+              </interface>
+              <GetAccessor>
+                <interface>
+                  <addData>
+                    <data name="http://www.3s-software.com/plcopenxml/accessmodifiers" handleUnknown="implementation">
+                      <AccessModifiers Private="true" />
+                    </data>
+                  </addData>
+                </interface>
+                <body>
+                  <ST>
+                    <xhtml xmlns="http://www.w3.org/1999/xhtml">{warning disable C0371}
+
+IF __ISVALIDREF (Inverter) THEN
+	driveStartRealState := Inverter.Statusword.5;
+ELSE
+	RETURN;
+END_IF
+
+
+
+{warning restore C0371}
+</xhtml>
+                  </ST>
+                </body>
+                <addData />
+              </GetAccessor>
+              <addData />
+            </Property>
+          </data>
+          <data name="http://www.3s-software.com/plcopenxml/property" handleUnknown="implementation">
+            <Property name="regulatorRealState" ObjectId="eb0294e2-93c9-4b8d-921d-ec00f030ee37">
+              <interface>
+                <returnType>
+                  <BOOL />
+                </returnType>
+              </interface>
+              <GetAccessor>
+                <interface>
+                  <addData>
+                    <data name="http://www.3s-software.com/plcopenxml/accessmodifiers" handleUnknown="implementation">
+                      <AccessModifiers Private="true" />
+                    </data>
+                  </addData>
+                </interface>
+                <body>
+                  <ST>
+                    <xhtml xmlns="http://www.w3.org/1999/xhtml">{warning disable C0371}
+
+IF __ISVALIDREF (Inverter) THEN
+	regulatorRealState := Inverter.Statusword.1;
+ELSE
+	RETURN;
+END_IF
+
+
+
+{warning restore C0371}</xhtml>
+                  </ST>
+                </body>
+                <addData />
+              </GetAccessor>
+              <addData />
+            </Property>
+          </data>
+          <data name="http://www.3s-software.com/plcopenxml/property" handleUnknown="implementation">
+            <Property name="errorStatus" ObjectId="21fd8f2a-f20b-4c56-86d2-0e25c972afb7">
+              <interface>
+                <returnType>
+                  <BOOL />
+                </returnType>
+              </interface>
+              <GetAccessor>
+                <interface>
+                  <addData>
+                    <data name="http://www.3s-software.com/plcopenxml/accessmodifiers" handleUnknown="implementation">
+                      <AccessModifiers Private="true" />
+                    </data>
+                  </addData>
+                </interface>
+                <body>
+                  <ST>
+                    <xhtml xmlns="http://www.w3.org/1999/xhtml">{warning disable C0371}
+IF __ISVALIDREF (Inverter) THEN
+	errorStatus := Inverter.Statusword.3 OR Inverter.Statusword.7;
+ELSE
+	RETURN;
+END_IF
+{warning restore C0371}</xhtml>
+                  </ST>
+                </body>
+                <addData />
+              </GetAccessor>
+              <addData />
+            </Property>
+          </data>
+          <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+            <ObjectId>aff854bd-578b-4a45-bb0b-c4e1b89d3bca</ObjectId>
+          </data>
+        </addData>
+      </pou>
+      <pou name="IC_MoveVelocity" pouType="functionBlock">
+        <interface>
+          <inOutVars>
+            <variable name="Inverter">
+              <type>
+                <derived name="Inverter_Axis_Ref" />
+              </type>
+            </variable>
+          </inOutVars>
+          <inputVars>
+            <variable name="Execute">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="Velocity">
+              <type>
+                <LREAL />
+              </type>
+            </variable>
+            <variable name="Direction">
+              <type>
+                <derived name="IMC_Direction" />
+              </type>
+            </variable>
+          </inputVars>
+          <outputVars>
+            <variable name="InVelocity">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="Busy">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="Active">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="CommandAborted">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="Error">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="ErrorID">
+              <type>
+                <derived name="IMC_Error" />
+              </type>
+            </variable>
+          </outputVars>
+          <localVars>
+            <variable name="i">
+              <type>
+                <INT />
+              </type>
+              <initialValue>
+                <simpleValue value="0" />
+              </initialValue>
+              <addData>
+                <data name="http://www.3s-software.com/plcopenxml/attributes" handleUnknown="implementation">
+                  <Attributes>
+                    <Attribute Name="hide" Value="" />
+                    <Attribute Name="conditionalshow" Value="SomeText" />
+                  </Attributes>
+                </data>
+              </addData>
+            </variable>
+            <variable name="OldExecute">
+              <type>
+                <BOOL />
+              </type>
+              <addData>
+                <data name="http://www.3s-software.com/plcopenxml/attributes" handleUnknown="implementation">
+                  <Attributes>
+                    <Attribute Name="hide" Value="" />
+                    <Attribute Name="conditionalshow" Value="SomeText" />
+                  </Attributes>
+                </data>
+              </addData>
+            </variable>
+          </localVars>
+          <addData>
+            <data name="http://www.3s-software.com/plcopenxml/pouinheritance" handleUnknown="implementation">
+              <Inheritance>
+                <Implements>I_ErrorStatus</Implements>
+                <Implements>I_ControllerMode</Implements>
+                <Implements>I_RegulatorRealState</Implements>
+              </Inheritance>
+            </data>
+            <data name="http://www.3s-software.com/plcopenxml/attributes" handleUnknown="implementation">
+              <Attributes>
+                <Attribute Name="conditionalshow" Value="" />
+                <Attribute Name="hide_all_locals" Value="" />
+                <Attribute Name="conditionalshow_all_locals" Value="SomeText" />
+                <Attribute Name="hide" Value="" />
+              </Attributes>
+            </data>
+          </addData>
+        </interface>
+        <body>
+          <ST>
+            <xhtml xmlns="http://www.w3.org/1999/xhtml">IF Execute THEN
+	CommandAborted := FALSE;
+	OldExecute := TRUE;
+	CASE i OF
+	-3: 
+		Error := TRUE;
+		ErrorID := IMC_Error.IMC_Axis_Wrong_ControllerMode;	
+	-2: 
+		Error := TRUE;
+		ErrorID := IMC_Error.IMC_Axis_Not_Startup;	
+	-1:
+		Error := TRUE;
+		ErrorID := IMC_Error.IMC_Axis_Error;
+	0: 
+		Busy := TRUE;
+		i := 10;
+	10:
+		IF ErrorStatus THEN
+			i := -1;
+		ELSE
+			i := 20;
+		END_IF;
+	20:
+		IF NOT RegulatorRealState THEN
+			i := -2;
+		ELSE
+			i := 30;
+		END_IF;
+	30:
+		IF ControllerMode &lt;&gt; IMC_ControllerMode.IMC_Velocity THEN
+			i := -3;
+		ELSE
+			i := 40;
+		END_IF;
+	40:
+		IF Direction = IMC_Direction.IMC_Positive THEN
+			Inverter.TargetVelocity := SwitchVelocityUnits(Velocity);
+		ELSIF Direction = IMC_Direction.IMC_Negative THEN
+			Inverter.TargetVelocity := -SwitchVelocityUnits(Velocity);
+		END_IF;
+		i := 50;
+	50:
+		Inverter.Controlword.4 := TRUE;
+		Inverter.Controlword.5 := TRUE;
+		Inverter.Controlword.6 := TRUE;
+	END_CASE
+ELSE
+	Error := FALSE;
+	ErrorID := IMC_Error.IMC_No_Error;
+	i := 0;
+END_IF;
+
+IF OldExecute THEN
+	Busy := TRUE;
+	Active := TRUE;
+	IF Inverter.Statusword.10 THEN
+		InVelocity := TRUE;
+	ELSE
+		InVelocity := FALSE;
+	END_IF;
+ELSE
+	Busy := FALSE;
+	Active := FALSE;
+	InVelocity := FALSE;
+END_IF;
+
+IF NOT Inverter.Controlword.4 OR NOT Inverter.Controlword.5 OR NOT Inverter.Controlword.6 OR ErrorStatus OR NOT RegulatorRealState THEN
+	OldExecute := FALSE;
+	CommandAborted := TRUE;
+END_IF;</xhtml>
+          </ST>
+        </body>
+        <addData>
+          <data name="http://www.3s-software.com/plcopenxml/method" handleUnknown="implementation">
+            <Method name="SwitchVelocityUnits" ObjectId="98ada14f-31b6-4b71-91ec-f93dd956f72e">
+              <interface>
+                <returnType>
+                  <INT />
+                </returnType>
+                <inputVars>
+                  <variable name="CommandVelocity">
+                    <type>
+                      <LREAL />
+                    </type>
+                  </variable>
+                </inputVars>
+              </interface>
+              <body>
+                <ST>
+                  <xhtml xmlns="http://www.w3.org/1999/xhtml">{warning disable C0371}
+IF __ISVALIDREF (Inverter) THEN
+	IF Inverter.VelocityUnits = IMC_VelocityUnits.IMC_RPM THEN
+		SwitchVelocityUnits := TO_INT(CommandVelocity);
+	ELSIF Inverter.VelocityUnits = IMC_VelocityUnits.IMC_MM_PER_MIN THEN
+		SwitchVelocityUnits := TO_INT(CommandVelocity/Inverter.DistancePerRevolution);
+	ELSIF Inverter.VelocityUnits = IMC_VelocityUnits.IMC_PUU_PER_SEC THEN
+		SwitchVelocityUnits := TO_INT((CommandVelocity/Inverter.DistancePerRevolution)*60);
+	END_IF;
+ELSE
+	RETURN;
+END_IF
+{warning restore C0371}
+</xhtml>
+                </ST>
+              </body>
+              <addData />
+            </Method>
+          </data>
+          <data name="http://www.3s-software.com/plcopenxml/property" handleUnknown="implementation">
+            <Property name="errorStatus" ObjectId="4c5140bb-b899-4d8a-b865-f0acca972562">
+              <interface>
+                <returnType>
+                  <BOOL />
+                </returnType>
+              </interface>
+              <GetAccessor>
+                <interface />
+                <body>
+                  <ST>
+                    <xhtml xmlns="http://www.w3.org/1999/xhtml">{warning disable C0371}
+IF __ISVALIDREF (Inverter) THEN
+	errorStatus := Inverter.Statusword.3 OR Inverter.Statusword.7;
+ELSE
+	RETURN;
+END_IF
+{warning restore C0371}</xhtml>
+                  </ST>
+                </body>
+                <addData />
+              </GetAccessor>
+              <addData />
+            </Property>
+          </data>
+          <data name="http://www.3s-software.com/plcopenxml/property" handleUnknown="implementation">
+            <Property name="ControllerMode" ObjectId="7bc6861e-c793-496a-a27c-8a89a6c88db0">
+              <interface>
+                <returnType>
+                  <derived name="IMC_ControllerMode" />
+                </returnType>
+              </interface>
+              <GetAccessor>
+                <interface />
+                <body>
+                  <ST>
+                    <xhtml xmlns="http://www.w3.org/1999/xhtml">{warning disable C0371}
+IF __ISVALIDREF (Inverter) THEN
+	CASE Inverter.ModeOfOperationDisplay OF
+		1: ControllerMode := IMC_ControllerMode.IMC_Position;
+		2: ControllerMode := IMC_ControllerMode.IMC_Velocity;
+		4: ControllerMode := IMC_ControllerMode.IMC_Torque;
+		6: ControllerMode := IMC_ControllerMode.IMC_Home;
+	END_CASE
+ELSE
+	RETURN;
+END_IF
+{warning restore C0371}</xhtml>
+                  </ST>
+                </body>
+                <addData />
+              </GetAccessor>
+              <addData />
+            </Property>
+          </data>
+          <data name="http://www.3s-software.com/plcopenxml/property" handleUnknown="implementation">
+            <Property name="RegulatorRealState" ObjectId="6f61e975-d53a-4694-95a3-fa2c02d39efe">
+              <interface>
+                <returnType>
+                  <BOOL />
+                </returnType>
+              </interface>
+              <GetAccessor>
+                <interface />
+                <body>
+                  <ST>
+                    <xhtml xmlns="http://www.w3.org/1999/xhtml">{warning disable C0371}
+IF __ISVALIDREF (Inverter) THEN
+	RegulatorRealState := Inverter.Statusword.1;
+ELSE
+	RETURN;
+END_IF
+{warning restore C0371}</xhtml>
+                  </ST>
+                </body>
+                <addData />
+              </GetAccessor>
+              <addData />
+            </Property>
+          </data>
+          <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+            <ObjectId>bd61fcde-a18d-4ba3-99cd-73d566abd047</ObjectId>
+          </data>
+        </addData>
+      </pou>
+      <pou name="IC_ReadActualPosition" pouType="functionBlock">
+        <interface>
+          <inOutVars>
+            <variable name="Inverter">
+              <type>
+                <derived name="Inverter_Axis_Ref" />
+              </type>
+            </variable>
+          </inOutVars>
+          <inputVars>
+            <variable name="Enable">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+          </inputVars>
+          <outputVars>
+            <variable name="Valid">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="Busy">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="Error">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="ErrorID">
+              <type>
+                <derived name="IMC_Error" />
+              </type>
+            </variable>
+            <variable name="Position">
+              <type>
+                <DINT />
+              </type>
+            </variable>
+          </outputVars>
+          <addData>
+            <data name="http://www.3s-software.com/plcopenxml/pouinheritance" handleUnknown="implementation">
+              <Inheritance>
+                <Implements>I_ActPosition</Implements>
+              </Inheritance>
+            </data>
+          </addData>
+        </interface>
+        <body>
+          <ST>
+            <xhtml xmlns="http://www.w3.org/1999/xhtml">IF Enable THEN
+	Position := ActPosition;
+	Valid := TRUE;
+	Busy := TRUE;
+ELSE
+	Valid := FALSE;
+	Busy := FALSE;
+	Error := FALSE;
+	ErrorID := IMC_Error.IMC_No_Error;
+END_IF</xhtml>
+          </ST>
+        </body>
+        <addData>
+          <data name="http://www.3s-software.com/plcopenxml/property" handleUnknown="implementation">
+            <Property name="ActPosition" ObjectId="2ca7f488-2931-4814-aea8-8369b98249d0">
+              <interface>
+                <returnType>
+                  <DINT />
+                </returnType>
+              </interface>
+              <GetAccessor>
+                <interface />
+                <body>
+                  <ST>
+                    <xhtml xmlns="http://www.w3.org/1999/xhtml">{warning disable C0371}
+
+IF __ISVALIDREF (Inverter) THEN
+	ActPosition := Inverter.ActPosition;
+ELSE
+	RETURN;
+END_IF
+
+
+
+{warning restore C0371}</xhtml>
+                  </ST>
+                </body>
+                <addData />
+              </GetAccessor>
+              <addData />
+            </Property>
+          </data>
+          <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+            <ObjectId>02eb2a41-a6ff-4c37-b031-cc4e3f68070a</ObjectId>
+          </data>
+        </addData>
+      </pou>
+      <pou name="IC_ReadActualTorque" pouType="functionBlock">
+        <interface>
+          <inOutVars>
+            <variable name="Inverter">
+              <type>
+                <derived name="Inverter_Axis_Ref" />
+              </type>
+            </variable>
+          </inOutVars>
+          <inputVars>
+            <variable name="Enable">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+          </inputVars>
+          <outputVars>
+            <variable name="Valid">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="Busy">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="Error">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="ErrorID">
+              <type>
+                <derived name="IMC_Error" />
+              </type>
+            </variable>
+            <variable name="Torque">
+              <type>
+                <DINT />
+              </type>
+            </variable>
+          </outputVars>
+          <localVars>
+            <variable name="SDORead">
+              <type>
+                <derived name="ETC_CO_SdoRead" />
+              </type>
+              <addData>
+                <data name="http://www.3s-software.com/plcopenxml/attributes" handleUnknown="implementation">
+                  <Attributes>
+                    <Attribute Name="hide" Value="" />
+                  </Attributes>
+                </data>
+              </addData>
+            </variable>
+            <variable name="SDOData">
+              <type>
+                <INT />
+              </type>
+              <addData>
+                <data name="http://www.3s-software.com/plcopenxml/attributes" handleUnknown="implementation">
+                  <Attributes>
+                    <Attribute Name="hide" Value="" />
+                  </Attributes>
+                </data>
+              </addData>
+            </variable>
+          </localVars>
+          <addData>
+            <data name="http://www.3s-software.com/plcopenxml/attributes" handleUnknown="implementation">
+              <Attributes>
+                <Attribute Name="hide_all_locals" Value="" />
+              </Attributes>
+            </data>
+          </addData>
+        </interface>
+        <body>
+          <ST>
+            <xhtml xmlns="http://www.w3.org/1999/xhtml">IF Enable THEN
+	Busy := TRUE;
+	IF NOT SDORead.xExecute THEN
+		SDORead.xExecute := TRUE;
+		Valid := FALSE;
+	END_IF
+	IF SDORead.xDone THEN
+		SDORead.xExecute := FALSE;
+		Valid := TRUE;
+	END_IF
+	IF SDORead.xError THEN
+		Error := TRUE;
+		ErrorID := IMC_Error.IMC_Could_Not_Read_SDO;
+	END_IF
+	Torque := SDOData;
+ELSE
+	Valid := FALSE;
+	Busy := FALSE;
+	Error := FALSE;
+	ErrorID := IMC_Error.IMC_No_Error;
+END_IF
+
+SDORead(
+	usiCom:= 1, 
+	uiDevice:= Inverter.ETCSlave, 
+	usiChannel:= 1, 
+	wIndex:= 16#3021, 
+	bySubindex:= 16#C, 
+	udiTimeOut:= 100, 
+	pBuffer:= ADR(SDOData), 
+	szSize:= SIZEOF(SDOData)
+);</xhtml>
+          </ST>
+        </body>
+        <addData>
+          <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+            <ObjectId>fbe5678a-bb44-42fb-b958-640b298ed8ac</ObjectId>
+          </data>
+        </addData>
+      </pou>
+      <pou name="IC_ReadActualVelocity" pouType="functionBlock">
+        <interface>
+          <inOutVars>
+            <variable name="Inverter">
+              <type>
+                <derived name="Inverter_Axis_Ref" />
+              </type>
+            </variable>
+          </inOutVars>
+          <inputVars>
+            <variable name="Enable">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+          </inputVars>
+          <outputVars>
+            <variable name="Valid">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="Busy">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="Error">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="ErrorID">
+              <type>
+                <derived name="IMC_Error" />
+              </type>
+            </variable>
+            <variable name="Velocity">
+              <type>
+                <INT />
+              </type>
+            </variable>
+          </outputVars>
+          <addData>
+            <data name="http://www.3s-software.com/plcopenxml/pouinheritance" handleUnknown="implementation">
+              <Inheritance>
+                <Implements>I_ActVelocity</Implements>
+              </Inheritance>
+            </data>
+          </addData>
+        </interface>
+        <body>
+          <ST>
+            <xhtml xmlns="http://www.w3.org/1999/xhtml">IF Enable THEN
+	Velocity := ActVelocity;
+	Valid := TRUE;
+	Busy := TRUE;
+ELSE
+	Valid := FALSE;
+	Busy := FALSE;
+	Error := FALSE;
+	ErrorID := IMC_Error.IMC_No_Error;
+END_IF</xhtml>
+          </ST>
+        </body>
+        <addData>
+          <data name="http://www.3s-software.com/plcopenxml/property" handleUnknown="implementation">
+            <Property name="ActVelocity" ObjectId="5bc09f8c-2e70-4354-b273-35c42a20487e">
+              <interface>
+                <returnType>
+                  <INT />
+                </returnType>
+              </interface>
+              <GetAccessor>
+                <interface />
+                <body>
+                  <ST>
+                    <xhtml xmlns="http://www.w3.org/1999/xhtml">{warning disable C0371}
+IF __ISVALIDREF (Inverter) THEN
+	ActVelocity := Inverter.ActVelocity;
+ELSE
+	RETURN;
+END_IF
+{warning restore C0371}</xhtml>
+                  </ST>
+                </body>
+                <addData />
+              </GetAccessor>
+              <addData />
+            </Property>
+          </data>
+          <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+            <ObjectId>f9c25350-a033-4f21-8a04-00c4f3c73da7</ObjectId>
+          </data>
+        </addData>
+      </pou>
+      <pou name="iC_ReadAxisError" pouType="functionBlock">
+        <interface>
+          <inOutVars>
+            <variable name="Inverter">
+              <type>
+                <derived name="Inverter_Axis_Ref" />
+              </type>
+            </variable>
+          </inOutVars>
+          <inputVars>
+            <variable name="Enable">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="Master">
+              <type>
+                <derived name="IoDrvEtherCAT" />
+              </type>
+            </variable>
+          </inputVars>
+          <outputVars>
+            <variable name="Valid">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="Busy">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="Error">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="ErrorID">
+              <type>
+                <derived name="IMC_Error" />
+              </type>
+            </variable>
+            <variable name="AxisError">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="AxisWarningID">
+              <type>
+                <BYTE />
+              </type>
+            </variable>
+            <variable name="AxisErrorID">
+              <type>
+                <BYTE />
+              </type>
+            </variable>
+            <variable name="SDOErrorID">
+              <type>
+                <derived name="ETC_CO_ERROR" />
+              </type>
+            </variable>
+          </outputVars>
+          <localVars>
+            <variable name="SDORead">
+              <type>
+                <derived name="ETC_CO_SdoRead" />
+              </type>
+              <addData>
+                <data name="http://www.3s-software.com/plcopenxml/attributes" handleUnknown="implementation">
+                  <Attributes>
+                    <Attribute Name="hide" Value="" />
+                  </Attributes>
+                </data>
+              </addData>
+            </variable>
+            <variable name="SDOData">
+              <type>
+                <WORD />
+              </type>
+              <addData>
+                <data name="http://www.3s-software.com/plcopenxml/attributes" handleUnknown="implementation">
+                  <Attributes>
+                    <Attribute Name="hide" Value="" />
+                  </Attributes>
+                </data>
+              </addData>
+            </variable>
+            <variable name="ptr">
+              <type>
+                <pointer>
+                  <baseType>
+                    <BYTE />
+                  </baseType>
+                </pointer>
+              </type>
+              <addData>
+                <data name="http://www.3s-software.com/plcopenxml/attributes" handleUnknown="implementation">
+                  <Attributes>
+                    <Attribute Name="hide" Value="" />
+                  </Attributes>
+                </data>
+              </addData>
+            </variable>
+          </localVars>
+          <addData>
+            <data name="http://www.3s-software.com/plcopenxml/attributes" handleUnknown="implementation">
+              <Attributes>
+                <Attribute Name="hide_all_locals" Value="" />
+              </Attributes>
+            </data>
+          </addData>
+        </interface>
+        <body>
+          <ST>
+            <xhtml xmlns="http://www.w3.org/1999/xhtml">IF Enable THEN
+	Busy := TRUE;
+	IF NOT SDORead.xExecute THEN
+		SDORead.xExecute := TRUE;
+		Valid := FALSE;
+		ErrorID := IMC_Error.IMC_No_Error;
+	END_IF
+	IF SDORead.xDone THEN
+		SDORead.xExecute := FALSE;
+		Valid := TRUE;
+		ptr := ADR(SDOData);
+		AxisErrorID := ptr^;
+		ptr := ptr + SIZEOF(BYTE);
+		AxisWarningID := ptr^;
+	END_IF
+	IF SDORead.xError THEN
+		Error := TRUE;
+		ErrorID := IMC_Error.IMC_Could_Not_Read_SDO;
+		SDORead.xExecute := FALSE;		
+	END_IF
+ELSE
+	Valid := FALSE;
+	Busy := FALSE;
+	Error := FALSE;
+	ErrorID := IMC_Error.IMC_No_Error;
+END_IF
+
+SDORead(
+	usiCom:= 1, 
+	uiDevice:= 1002, 
+	usiChannel:= 1, 
+	wIndex:= 16#3021, 
+	bySubindex:= 16#1, 
+	udiTimeOut:= 100,
+	pBuffer:= ADR(SDOData), 
+	szSize:= SIZEOF(SDOData)
+);
+
+SDOErrorID := SDORead.eError;
+</xhtml>
+          </ST>
+        </body>
+        <addData>
+          <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+            <ObjectId>07fb1592-e3e5-4d1f-bef2-6a9d18d6daa8</ObjectId>
+          </data>
+        </addData>
+      </pou>
+      <pou name="IC_ReadStatus" pouType="functionBlock">
+        <interface>
+          <inOutVars>
+            <variable name="Inverter">
+              <type>
+                <derived name="Inverter_Axis_Ref" />
+              </type>
+            </variable>
+          </inOutVars>
+          <inputVars>
+            <variable name="Enable">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+          </inputVars>
+          <outputVars>
+            <variable name="Valid">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="Busy">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="Error">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="ErrorID">
+              <type>
+                <derived name="IMC_Error" />
+              </type>
+            </variable>
+            <variable name="Disabled">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="Errorstop">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="StandStill">
+              <type>
+                <BOOL />
+              </type>
+              <documentation>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml">Stopping : BOOL; Nie w falowniku (chyba, że da się jakoś inaczej -&gt; zobaczyć statusword)</xhtml>
+              </documentation>
+            </variable>
+            <variable name="DiscreteMotion">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="ContinuousMotion">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="Homing">
+              <type>
+                <BOOL />
+              </type>
+              <documentation>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml">SynchronizedMotion : BOOL; Nie w falowniku</xhtml>
+              </documentation>
+            </variable>
+            <variable name="ConstantVelocity">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="Accelerating">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="Decelerating">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+          </outputVars>
+          <addData>
+            <data name="http://www.3s-software.com/plcopenxml/pouinheritance" handleUnknown="implementation">
+              <Inheritance>
+                <Implements>I_ErrorStatus</Implements>
+                <Implements>I_ActVelocity</Implements>
+                <Implements>I_RegulatorRealState</Implements>
+                <Implements>I_ControllerMode</Implements>
+                <Implements>I_MotionStatus</Implements>
+              </Inheritance>
+            </data>
+          </addData>
+        </interface>
+        <body>
+          <ST>
+            <xhtml xmlns="http://www.w3.org/1999/xhtml">IF Enable THEN
+	Busy := TRUE;
+	//Errorstop status
+	IF errorStatus THEN
+		Errorstop := TRUE;
+	ELSE
+		Errorstop := FALSE;
+	END_IF;
+	//Disabled status
+	IF NOT errorStatus AND NOT RegulatorRealState THEN
+		Disabled := TRUE;
+	ELSE
+		Disabled := FALSE;
+	END_IF;
+	//Standstill status
+	IF NOT Errorstop AND RegulatorRealState AND ActVelocity = 0 THEN
+		StandStill := TRUE;
+	ELSE
+		StandStill := FALSE;
+	END_IF;
+	//Stopping status
+// 	IF NOT Errorstop AND RegulatorRealState AND ActVelocity &lt;&gt; 0 AND Inverter.Controlword &lt;= 16#0F THEN
+// 		Stopping := TRUE;
+// 	ELSE
+// 		Stopping := FALSE;
+// 	END_IF;
+	//Discrete motion
+	IF NOT Errorstop AND RegulatorRealState AND ActVelocity &lt;&gt; 0 AND ControllerMode = IMC_ControllerMode.IMC_Position THEN
+		DiscreteMotion := TRUE;
+	ELSE
+		DiscreteMotion := FALSE;
+	END_IF;
+	//Continuous motion
+	IF NOT Errorstop AND RegulatorRealState AND ActVelocity &lt;&gt; 0 AND ControllerMode = IMC_ControllerMode.IMC_Velocity THEN
+		ContinuousMotion := TRUE;
+	ELSE
+		ContinuousMotion := FALSE;
+	END_IF;
+	//Homing status
+	IF NOT Errorstop AND RegulatorRealState AND ActVelocity &lt;&gt; 0 AND ControllerMode = IMC_ControllerMode.IMC_Home THEN
+		Homing := TRUE;
+	ELSE
+		Homing := FALSE;
+	END_IF;	
+	//ConstantVelocity
+	IF NOT Errorstop AND RegulatorRealState AND MotionStatus = IMC_MotionStatus.IMC_ConstantVelocity THEN
+		ConstantVelocity := TRUE;
+	ELSE
+		ConstantVelocity := FALSE;
+	END_IF;
+	//Accelerating
+	IF NOT Errorstop AND RegulatorRealState AND MotionStatus = IMC_MotionStatus.IMC_Accelerating THEN
+		Accelerating := TRUE;
+	ELSE
+		Accelerating := FALSE;
+	END_IF;
+	//Decelerating
+	IF NOT Errorstop AND RegulatorRealState AND MotionStatus = IMC_MotionStatus.IMC_Decelerating THEN
+		Decelerating := TRUE;
+	ELSE
+		Decelerating := FALSE;
+	END_IF;
+	Valid := TRUE;
+ELSE
+	Valid := FALSE;
+	Busy := FALSE;
+	Error := FALSE;
+	ErrorID := IMC_Error.IMC_No_Error;
+	Disabled := FALSE;
+	Errorstop := FALSE;
+	//Stopping := FALSE;
+	StandStill := FALSE;
+	DiscreteMotion := FALSE;
+	ContinuousMotion := FALSE;
+	//SynchronizedMotion := FALSE;
+	Homing := FALSE;
+	ConstantVelocity := FALSE;
+	Accelerating := FALSE;
+	Decelerating := FALSE;
+END_IF</xhtml>
+          </ST>
+        </body>
+        <addData>
+          <data name="http://www.3s-software.com/plcopenxml/property" handleUnknown="implementation">
+            <Property name="errorStatus" ObjectId="68a15bbb-45bc-4493-a67d-63e5f649f185">
+              <interface>
+                <returnType>
+                  <BOOL />
+                </returnType>
+              </interface>
+              <GetAccessor>
+                <interface />
+                <body>
+                  <ST>
+                    <xhtml xmlns="http://www.w3.org/1999/xhtml">{warning disable C0371}
+IF __ISVALIDREF (Inverter) THEN
+	errorStatus := Inverter.Statusword.3 OR Inverter.Statusword.7;
+ELSE
+	RETURN;
+END_IF
+{warning restore C0371}</xhtml>
+                  </ST>
+                </body>
+                <addData />
+              </GetAccessor>
+              <addData />
+            </Property>
+          </data>
+          <data name="http://www.3s-software.com/plcopenxml/property" handleUnknown="implementation">
+            <Property name="ActVelocity" ObjectId="d6a48d64-d9b2-4b8f-a719-444bbbbcd128">
+              <interface>
+                <returnType>
+                  <INT />
+                </returnType>
+              </interface>
+              <GetAccessor>
+                <interface />
+                <body>
+                  <ST>
+                    <xhtml xmlns="http://www.w3.org/1999/xhtml">{warning disable C0371}
+IF __ISVALIDREF (Inverter) THEN
+	ActVelocity := Inverter.ActVelocity;
+ELSE
+	RETURN;
+END_IF
+{warning restore C0371}</xhtml>
+                  </ST>
+                </body>
+                <addData />
+              </GetAccessor>
+              <addData />
+            </Property>
+          </data>
+          <data name="http://www.3s-software.com/plcopenxml/property" handleUnknown="implementation">
+            <Property name="RegulatorRealState" ObjectId="b72b3107-cee1-42a6-8ab1-deacd9c99972">
+              <interface>
+                <returnType>
+                  <BOOL />
+                </returnType>
+              </interface>
+              <GetAccessor>
+                <interface />
+                <body>
+                  <ST>
+                    <xhtml xmlns="http://www.w3.org/1999/xhtml">{warning disable C0371}
+
+IF __ISVALIDREF (Inverter) THEN
+	RegulatorRealState := Inverter.Statusword.1;
+ELSE
+	RETURN;
+END_IF
+
+{warning restore C0371}</xhtml>
+                  </ST>
+                </body>
+                <addData />
+              </GetAccessor>
+              <addData />
+            </Property>
+          </data>
+          <data name="http://www.3s-software.com/plcopenxml/property" handleUnknown="implementation">
+            <Property name="ControllerMode" ObjectId="9d0d0c84-35fd-4b32-9968-0896b614b51d">
+              <interface>
+                <returnType>
+                  <derived name="IMC_ControllerMode" />
+                </returnType>
+              </interface>
+              <GetAccessor>
+                <interface />
+                <body>
+                  <ST>
+                    <xhtml xmlns="http://www.w3.org/1999/xhtml">{warning disable C0371}
+IF __ISVALIDREF (Inverter) THEN
+	CASE Inverter.ModeOfOperationDisplay OF
+		1: ControllerMode := IMC_ControllerMode.IMC_Position;
+		2: ControllerMode := IMC_ControllerMode.IMC_Velocity;
+		4: ControllerMode := IMC_ControllerMode.IMC_Torque;
+		6: ControllerMode := IMC_ControllerMode.IMC_Home;
+	END_CASE
+ELSE
+	RETURN;
+END_IF
+{warning restore C0371}</xhtml>
+                  </ST>
+                </body>
+                <addData />
+              </GetAccessor>
+              <addData />
+            </Property>
+          </data>
+          <data name="http://www.3s-software.com/plcopenxml/property" handleUnknown="implementation">
+            <Property name="MotionStatus" ObjectId="e9401504-e7f8-44d6-9afc-c36fc78f626d">
+              <interface>
+                <returnType>
+                  <derived name="IMC_MotionStatus" />
+                </returnType>
+              </interface>
+              <GetAccessor>
+                <interface>
+                  <localVars>
+                    <variable name="PrevVelocity">
+                      <type>
+                        <INT />
+                      </type>
+                    </variable>
+                  </localVars>
+                </interface>
+                <body>
+                  <ST>
+                    <xhtml xmlns="http://www.w3.org/1999/xhtml">{warning disable C0371}
+IF __ISVALIDREF (Inverter) THEN
+	IF (ActVelocity &gt; 0 AND ActVelocity &gt; PrevVelocity) OR (ActVelocity &lt; 0 AND ActVelocity &lt; PrevVelocity) THEN
+		MotionStatus := IMC_MotionStatus.IMC_Accelerating;
+	ELSIF (ActVelocity &gt; 0 AND ActVelocity &lt; PrevVelocity) OR (ActVelocity &lt; 0 AND ActVelocity &gt; PrevVelocity) THEN
+		MotionStatus := IMC_MotionStatus.IMC_Decelerating;
+	ELSIF ActVelocity = PrevVelocity AND ActVelocity &lt;&gt; 0 THEN
+		MotionStatus := IMC_MotionStatus.IMC_ConstantVelocity;
+	ELSIF ActVelocity = 0 THEN
+		MotionStatus := IMC_MotionStatus.IMC_Standstill;
+	END_IF;
+	PrevVelocity := ActVelocity;
+ELSE
+	RETURN;
+END_IF
+{warning restore C0371}</xhtml>
+                  </ST>
+                </body>
+                <addData />
+              </GetAccessor>
+              <addData />
+            </Property>
+          </data>
+          <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+            <ObjectId>3df4a371-8cc0-4137-8a77-555bb386dd0d</ObjectId>
+          </data>
+        </addData>
+      </pou>
+      <pou name="IC_Reset" pouType="functionBlock">
+        <interface>
+          <inOutVars>
+            <variable name="Inverter">
+              <type>
+                <derived name="Inverter_Axis_Ref" />
+              </type>
+            </variable>
+          </inOutVars>
+          <inputVars>
+            <variable name="Execute">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+          </inputVars>
+          <outputVars>
+            <variable name="Done">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="Busy">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="Error">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="ErrorID">
+              <type>
+                <derived name="IMC_Error" />
+              </type>
+            </variable>
+          </outputVars>
+          <localVars>
+            <variable name="cykl">
+              <type>
+                <INT />
+              </type>
+              <addData>
+                <data name="http://www.3s-software.com/plcopenxml/attributes" handleUnknown="implementation">
+                  <Attributes>
+                    <Attribute Name="hide" Value="" />
+                  </Attributes>
+                </data>
+              </addData>
+            </variable>
+          </localVars>
+          <addData>
+            <data name="http://www.3s-software.com/plcopenxml/pouinheritance" handleUnknown="implementation">
+              <Inheritance>
+                <Implements>I_ErrorStatus</Implements>
+              </Inheritance>
+            </data>
+            <data name="http://www.3s-software.com/plcopenxml/attributes" handleUnknown="implementation">
+              <Attributes>
+                <Attribute Name="hide_all_locals" Value="" />
+              </Attributes>
+            </data>
+          </addData>
+        </interface>
+        <body>
+          <ST>
+            <xhtml xmlns="http://www.w3.org/1999/xhtml">IF Execute  THEN
+	CASE cykl OF
+		-1:
+			Error := TRUE;
+			ErrorID := IMC_Error.IMC_Inverter_No_Error;
+			Busy := FALSE;
+		0:
+			Busy := TRUE;
+			cykl := 10;
+		10:
+			IF NOT errorStatus THEN
+				cykl := -1;
+			ELSE
+				cykl := 20;
+			END_IF
+		20:
+			Inverter.Controlword.7 := TRUE;
+			cykl := 30;
+		30:
+			IF NOT errorStatus THEN
+				Inverter.Controlword.7 := FALSE;
+				cykl := 40;
+			END_IF
+		40:
+			Done := TRUE;
+			Busy := FALSE;
+	END_CASE
+ELSE
+	Done := FALSE;
+	Busy := FALSE;
+	Error := FALSE;
+	ErrorID := IMC_Error.IMC_No_Error;
+	Inverter.Controlword.7 := FALSE;
+	cykl := 0;
+END_IF</xhtml>
+          </ST>
+        </body>
+        <addData>
+          <data name="http://www.3s-software.com/plcopenxml/property" handleUnknown="implementation">
+            <Property name="errorStatus" ObjectId="71fd68aa-e47f-4e4b-a4f6-8da8ed591935">
+              <interface>
+                <returnType>
+                  <BOOL />
+                </returnType>
+              </interface>
+              <GetAccessor>
+                <interface />
+                <body>
+                  <ST>
+                    <xhtml xmlns="http://www.w3.org/1999/xhtml">{warning disable C0371}
+
+IF __ISVALIDREF (Inverter) THEN
+	errorStatus := Inverter.Statusword.3 OR Inverter.Statusword.7;
+ELSE
+	RETURN;
+END_IF
+
+
+
+{warning restore C0371}</xhtml>
+                  </ST>
+                </body>
+                <addData />
+              </GetAccessor>
+              <addData />
+            </Property>
+          </data>
+          <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+            <ObjectId>55f1cb63-16e0-486c-ada9-3bd2ee09a65d</ObjectId>
+          </data>
+        </addData>
+      </pou>
+      <pou name="IC_Stop" pouType="functionBlock">
+        <interface>
+          <inOutVars>
+            <variable name="Inverter">
+              <type>
+                <derived name="Inverter_Axis_Ref" />
+              </type>
+            </variable>
+          </inOutVars>
+          <inputVars>
+            <variable name="Execute">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+          </inputVars>
+          <outputVars>
+            <variable name="Done">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="Busy">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="Error">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="ErrorID">
+              <type>
+                <derived name="IMC_Error" />
+              </type>
+            </variable>
+          </outputVars>
+          <addData>
+            <data name="http://www.3s-software.com/plcopenxml/pouinheritance" handleUnknown="implementation">
+              <Inheritance>
+                <Implements>I_ControllerMode</Implements>
+                <Implements>I_MotionStatus</Implements>
+              </Inheritance>
+            </data>
+          </addData>
+        </interface>
+        <body>
+          <ST>
+            <xhtml xmlns="http://www.w3.org/1999/xhtml">IF Execute THEN
+	Busy := TRUE;
+	IF MotionStatus = IMC_MotionStatus.IMC_Standstill AND NOT Done THEN
+		Error := TRUE;
+		ErrorID := IMC_Error.IMC_Axis_Not_In_Motion;
+	ELSE
+		IF ControllerMode = IMC_ControllerMode.IMC_Position OR ControllerMode = IMC_ControllerMode.IMC_Home THEN
+			Inverter.Controlword.8 := TRUE;
+		ELSIF ControllerMode = IMC_ControllerMode.IMC_Velocity THEN
+			Inverter.Controlword.4 := FALSE;
+			Inverter.Controlword.5 := FALSE;
+			Inverter.Controlword.6 := FALSE;
+		END_IF;
+		IF Inverter.ActVelocity = 0 THEN
+			Done := TRUE;
+		END_IF;
+	END_IF;
+ELSE
+	Done := FALSE;
+	Busy := FALSE;
+	Error := FALSE;
+	ErrorID := IMC_Error.IMC_No_Error;
+END_IF;</xhtml>
+          </ST>
+        </body>
+        <addData>
+          <data name="http://www.3s-software.com/plcopenxml/property" handleUnknown="implementation">
+            <Property name="ControllerMode" ObjectId="3320edd9-4e63-4014-97e6-e9cb27bbd19c">
+              <interface>
+                <returnType>
+                  <derived name="IMC_ControllerMode" />
+                </returnType>
+              </interface>
+              <GetAccessor>
+                <interface />
+                <body>
+                  <ST>
+                    <xhtml xmlns="http://www.w3.org/1999/xhtml">{warning disable C0371}
+IF __ISVALIDREF (Inverter) THEN
+	CASE Inverter.ModeOfOperationDisplay OF
+		1: ControllerMode := IMC_ControllerMode.IMC_Position;
+		2: ControllerMode := IMC_ControllerMode.IMC_Velocity;
+		4: ControllerMode := IMC_ControllerMode.IMC_Torque;
+		6: ControllerMode := IMC_ControllerMode.IMC_Home;
+	END_CASE
+ELSE
+	RETURN;
+END_IF
+{warning restore C0371}</xhtml>
+                  </ST>
+                </body>
+                <addData />
+              </GetAccessor>
+              <addData />
+            </Property>
+          </data>
+          <data name="http://www.3s-software.com/plcopenxml/property" handleUnknown="implementation">
+            <Property name="MotionStatus" ObjectId="eec00fdf-5595-45e7-8463-09a475547399">
+              <interface>
+                <returnType>
+                  <derived name="IMC_MotionStatus" />
+                </returnType>
+              </interface>
+              <GetAccessor>
+                <interface>
+                  <localVars>
+                    <variable name="PrevVelocity">
+                      <type>
+                        <INT />
+                      </type>
+                    </variable>
+                  </localVars>
+                </interface>
+                <body>
+                  <ST>
+                    <xhtml xmlns="http://www.w3.org/1999/xhtml">{warning disable C0371}
+IF __ISVALIDREF (Inverter) THEN
+	IF Inverter.ActVelocity &gt; 0 AND Inverter.ActVelocity &gt; PrevVelocity OR Inverter.ActVelocity &lt; 0 AND Inverter.ActVelocity &lt; PrevVelocity THEN
+		MotionStatus := IMC_MotionStatus.IMC_Accelerating;
+	ELSIF Inverter.ActVelocity &gt; 0 AND Inverter.ActVelocity &lt; PrevVelocity OR Inverter.ActVelocity &lt; 0 AND Inverter.ActVelocity &gt; PrevVelocity THEN
+		MotionStatus := IMC_MotionStatus.IMC_Decelerating;
+	ELSIF Inverter.ActVelocity = PrevVelocity THEN
+		MotionStatus := IMC_MotionStatus.IMC_ConstantVelocity;
+	ELSIF Inverter.ActVelocity = 0 THEN
+		MotionStatus := IMC_MotionStatus.IMC_Standstill;
+	END_IF;
+	PrevVelocity := Inverter.ActVelocity;
+ELSE
+	RETURN;
+END_IF
+{warning restore C0371}</xhtml>
+                  </ST>
+                </body>
+                <addData />
+              </GetAccessor>
+              <addData />
+            </Property>
+          </data>
+          <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+            <ObjectId>dd610aa0-a9bc-4f43-87d2-dbba3b08fb9b</ObjectId>
+          </data>
+        </addData>
+      </pou>
+      <pou name="Test_SDO" pouType="functionBlock">
+        <interface>
+          <inputVars>
+            <variable name="Execute">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="Com">
+              <type>
+                <USINT />
+              </type>
+            </variable>
+            <variable name="Device">
+              <type>
+                <UINT />
+              </type>
+            </variable>
+            <variable name="Index">
+              <type>
+                <WORD />
+              </type>
+            </variable>
+            <variable name="Subindex">
+              <type>
+                <BYTE />
+              </type>
+            </variable>
+          </inputVars>
+          <outputVars>
+            <variable name="ErrorID">
+              <type>
+                <derived name="ETC_CO_ERROR" />
+              </type>
+            </variable>
+          </outputVars>
+          <localVars>
+            <variable name="ReadSDO">
+              <type>
+                <derived name="ETC_CO_SdoRead" />
+              </type>
+            </variable>
+            <variable name="SDOData">
+              <type>
+                <INT />
+              </type>
+            </variable>
+          </localVars>
+        </interface>
+        <body>
+          <ST>
+            <xhtml xmlns="http://www.w3.org/1999/xhtml">ReadSDO(
+	xExecute:= Execute, 
+	usiCom:= Com, 
+	uiDevice:= Device, 
+	usiChannel:= 1, 
+	wIndex:= Index, 
+	bySubindex:= Subindex, 
+	udiTimeOut:= 100, 
+	pBuffer:= ADR(SDOData), 
+	szSize:= SIZEOF(SDOData), 
+	xDone=&gt; , 
+	xBusy=&gt; , 
+	xError=&gt; , 
+	eError=&gt; ErrorID, 
+	udiSdoAbort=&gt; , 
+	szDataRead=&gt; );</xhtml>
+          </ST>
+        </body>
+        <addData>
+          <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+            <ObjectId>26a606ae-7b47-459f-93c9-fcf6443c4fbc</ObjectId>
+          </data>
+        </addData>
+      </pou>
+    </pous>
+  </types>
+  <instances>
+    <configurations />
+  </instances>
+  <addData>
+    <data name="http://www.3s-software.com/plcopenxml/interface" handleUnknown="implementation">
+      <Interface name="I_ActPosition" ObjectId="ecd88e1b-9458-4599-8b2e-4af58834b2d4">
+        <Properties>
+          <Property name="ActPosition" ObjectId="c2256d54-715b-4302-967c-be94b25d58a4">
+            <interface>
+              <returnType>
+                <DINT />
+              </returnType>
+            </interface>
+            <GetAccessor />
+            <addData />
+          </Property>
+        </Properties>
+        <addData />
+      </Interface>
+    </data>
+    <data name="http://www.3s-software.com/plcopenxml/interface" handleUnknown="implementation">
+      <Interface name="I_ActTorque" ObjectId="30bdd9e7-77ec-4899-be8a-ec312147ce66">
+        <Properties>
+          <Property name="ActTorque" ObjectId="9559d780-f77b-4659-b015-ca1f2653623c">
+            <interface>
+              <returnType>
+                <INT />
+              </returnType>
+            </interface>
+            <GetAccessor />
+            <addData />
+          </Property>
+        </Properties>
+        <addData />
+      </Interface>
+    </data>
+    <data name="http://www.3s-software.com/plcopenxml/interface" handleUnknown="implementation">
+      <Interface name="I_ActVelocity" ObjectId="376e008b-f56c-4b5a-b3f4-03d598c700e2">
+        <Properties>
+          <Property name="ActVelocity" ObjectId="fc861b2e-f386-4264-9a4d-dbfc3379789f">
+            <interface>
+              <returnType>
+                <INT />
+              </returnType>
+            </interface>
+            <GetAccessor />
+            <addData />
+          </Property>
+        </Properties>
+        <addData />
+      </Interface>
+    </data>
+    <data name="http://www.3s-software.com/plcopenxml/interface" handleUnknown="implementation">
+      <Interface name="I_ControllerMode" ObjectId="a33905b6-43ce-4b55-bd97-0cbd128187e9">
+        <Properties>
+          <Property name="ControllerMode" ObjectId="6744018d-39d3-4ba0-a1df-0b97df1ad7bf">
+            <interface>
+              <returnType>
+                <derived name="IMC_ControllerMode" />
+              </returnType>
+            </interface>
+            <GetAccessor />
+            <addData />
+          </Property>
+        </Properties>
+        <addData />
+      </Interface>
+    </data>
+    <data name="http://www.3s-software.com/plcopenxml/interface" handleUnknown="implementation">
+      <Interface name="I_ErrorStatus" ObjectId="22624ba8-ac4e-46cf-9878-e4e09a3cea3a">
+        <Properties>
+          <Property name="errorStatus" ObjectId="35e2afd8-0c33-496c-b0a0-5ea216fd5200">
+            <interface>
+              <returnType>
+                <BOOL />
+              </returnType>
+            </interface>
+            <GetAccessor />
+            <addData />
+          </Property>
+        </Properties>
+        <addData />
+      </Interface>
+    </data>
+    <data name="http://www.3s-software.com/plcopenxml/interface" handleUnknown="implementation">
+      <Interface name="I_MotionStatus" ObjectId="cce828bc-3eaf-41dd-84e7-bdecf15b767c">
+        <Properties>
+          <Property name="MotionStatus" ObjectId="ffd88b68-6c1f-4929-80b4-b3c370c66a85">
+            <interface>
+              <returnType>
+                <derived name="IMC_MotionStatus" />
+              </returnType>
+            </interface>
+            <GetAccessor />
+            <addData />
+          </Property>
+        </Properties>
+        <addData />
+      </Interface>
+    </data>
+    <data name="http://www.3s-software.com/plcopenxml/interface" handleUnknown="implementation">
+      <Interface name="I_RegulatorRealState" ObjectId="97bd0228-ecf2-4422-8e02-6f1769818ea8">
+        <Properties>
+          <Property name="RegulatorRealState" ObjectId="5dc3332f-1ee5-426c-92ab-e9acfa0e4b2f">
+            <interface>
+              <returnType>
+                <BOOL />
+              </returnType>
+            </interface>
+            <GetAccessor />
+            <addData />
+          </Property>
+        </Properties>
+        <addData />
+      </Interface>
+    </data>
+    <data name="http://www.3s-software.com/plcopenxml/libraries" handleUnknown="implementation">
+      <Libraries>
+        <Library Name="#CAA Types" Namespace="CAA" HideWhenReferencedAsDependency="false" PublishSymbolsInContainer="false" SystemLibrary="false" LinkAllContent="false" DefaultResolution="CAA Types Extern, * (CAA Technical Workgroup)" />
+        <Library Name="#CAA FB Factory" Namespace="FBF" HideWhenReferencedAsDependency="false" PublishSymbolsInContainer="false" SystemLibrary="false" LinkAllContent="false" DefaultResolution="CAA FB Factory, * (CAA Technical Workgroup)" />
+        <Library Name="#CBML" Namespace="CBML" HideWhenReferencedAsDependency="false" PublishSymbolsInContainer="false" SystemLibrary="false" LinkAllContent="false" DefaultResolution="Common Behaviour Model, * (3S - Smart Software Solutions GmbH)" />
+        <Library Name="#EtherCATStackLibrary" Namespace="ETCStack" HideWhenReferencedAsDependency="false" PublishSymbolsInContainer="false" SystemLibrary="false" LinkAllContent="false" DefaultResolution="EtherCATStack, * (3S - Smart Software Solutions GmbH)" />
+        <Library Name="#IODrvEtherCATDriver" Namespace="IoDrvEthercatDriverLib" HideWhenReferencedAsDependency="false" PublishSymbolsInContainer="false" SystemLibrary="false" LinkAllContent="false" DefaultResolution="IODrvEtherCATDriver, * (3S - Smart Software Solutions GmbH)">
+          <Parameters>
+            <Parameter Name="ETC_MAX_SLAVES" Value="1024" />
+            <Parameter Name="MAX_ASYNC_MSG" Value="4" />
+            <Parameter Name="MAX_SDO_CHANNELS" Value="100" />
+            <Parameter Name="MAX_MAILBOX_CHANNELS" Value="100" />
+            <Parameter Name="MAX_STATUS_CYCLE_DELAY" Value="3" />
+            <Parameter Name="ETC_FOE_TIMEOUT" Value="10000" />
+          </Parameters>
+        </Library>
+        <addData>
+          <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+            <ObjectId>8c1463b5-02f2-427d-bd06-9e39d42fcbff</ObjectId>
+          </data>
+        </addData>
+      </Libraries>
+    </data>
+    <data name="http://www.3s-software.com/plcopenxml/projectstructure" handleUnknown="discard">
+      <ProjectStructure>
+        <Folder Name="InverterControl">
+          <Folder Name="Enums">
+            <Object Name="IMC_ControllerMode" ObjectId="b01ca257-462f-4dc2-8e8f-d56d9f0c1292" />
+            <Object Name="IMC_Error" ObjectId="bbfe9e38-1359-4d02-91a2-7f5ef04dc0a7" />
+            <Object Name="IMC_MotionStatus" ObjectId="1cf57172-8588-4b53-9766-e909811d6d00" />
+            <Object Name="IMC_VelocityUnits" ObjectId="0ed1c4de-a435-4b87-8105-08f97cbe287e" />
+            <Object Name="IMC_Direction" ObjectId="d3b88ce3-c7ed-4363-91b9-f88ddb3d449e" />
+          </Folder>
+          <Folder Name="Function Blocks">
+            <Object Name="IC_Reset" ObjectId="55f1cb63-16e0-486c-ada9-3bd2ee09a65d">
+              <Object Name="errorStatus" ObjectId="71fd68aa-e47f-4e4b-a4f6-8da8ed591935" />
+            </Object>
+            <Object Name="IC_ReadActualVelocity" ObjectId="f9c25350-a033-4f21-8a04-00c4f3c73da7">
+              <Object Name="ActVelocity" ObjectId="5bc09f8c-2e70-4354-b273-35c42a20487e" />
+            </Object>
+            <Object Name="IC_ReadActualPosition" ObjectId="02eb2a41-a6ff-4c37-b031-cc4e3f68070a">
+              <Object Name="ActPosition" ObjectId="2ca7f488-2931-4814-aea8-8369b98249d0" />
+            </Object>
+            <Object Name="IC_ReadActualTorque" ObjectId="fbe5678a-bb44-42fb-b958-640b298ed8ac" />
+            <Object Name="iC_ReadAxisError" ObjectId="07fb1592-e3e5-4d1f-bef2-6a9d18d6daa8" />
+            <Object Name="Test_SDO" ObjectId="26a606ae-7b47-459f-93c9-fcf6443c4fbc" />
+            <Object Name="IC_ReadStatus" ObjectId="3df4a371-8cc0-4137-8a77-555bb386dd0d">
+              <Object Name="errorStatus" ObjectId="68a15bbb-45bc-4493-a67d-63e5f649f185" />
+              <Object Name="ActVelocity" ObjectId="d6a48d64-d9b2-4b8f-a719-444bbbbcd128" />
+              <Object Name="RegulatorRealState" ObjectId="b72b3107-cee1-42a6-8ab1-deacd9c99972" />
+              <Object Name="ControllerMode" ObjectId="9d0d0c84-35fd-4b32-9968-0896b614b51d" />
+              <Object Name="MotionStatus" ObjectId="e9401504-e7f8-44d6-9afc-c36fc78f626d" />
+            </Object>
+            <Object Name="IC_MoveVelocity" ObjectId="bd61fcde-a18d-4ba3-99cd-73d566abd047">
+              <Object Name="errorStatus" ObjectId="4c5140bb-b899-4d8a-b865-f0acca972562" />
+              <Object Name="ControllerMode" ObjectId="7bc6861e-c793-496a-a27c-8a89a6c88db0" />
+              <Object Name="RegulatorRealState" ObjectId="6f61e975-d53a-4694-95a3-fa2c02d39efe" />
+              <Object Name="SwitchVelocityUnits" ObjectId="98ada14f-31b6-4b71-91ec-f93dd956f72e" />
+            </Object>
+            <Object Name="IC_Stop" ObjectId="dd610aa0-a9bc-4f43-87d2-dbba3b08fb9b">
+              <Object Name="ControllerMode" ObjectId="3320edd9-4e63-4014-97e6-e9cb27bbd19c" />
+              <Object Name="MotionStatus" ObjectId="eec00fdf-5595-45e7-8463-09a475547399" />
+            </Object>
+            <Folder Name="Administration">
+              <Object Name="IC_Power" ObjectId="aff854bd-578b-4a45-bb0b-c4e1b89d3bca">
+                <Object Name="setRegulatorON" ObjectId="bd3fc6e2-b202-458e-a944-be60d7f5ca76" />
+                <Object Name="setDriveStart" ObjectId="8c441cfd-329f-4d7b-924a-c916f0645f8a" />
+                <Object Name="driveStartRealState" ObjectId="5fb33c9e-a720-4c84-9236-e7918b2c079e" />
+                <Object Name="regulatorRealState" ObjectId="eb0294e2-93c9-4b8d-921d-ec00f030ee37" />
+                <Object Name="errorStatus" ObjectId="21fd8f2a-f20b-4c56-86d2-0e25c972afb7" />
+              </Object>
+            </Folder>
+          </Folder>
+          <Folder Name="Interfaces">
+            <Object Name="I_RegulatorRealState" ObjectId="97bd0228-ecf2-4422-8e02-6f1769818ea8">
+              <Object Name="RegulatorRealState" ObjectId="5dc3332f-1ee5-426c-92ab-e9acfa0e4b2f" />
+            </Object>
+            <Object Name="I_ActVelocity" ObjectId="376e008b-f56c-4b5a-b3f4-03d598c700e2">
+              <Object Name="ActVelocity" ObjectId="fc861b2e-f386-4264-9a4d-dbfc3379789f" />
+            </Object>
+            <Object Name="I_ErrorStatus" ObjectId="22624ba8-ac4e-46cf-9878-e4e09a3cea3a">
+              <Object Name="errorStatus" ObjectId="35e2afd8-0c33-496c-b0a0-5ea216fd5200" />
+            </Object>
+            <Object Name="I_ActPosition" ObjectId="ecd88e1b-9458-4599-8b2e-4af58834b2d4">
+              <Object Name="ActPosition" ObjectId="c2256d54-715b-4302-967c-be94b25d58a4" />
+            </Object>
+            <Object Name="I_ActTorque" ObjectId="30bdd9e7-77ec-4899-be8a-ec312147ce66">
+              <Object Name="ActTorque" ObjectId="9559d780-f77b-4659-b015-ca1f2653623c" />
+            </Object>
+            <Object Name="I_ControllerMode" ObjectId="a33905b6-43ce-4b55-bd97-0cbd128187e9">
+              <Object Name="ControllerMode" ObjectId="6744018d-39d3-4ba0-a1df-0b97df1ad7bf" />
+            </Object>
+            <Object Name="I_MotionStatus" ObjectId="cce828bc-3eaf-41dd-84e7-bdecf15b767c">
+              <Object Name="MotionStatus" ObjectId="ffd88b68-6c1f-4929-80b4-b3c370c66a85" />
+            </Object>
+          </Folder>
+          <Folder Name="Structs">
+            <Object Name="Inverter_Axis_Ref" ObjectId="f69d4bac-490d-4a25-be08-9436661369b9" />
+          </Folder>
+        </Folder>
+        <Object Name="Library Manager" ObjectId="8c1463b5-02f2-427d-bd06-9e39d42fcbff" />
+        <Object Name="Project Information" ObjectId="11c0fc3a-9bcf-4dd8-ac38-efb93363e521" />
+      </ProjectStructure>
+    </data>
+  </addData>
+</project>
