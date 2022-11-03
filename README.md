@@ -115,3 +115,13 @@ Enumeration data type, allows to represent actual velocity units used in applica
 | IMC_RPM         | 0       | Velocity is scaled in rounds per minute                                                                            |
 | IMC_PUU_PER_SEC | 1       | Velocity is scaled in pulses per second. Pulses mean actual pulses recieved by a drive from encoder                |
 | IMC_MM_PER_MIN  | 2       | Velocity is scaled in milimiters per minute. Velocity is calculated from distance per revolution entered by a user |
+
+### IMC_ControllerMode (Enum)
+Enumeration data type, represents drive controller mode in text values. Controller mode is set and read, by Mode of Operation and Mode of Operation display respectively. Enum values correspond directyl to Mode of Operation values (ie. IMC_Velocity=2 and Mode of Opertaion=2). Further description below:
+
+| Name            | Initial | Comment                                                                                                            |
+| --------------- | ------- | ------------------------------------------------------------------------------------------------------------------ |
+| IMC_Position    | 1       | Drive is set in position controller mode - positioning blocks are available to use                                 |
+| IMC_Velocity    | 2       | Drive is set in velocity controller mode - velocity blocks are available to use                                    |
+| IMC_Torque      | 3       | Drive is set in torque controller mode - torque control blocks are available to use                                |
+| IMC_Home        | 6       | Automatically set only for triggering IC_Home. Can be set by the user, but only IC_Home could be used in this mode |
