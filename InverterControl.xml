@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <project xmlns="http://www.plcopen.org/xml/tc6_0200">
-  <fileHeader companyName="Delta Electronics, Inc." productName="DIADesigner-AX" productVersion="DIADesigner-AX 1.3" creationDateTime="2022-11-03T13:34:40.344919" />
-  <contentHeader name="InverterControl" version="3.5.15.30" modificationDateTime="2022-11-03T13:34:20.6434693" organization="Indpurogress" author="Piotr Gliszczyński">
+  <fileHeader companyName="Delta Electronics, Inc." productName="DIADesigner-AX" productVersion="DIADesigner-AX 1.3" creationDateTime="2022-11-03T14:08:12.2646721" />
+  <contentHeader name="InverterControl" version="3.5.15.30" modificationDateTime="2022-11-03T14:08:02.5539623" organization="Indpurogress" author="Piotr Gliszczyński">
     <Comment>Library project template with all possible element types, docu and a sample project structure</Comment>
     <coordinateInfo>
       <fbd>
@@ -296,6 +296,7 @@
         <body>
           <ST>
             <xhtml xmlns="http://www.w3.org/1999/xhtml">IF Enable THEN
+	Busy := TRUE;
 	//Initializing drive
 	Inverter.Controlword.1 := TRUE;
 	Inverter.Controlword.3 := TRUE;
@@ -307,8 +308,7 @@
 	//outputs update
 	bRegulatorRealState := regulatorRealState;
 	bDriveStartRealState := driveStartRealState;
-	Status := TRUE;
-	Busy := TRUE;
+	Status := bRegulatorRealState AND bDriveStartRealState;
 	
 	//Error hanlding
 	IF errorStatus THEN
@@ -501,13 +501,7 @@ END_IF
                 </returnType>
               </interface>
               <GetAccessor>
-                <interface>
-                  <addData>
-                    <data name="http://www.3s-software.com/plcopenxml/accessmodifiers" handleUnknown="implementation">
-                      <AccessModifiers Private="true" />
-                    </data>
-                  </addData>
-                </interface>
+                <interface />
                 <body>
                   <ST>
                     <xhtml xmlns="http://www.w3.org/1999/xhtml">{warning disable C0371}
