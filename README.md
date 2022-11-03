@@ -57,6 +57,22 @@ When block is being executed output **Busy** is `TRUE`, when axis is reset succe
 |        | Error                | `BOOL`              | `TRUE`: Error has occured during function block execution         |
 |        | ErrorID              | `IC_Error`          | Error identification - see description of type IC_Error           |
 
+### IC_SetControllerMode
+Configuration function block, that allows for switching controller mode (velocity, position, torque) of Inverter_Axis_Ref. The block is executed once, when rising edge of input **Execute** is detected. Velocity units are set with input VelocityUnits.
+
+When block is being executed output **Busy** is `TRUE`, when axis is reset succesfully output changes it's value to `FALSE` and output **Done** is set to `TRUE`. If error during execution of block occur output **Error** will be set to `TRUE`. Error code will be indicated in output **ErrorID**.
+
+![obraz](https://user-images.githubusercontent.com/109360131/199773244-5b092ff1-d91c-49e2-90fd-742ff5ce1ff6.png)
+| Scope  | Name                 | Type                 | Comment                                                           |
+| ------ | -------------------- | -------------------- | -------------                                                     |
+| InOut  | Inverter             | `Inverter_Axis_Ref`  | Reference to inverter - see description of type Inverter_Axis_Ref |
+| Input  | Execute              | `BOOL`               | Rising edge: Starts the execution of the function block           |
+|        | ControllerMode       | `IMC_ControllerMode` | Allows for selection of controller mode of axis. Available controller modes are velocity, position, torque and home control. For further details see `IMC_ControllerMode` description |
+| Output | Done                 | `BOOL`               | `TRUE`: Reset has been succesfully executed                       |
+|        | Busy                 | `BOOL`               | `TRUE`: Function block is executing                               |
+|        | Error                | `BOOL`               | `TRUE`: Error has occured during function block execution         |
+|        | ErrorID              | `IC_Error`           | Error identification - see description of type IC_Error           |
+
 ## Library defined data types
 Library defines several data types. Their descripition you may find below.
 
