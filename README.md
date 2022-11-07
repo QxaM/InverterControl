@@ -105,6 +105,22 @@ Block is being executed when **Enable** input is `TRUE`. When block is executing
 |        | Error                | `BOOL`               | `TRUE`: Error has occured during function block execution         |
 |        | ErrorID              | `IC_Error`           | Error identification - see description of type IC_Error           |
 
+### IC_ReadActualTorque
+Diagnostic function block, that allows for reading actual torque of inverter axis. Actual torque is scaled in 0.1%.
+
+Block is being executed when **Enable** input is `TRUE`. When block is executing **Busy** output is `TRUE`, whena velocity has actual value - **Valid** output is `TRUE`. Torque is written to output **Torque** in `LREAL` value. If any error occur during execution of this block **Error** output will be `TRUE` and error code could be checked in **ErrorID**
+
+![obraz](https://user-images.githubusercontent.com/109360131/200336624-e2a443de-bf85-4da8-9187-3741671bfffa.png)
+| Scope  | Name                 | Type                 | Comment                                                           |
+| ------ | -------------------- | -------------------- | -------------                                                     |
+| InOut  | Inverter             | `Inverter_Axis_Ref`  | Reference to inverter - see description of type Inverter_Axis_Ref |
+| Input  | Enable               | `BOOL`               | `TRUE`: Block is being executed                                   |
+| Output | Valid                | `BOOL`               | `TRUE`: Reset has been succesfully executed                       |
+|        | Busy                 | `BOOL`               | `TRUE`: Function block is executing                               |
+|        | Torque               | `LREAL`              | Actual torque read from a drive                                   |
+|        | Error                | `BOOL`               | `TRUE`: Error has occured during function block execution         |
+|        | ErrorID              | `IC_Error`           | Error identification - see description of type IC_Error           |
+
 ## Library defined data types
 Library defines several data types. Their descripition you may find below.
 
