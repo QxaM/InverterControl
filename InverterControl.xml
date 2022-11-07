@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <project xmlns="http://www.plcopen.org/xml/tc6_0200">
-  <fileHeader companyName="Delta Electronics, Inc." productName="DIADesigner-AX" productVersion="DIADesigner-AX 1.3" creationDateTime="2022-11-07T11:14:01.8619904" />
-  <contentHeader name="InverterControl" version="3.5.15.30" modificationDateTime="2022-11-07T11:13:49.6375048" organization="Indpurogress" author="Piotr Gliszczyński">
+  <fileHeader companyName="Delta Electronics, Inc." productName="DIADesigner-AX" productVersion="DIADesigner-AX 1.3" creationDateTime="2022-11-07T15:26:23.3418242" />
+  <contentHeader name="InverterControl" version="3.5.15.30" modificationDateTime="2022-11-07T15:26:14.9285312" organization="Indpurogress" author="Piotr Gliszczyński">
     <Comment>Library project template with all possible element types, docu and a sample project structure</Comment>
     <coordinateInfo>
       <fbd>
@@ -934,6 +934,110 @@ END_IF
           </data>
         </addData>
       </pou>
+      <pou name="IC_ReadActualVelocity" pouType="functionBlock">
+        <interface>
+          <inOutVars>
+            <variable name="Inverter">
+              <type>
+                <derived name="Inverter_Axis_Ref" />
+              </type>
+            </variable>
+          </inOutVars>
+          <inputVars>
+            <variable name="Enable">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+          </inputVars>
+          <outputVars>
+            <variable name="Valid">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="Busy">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="Error">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="ErrorID">
+              <type>
+                <derived name="IMC_Error" />
+              </type>
+            </variable>
+            <variable name="Velocity">
+              <type>
+                <LREAL />
+              </type>
+            </variable>
+          </outputVars>
+          <addData>
+            <data name="http://www.3s-software.com/plcopenxml/pouinheritance" handleUnknown="implementation">
+              <Inheritance>
+                <Implements>I_ActVelocity</Implements>
+              </Inheritance>
+            </data>
+          </addData>
+        </interface>
+        <body>
+          <ST>
+            <xhtml xmlns="http://www.w3.org/1999/xhtml">IF Enable THEN
+	
+	IF Inverter.velocityUnits = IMC_VelocityUnits.IMC_RPM THEN
+		Velocity := ActVelocity;
+	ELSIF Inverter.velocityUnits = IMC_VelocityUnits.IMC_PUU_PER_SEC THEN
+		Velocity := ActVelocity * Inverter.encoderPulses;
+	ELSIF Inverter.velocityUnits = IMC_VelocityUnits.IMC_MM_PER_MIN THEN
+		Velocity := (ActVelocity * Inverter.distancePerRevolution);
+	END_IF;
+	
+	Valid := TRUE;
+	Busy := TRUE;
+ELSE
+	Valid := FALSE;
+	Busy := FALSE;
+	Error := FALSE;
+	ErrorID := IMC_Error.IMC_No_Error;
+END_IF</xhtml>
+          </ST>
+        </body>
+        <addData>
+          <data name="http://www.3s-software.com/plcopenxml/property" handleUnknown="implementation">
+            <Property name="ActVelocity" ObjectId="5bc09f8c-2e70-4354-b273-35c42a20487e">
+              <interface>
+                <returnType>
+                  <INT />
+                </returnType>
+              </interface>
+              <GetAccessor>
+                <interface />
+                <body>
+                  <ST>
+                    <xhtml xmlns="http://www.w3.org/1999/xhtml">{warning disable C0371}
+IF __ISVALIDREF (Inverter) THEN
+	ActVelocity := Inverter.ActVelocity;
+ELSE
+	RETURN;
+END_IF
+{warning restore C0371}</xhtml>
+                  </ST>
+                </body>
+                <addData />
+              </GetAccessor>
+              <addData />
+            </Property>
+          </data>
+          <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+            <ObjectId>f9c25350-a033-4f21-8a04-00c4f3c73da7</ObjectId>
+          </data>
+        </addData>
+      </pou>
       <pou name="IC_MoveVelocity" pouType="functionBlock">
         <interface>
           <inOutVars>
@@ -1352,102 +1456,6 @@ SDORead(
         <addData>
           <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
             <ObjectId>fbe5678a-bb44-42fb-b958-640b298ed8ac</ObjectId>
-          </data>
-        </addData>
-      </pou>
-      <pou name="IC_ReadActualVelocity" pouType="functionBlock">
-        <interface>
-          <inOutVars>
-            <variable name="Inverter">
-              <type>
-                <derived name="Inverter_Axis_Ref" />
-              </type>
-            </variable>
-          </inOutVars>
-          <inputVars>
-            <variable name="Enable">
-              <type>
-                <BOOL />
-              </type>
-            </variable>
-          </inputVars>
-          <outputVars>
-            <variable name="Valid">
-              <type>
-                <BOOL />
-              </type>
-            </variable>
-            <variable name="Busy">
-              <type>
-                <BOOL />
-              </type>
-            </variable>
-            <variable name="Error">
-              <type>
-                <BOOL />
-              </type>
-            </variable>
-            <variable name="ErrorID">
-              <type>
-                <derived name="IMC_Error" />
-              </type>
-            </variable>
-            <variable name="Velocity">
-              <type>
-                <INT />
-              </type>
-            </variable>
-          </outputVars>
-          <addData>
-            <data name="http://www.3s-software.com/plcopenxml/pouinheritance" handleUnknown="implementation">
-              <Inheritance>
-                <Implements>I_ActVelocity</Implements>
-              </Inheritance>
-            </data>
-          </addData>
-        </interface>
-        <body>
-          <ST>
-            <xhtml xmlns="http://www.w3.org/1999/xhtml">IF Enable THEN
-	Velocity := ActVelocity;
-	Valid := TRUE;
-	Busy := TRUE;
-ELSE
-	Valid := FALSE;
-	Busy := FALSE;
-	Error := FALSE;
-	ErrorID := IMC_Error.IMC_No_Error;
-END_IF</xhtml>
-          </ST>
-        </body>
-        <addData>
-          <data name="http://www.3s-software.com/plcopenxml/property" handleUnknown="implementation">
-            <Property name="ActVelocity" ObjectId="5bc09f8c-2e70-4354-b273-35c42a20487e">
-              <interface>
-                <returnType>
-                  <INT />
-                </returnType>
-              </interface>
-              <GetAccessor>
-                <interface />
-                <body>
-                  <ST>
-                    <xhtml xmlns="http://www.w3.org/1999/xhtml">{warning disable C0371}
-IF __ISVALIDREF (Inverter) THEN
-	ActVelocity := Inverter.ActVelocity;
-ELSE
-	RETURN;
-END_IF
-{warning restore C0371}</xhtml>
-                  </ST>
-                </body>
-                <addData />
-              </GetAccessor>
-              <addData />
-            </Property>
-          </data>
-          <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
-            <ObjectId>f9c25350-a033-4f21-8a04-00c4f3c73da7</ObjectId>
           </data>
         </addData>
       </pou>
@@ -2349,12 +2357,12 @@ END_IF
                 <Object Name="ControllerMode" ObjectId="974438dd-e473-4ed5-9e76-cdf675560487" />
               </Object>
             </Folder>
-            <Object Name="IC_ReadActualVelocity" ObjectId="f9c25350-a033-4f21-8a04-00c4f3c73da7">
-              <Object Name="ActVelocity" ObjectId="5bc09f8c-2e70-4354-b273-35c42a20487e" />
-            </Object>
             <Folder Name="Diagnostics">
               <Object Name="IC_ReadActualPosition" ObjectId="02eb2a41-a6ff-4c37-b031-cc4e3f68070a">
                 <Object Name="ActPosition" ObjectId="2ca7f488-2931-4814-aea8-8369b98249d0" />
+              </Object>
+              <Object Name="IC_ReadActualVelocity" ObjectId="f9c25350-a033-4f21-8a04-00c4f3c73da7">
+                <Object Name="ActVelocity" ObjectId="5bc09f8c-2e70-4354-b273-35c42a20487e" />
               </Object>
             </Folder>
             <Object Name="IC_ReadActualTorque" ObjectId="fbe5678a-bb44-42fb-b958-640b298ed8ac" />
