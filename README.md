@@ -76,7 +76,7 @@ When block is being executed output **Busy** is `TRUE`, when axis has set the co
 ### IC_ReadActualPosition
 Diagnostic function block, that allows for reading actual position of inverter axis. Actual position is read in milimeters - distance per revolution and encoder pulses are used for scaling (see `Inverter_Axis_Ref` for further details).
 
-Block is being executed when **Enable** input is `TRUE`. When block is executing **Busy** output is `TRUE`, whena position has actual value - **Valid** output is `TRUE`. Output position is written to output **Position** in `LREAL` value. If any error occur during execution of this block **Error** output will be `TRUE` and error code could be checked in **ErrorID**
+Block is being executed when **Enable** input is `TRUE`. When block is executing **Busy** output is `TRUE`, whena position has actual value - **Valid** output is `TRUE`. Position is written to output **Position** in `LREAL` value. If any error occur during execution of this block **Error** output will be `TRUE` and error code could be checked in **ErrorID**
 
 ![obraz](https://user-images.githubusercontent.com/109360131/200296069-2c88bac0-3483-4ee1-9c92-e7cccbb9bd8b.png)
 | Scope  | Name                 | Type                 | Comment                                                           |
@@ -86,6 +86,22 @@ Block is being executed when **Enable** input is `TRUE`. When block is executing
 | Output | Valid                | `BOOL`               | `TRUE`: Reset has been succesfully executed                       |
 |        | Busy                 | `BOOL`               | `TRUE`: Function block is executing                               |
 |        | Position             | `LREAL`              | Actual posiiton read from a drive                                 |
+|        | Error                | `BOOL`               | `TRUE`: Error has occured during function block execution         |
+|        | ErrorID              | `IC_Error`           | Error identification - see description of type IC_Error           |
+
+### IC_ReadActualVelocity
+Diagnostic function block, that allows for reading actual velocity of inverter axis. Actual velocity may be read in different units - unit selection is defined by velocityUnit input of inverter axis ref data type. For more information see description of `Inverter_Axis_Ref` data type below.
+
+Block is being executed when **Enable** input is `TRUE`. When block is executing **Busy** output is `TRUE`, whena velocity has actual value - **Valid** output is `TRUE`. Velocity is written to output **Velocity** in `LREAL` value. If any error occur during execution of this block **Error** output will be `TRUE` and error code could be checked in **ErrorID**
+
+![obraz](https://user-images.githubusercontent.com/109360131/200335180-683b20e4-22eb-4e93-baf1-be754eace14f.png)
+| Scope  | Name                 | Type                 | Comment                                                           |
+| ------ | -------------------- | -------------------- | -------------                                                     |
+| InOut  | Inverter             | `Inverter_Axis_Ref`  | Reference to inverter - see description of type Inverter_Axis_Ref |
+| Input  | Enable               | `BOOL`               | `TRUE`: Block is being executed                                   |
+| Output | Valid                | `BOOL`               | `TRUE`: Reset has been succesfully executed                       |
+|        | Busy                 | `BOOL`               | `TRUE`: Function block is executing                               |
+|        | Velocity             | `LREAL`              | Actual velocity read from a drive                                 |
 |        | Error                | `BOOL`               | `TRUE`: Error has occured during function block execution         |
 |        | ErrorID              | `IC_Error`           | Error identification - see description of type IC_Error           |
 
