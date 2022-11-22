@@ -1,0 +1,462 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<project xmlns="http://www.plcopen.org/xml/tc6_0200">
+  <fileHeader companyName="Delta Electronics, Inc." productName="DIADesigner-AX" productVersion="DIADesigner-AX 1.3" creationDateTime="2022-11-08T09:55:33.6115444" />
+  <contentHeader name="A2ServodriveLibrary" version="3.5.15.30" modificationDateTime="2022-11-08T09:55:24.181516" organization="Induprogress sp. z o.o" author="Piotr Gliszczyński">
+    <Comment>Library for using A2 via CiA402. For now enum for error codes processing is available. </Comment>
+    <coordinateInfo>
+      <fbd>
+        <scaling x="1" y="1" />
+      </fbd>
+      <ld>
+        <scaling x="1" y="1" />
+      </ld>
+      <sfc>
+        <scaling x="1" y="1" />
+      </sfc>
+    </coordinateInfo>
+    <addData>
+      <data name="http://www.3s-software.com/plcopenxml/projectinformation" handleUnknown="implementation">
+        <ProjectInformation>
+          <property name="Author" type="string">Piotr Gliszczyński</property>
+          <property name="AutoResolveUnbound" type="boolean">true</property>
+          <property name="Company" type="string">Induprogress sp. z o.o</property>
+          <property name="CompiledLibraryCompatibilityVersion" type="string">DIADesigner-AX 1.3</property>
+          <property name="DefaultNamespace" type="string">A2Lib</property>
+          <property name="Description" type="string">Library for using A2 via CiA402. For now enum for error codes processing is available. </property>
+          <property name="DocFormat" type="string">reStructuredText</property>
+          <property name="IsEndUserLibrary" type="boolean">false</property>
+          <property name="LanguageModelAttribute" type="string">qualified-access-only</property>
+          <property name="Placeholder" type="string">A2Lib</property>
+          <property name="Project" type="string">DeltaBibliotekaAX</property>
+          <property name="Released" type="boolean">false</property>
+          <property name="SourceLibrary" type="boolean">false</property>
+          <property name="Title" type="string">A2ServodriveLibrary</property>
+          <property name="Version" type="version">3.5.15.30</property>
+          <property name="library-category-list" type="library-category-list">Application</property>
+        </ProjectInformation>
+      </data>
+    </addData>
+  </contentHeader>
+  <types>
+    <dataTypes>
+      <dataType name="DriveA2Error">
+        <baseType>
+          <enum>
+            <values>
+              <value name="NO_ERROR" value="0" />
+              <value name="OVER_CURRENT_AL001" value="16#1" />
+              <value name="OVER_VOLTAGE_AL002" value="16#2" />
+              <value name="UNDER_VOLTAGE_AL003" value="16#3" />
+              <value name="MOTOR_COMBINATION_ERROR_AL004" value="16#4" />
+              <value name="REGENERATION_ERROR_AL005" value="16#5" />
+              <value name="OVERLOAD_AL006" value="16#6" />
+              <value name="OVERSPEED_AL007" value="16#7" />
+              <value name="ABNORMAL_PULSE_COMMAND_AL008" value="16#8" />
+              <value name="EXCESSIVE_DEVIATION_OF_POSITION_COMMAND_AL009" value="16#9" />
+              <value name="ENCODER_ERROR_AL011" value="16#11" />
+              <value name="ADJUSTMENT_ERROR_AL012" value="16#12" />
+              <value name="EMERGENCY_STOP_AL013" value="16#13" />
+              <value name="REVERSE_LIMIT_ERROR_AL014" value="16#14" />
+              <value name="FORWARD_LIMIT_ERROR_AL015" value="16#15" />
+              <value name="IGBT_OVERHEAT_AL016" value="16#16" />
+              <value name="ABNORMAL_ERROR_AL017" value="16#17" />
+              <value name="ABNORMAL_SIGNAL_OUTPUT_AL018" value="16#18" />
+              <value name="SERIAL_COMMUNICATION_ERROR_AL019" value="16#19" />
+              <value name="SERIAL_COMMUNICATION_TIME_OUT_AL020" value="16#20" />
+              <value name="MAIN_CIRCUIT_POWER_LACK_PHASE_AL022" value="16#22" />
+              <value name="EARLY_WARNING_FOR_OVERLOAD_AL023" value="16#23" />
+              <value name="ENCODER_INITIAL_MAGNETIC_FIELD_ERROR_AL024" value="16#24" />
+              <value name="THE_INTERNAL_OF_THE_ENCODER_IS_IN_ERROR_AL025" value="16#25" />
+              <value name="UNRELIABLE_INTERNAL_DATA_OF_THE_ENCODER_AL026" value="16#26" />
+              <value name="THE_INTERNAL_OF_THE_IS_IN_ERROR_AL027" value="16#27" />
+              <value name="ENCODER_VOLTAGE_ERROR_AL028" value="16#28" />
+              <value name="GRAY_CODE_ERROR_AL029" value="16#29" />
+              <value name="MOTOR_CRASH_ERROR_AL030" value="16#30" />
+              <value name="INCORRECT_WIRING_OF_THE_MOTOR_POWER_LINE_UVW_GND_AL031" value="16#31" />
+              <value name="INTERNAL_COMMUNICATION_OF_THE_ENCODER_IS_IN_ERROR_AL034" value="16#34" />
+              <value name="ENCODER_TEMPERATURE_EXCEEDS_THE_PROTECTIVE_RANGE_AL035" value="16#35" />
+              <value name="EXCESSIVE_DEVIATION_OF_FULL_CLOSED_LOOP_AL040" value="16#40" />
+              <value name="COMMUNICATION_OF_LINEAR_SCALE_IS_BREAKDOWN_AL041" value="16#41" />
+              <value name="ANALOG_INPUT_VOLTAGE_ERROR_AL042" value="16#42" />
+              <value name="WARNING_OF_SERVODRIVE_FUNCTION_OVERLOAD_AL043" value="16#43" />
+              <value name="WRONG_SETTING_OF_E_GEAR_RATIO_AL045" value="16#45" />
+              <value name="THE_ABSOLUTE_POSITION_IS_LOST_AL060" value="16#60" />
+              <value name="ENCODER_UNDER_VOLTAGE_AL061" value="16#61" />
+              <value name="THE_MULTITURN_OF_ABSOLUTE_ENCODER_OVERFLOWS_AL062" value="16#62" />
+              <value name="ENCODER_TEMPERATURE_WARNING_AL067" value="16#67" />
+              <value name="ABSOLUTE_DATA_TRANSMITTED_VIA_IO_IS_IN_ERROR_AL068" value="16#68" />
+              <value name="WRONG_MOTOR_TYPE_AL069" value="16#69" />
+              <value name="THE_ABSOLUTE_COORDINATE_HAS_NOT_BEEN_INITIALIZED_AL06A" value="16#6A" />
+              <value name="ENCODER_DOES_NOT_COMPLETE_THE_COMMAND_AL070" value="16#70" />
+              <value name="ENCODER_OVERSPEED_AL072" value="16#72" />
+              <value name="ENCODER_MEMORY_ERROR_AL073" value="16#73" />
+              <value name="ABSOLUTE_ENCODER_SINGLE_TURN_POSITION_ERROR_AL074" value="16#74" />
+              <value name="ABSOLUTE_ENCODER_POSITION_ERROR_AL075" value="16#75" />
+              <value name="ENCODER_COMPUTING_ERROR_AL077" value="16#77" />
+              <value name="ENCODER_PARAMETER_ERROR_AL079" value="16#79" />
+              <value name="LOSS_OF_ENCODER_Z_PULSE_AL07A" value="16#7A" />
+              <value name="ENCODER_MEMORY_BUSY_AL07B" value="16#7B" />
+              <value name="COMMAND_TO_CLEAR_THE_ABSOLUTE_POSITION_ISSUED_WHEN_MOTOR_SPEED_OVER_200_RPM_AL07C" value="16#7C" />
+              <value name="SERVODRIVE_POWER_IS_CYCLED_BEFORE_AL07C_IS_CLEARED_AL07D" value="16#7D" />
+              <value name="ENCODER_CLEARING_PROCEDURE_ERROR_AL07E" value="16#7E" />
+              <value name="SERVO_DRIVE_OUTPUTS_EXCESSIVE_CURRENT_AL083" value="16#83" />
+              <value name="REGENERATION_SETTING_ERROR_AL085" value="16#85" />
+              <value name="INPUT_VOLTAGE_IS_TOO_HIGH_AL086" value="16#86" />
+              <value name="THE_SERVO_DRIVE_DOES_NOT_CONNECT_TO_EXTERNAL_REGENERATIVE_RESISTOR_AL095" value="16#95" />
+              <value name="DSP_FIRMWARE_UPGRADE_AL099" value="16#99" />
+              <value name="CANOPEN_SDO_RECIEVES_BUFFER_OVERFLOW_AL111" value="16#111" />
+              <value name="CANOPEN_PDO_RECIEVES_BUFFER_OVERFLOW_AL112" value="16#112" />
+              <value name="INDEX_ERROR_OCCURS_WHEN_ACCESING_CANOPEN_PDO_AL121" value="16#121" />
+              <value name="SUBINDEX_ERROR_OCCURS_WHEN_ACCESING_CANOPEN_PDO_AL122" value="16#122" />
+              <value name="DATA_SIZE_ERROR_OCCURS_WHEN_ACCESING_CANOPEN_PDO_AL123" value="16#123" />
+              <value name="DATA_RANGE_ERROR_OCCURS_WHEN_ACCESING_CANOPEN_PDO_AL124" value="16#124" />
+              <value name="CANOPEN_PDO_IS_READONLY_AND_WRITE_PROTECTED_AL125" value="16#125" />
+              <value name="CANOPEN_PDO_IS_NOT_ALLOWED_IN_PDO_AL126" value="16#126" />
+              <value name="CANOPEN_PDO_IS_WRITE_PROTECTED_WHEN_SERVO_ON_AL127" value="16#127" />
+              <value name="ERROR_OCCURS_WHEN_READING_CANOPEN_PDO_VIA_EEPROM_AL128" value="16#128" />
+              <value name="ERROR_OCCURS_WHEN_WRITING_CANOPEN_PDO_VIA_EEPROM_AL129" value="16#129" />
+              <value name="THE_ACCESSING_ADDRESS_OF_EEPROM_IS_OUT_OF_RANGE_WHEN_USING_CANOPEN_PDO_AL130" value="16#130" />
+              <value name="CRC_OF_EEPROM_CALCULATION_ERROR_OCCURS_WHEN_USING_CANOPEN_PDO_AL131" value="16#131" />
+              <value name="ENTER_THE_INCORRECT_PASSWORD_WHEN_USING_CANOPEN_PDO_AL132" value="16#132" />
+              <value name="HEARTBEAT_OR_NODEGUARDING_ERROR_AL170" value="16#170" />
+              <value name="CANOPEN_PDO_TIMEOUT_AL180" value="16#180" />
+              <value name="COMMUNICATION_DISCONNECTED_AL185" value="16#185" />
+              <value name="CAN_BUS_OFF_AL186" value="16#186" />
+              <value name="ERROR_OCCURS_WHEN_LOADING_CANOPEN_DATA_AL201" value="16#201" />
+              <value name="PARAMETER_GROUP_OF_PR8_IS_OUT_OF_RANGE_AL207" value="16#207" />
+              <value name="PARAMETER_NUMBER_OF_PR8_IS_OUT_OF_RANGE_AL209" value="16#209" />
+              <value name="PARAMETER_SETTING_OF_PR8_IS_WRONG_AL213" value="16#213" />
+              <value name="WRITE_PARAMETERS_READ_ONLY_AL215" value="16#215" />
+              <value name="WRITE_PARAMETERS_PARAMETERS_LOCKED_AL217" value="16#217" />
+              <value name="SETTING_OF_MONITOR_ITEM_OF_PR8_IS_OUT_OF_RANGE_AL231" value="16#231" />
+              <value name="PR_COMMAND_OVERFLOWS_AL235" value="16#235" />
+              <value name="INDEXING_COORDINATE_IS_UNDEFINED_AL237" value="16#237" />
+              <value name="PR_POSITIONING_TIMEOUT_AL245" value="16#245" />
+              <value name="THE_NUMBER_OF_PR_COMMAND_EXCEEDS_THE_LIMIT_AL249" value="16#249" />
+              <value name="FORWARD_SOFTWARE_LIMIT_AL283" value="16#283" />
+              <value name="REVERSE_SOFTWARE_LIMIT_AL285" value="16#285" />
+              <value name="FEEDBACK_POSITION_COUNTER_OVERFLOWS_AL289" value="16#289" />
+              <value name="SERVO_OFF_ERROR_AL291" value="16#291" />
+              <value name="CANOPEN_FAILS_TO_SYNCHRONIZE_AL301" value="16#301" />
+              <value name="THE_SYNCHRONIZED_SIGNAL_OF_CANOPEN_IS_SENT_TO_FAST_AL302" value="16#302" />
+              <value name="THE_SYNCHRONIZED_SIGNAL_OF_CANOPEN_IS_SENT_TOO_SLOW_AL303" value="16#303" />
+              <value name="CANOPEN_IP_COMMAND_IS_FAILED_AL304" value="16#304" />
+              <value name="SYNC_PERIOD_IS_IN_ERROR_AL305" value="16#305" />
+              <value name="EMERGENCY_STOP_DURING_DECELERATION_AL35F" value="16#35F" />
+              <value name="POSITION_DEVIATION_ALARM_FOR_DO_MC_OK_AL380" value="16#380" />
+              <value name="EMERGENCY_STOP_AL3CF" value="16#3CF" />
+              <value name="CANOPEN_SYNC_FAILED_SERVO_OFF_AL3E1" value="16#3E1" />
+              <value name="CANOPEN_SYNC_SIGNAL_ERROR_SERVO_OFF_AL3E2" value="16#3E2" />
+              <value name="CANOPEN_SYNC_TIME_OUT_AL3E3" value="16#3E3" />
+              <value name="CANOPEN_IP_COMMAND_FAILED_AL3E4" value="16#3E4" />
+              <value name="SYNC_PERIOD_ERROR_AL3E5" value="16#3E5" />
+              <value name="ABSOLUTE_INDEX_COORDINATE_UNDEFINED_AL3F1" value="16#3F1" />
+              <value name="INDEX_COORDINATES_ERROR_AL400" value="16#400" />
+              <value name="NMT_RESET_COMMAND_IS_RECIEVED_WHEN_SERVO_ON_AL401" value="16#401" />
+              <value name="VALUE_OF_PR_SPECIAL_FILTER_SETTING_IS_TOO_BIG_AL404" value="16#404" />
+              <value name="SAFE_TORQUE_ENABLED_AL500" value="16#500" />
+              <value name="STO_A_LOSS_AL501" value="16#501" />
+              <value name="STO_B_LOSS_AL502" value="16#502" />
+              <value name="STO_SELF_DIAGNOSTIC_ERROR_AL503" value="16#503" />
+              <value name="SYSTEM_FAILURE_AL555" value="16#555" />
+            </values>
+          </enum>
+        </baseType>
+        <addData>
+          <data name="http://www.3s-software.com/plcopenxml/attributes" handleUnknown="implementation">
+            <Attributes>
+              <Attribute Name="qualified_only" Value="" />
+              <Attribute Name="strict" Value="" />
+              <Attribute Name="to_string" Value="" />
+            </Attributes>
+          </data>
+          <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+            <ObjectId>78d149a6-edb4-4f89-aea7-ddf63de254c2</ObjectId>
+          </data>
+        </addData>
+      </dataType>
+      <dataType name="DriveVFDError">
+        <baseType>
+          <enum>
+            <values>
+              <value name="NO_ERROR" value="0" />
+              <value name="OVER_CURRENT_DURING_ACCELERATION_ocA" value="1" />
+              <value name="OVER_CURRENT_DURING_DECELERATION_ocd" value="2" />
+              <value name="OVER_CURRENT_DURING_STEADY_OPERATION_ocn" value="3" />
+              <value name="GROUND_FAULT_GFF" value="4" />
+              <value name="IGBT_SHORT_CIRCUIT_BETWEEN_UPPER_BRIDGE_AND_LOWER_BRIDGE_occ" value="5" />
+              <value name="OVER_CURRENT_AT_STOP_ocS" value="6" />
+              <value name="OVER_VOLTAGE_DURING_ACCELERATION_ovA" value="7" />
+              <value name="OVER_VOLTAGE_DURING_DECELERATION_ovd" value="8" />
+              <value name="OVER_VOLTAGE_AT_CONSTANT_SPEED_ovn" value="9" />
+              <value name="OVER_VOLTAGE_AT_STOP_ovS" value="10" />
+              <value name="LOW_VOLTAGE_DURING_ACCELERATION_LvA" value="11" />
+              <value name="LOW_VOLTAGE_DURING_DECELERATION_Lvd" value="12" />
+              <value name="LOW_VOLTAGE_AT_CONSTANT_SPEED_Lvn" value="13" />
+              <value name="LOW_VOLTAGE_AT_STOP_LvS" value="14" />
+              <value name="PHASE_LOSS_PROTECTION_OrP" value="15" />
+              <value name="IGBT_OVERHEATING_oH1" value="16" />
+              <value name="INTERNAL_KEY_PARTS_OVERHEATING_oH2" value="17" />
+              <value name="IGBT_TEMPERATURE_DETECTION_FAILURE_tH1o" value="18" />
+              <value name="CAPACITOR_HARDWARE_ERROR_tH2o" value="19" />
+              <value name="OVER_LOAD_oL" value="21" />
+              <value name="ELECTRONIC_THERMAL_RELAY_1_PROTECTION_EoL1" value="22" />
+              <value name="ELECTRONIC_THERMAL_RELAY_2_PROTECTION_EoL2" value="23" />
+              <value name="MOTOR_OVERHEATING_oH3" value="24" />
+              <value name="OVER_TORQUE_ot1" value="26" />
+              <value name="OVER_TORQUE_ot2" value="27" />
+              <value name="UNDER_CURRENT_uC" value="28" />
+              <value name="LIMIT_ERROR_LiT" value="29" />
+              <value name="EEPROM_WRITE_ERROR_cF1" value="30" />
+              <value name="EEPROM_READ_ERROR_cF2" value="31" />
+              <value name="U_PHASE_ERROR_cd1" value="33" />
+              <value name="V_PHASE_ERROR_cd2" value="34" />
+              <value name="W_PHASE_ERROR_cd3" value="35" />
+              <value name="cc_HARDWARE_FAILURE_Hd0" value="36" />
+              <value name="oc_HARDWARE_ERROR_Hd1" value="37" />
+              <value name="ov_HARDWARE_ERROR_Hd2" value="38" />
+              <value name="occ_HARDWARE_ERROR_Hd3" value="39" />
+              <value name="AUTO_TUNING_ERROR_AUE" value="40" />
+              <value name="PID_LOSS_ACI_AFE" value="41" />
+              <value name="PG_FEEDBACK_ERROR_PGF1" value="42" />
+              <value name="PG_FEEDBACK_LOSS_PGF2" value="43" />
+              <value name="PG_FEEDBACK_STALL_PGF3" value="44" />
+              <value name="PG_SLIP_ERROR_PGF4" value="45" />
+              <value name="ACI_LOSS_ACE" value="48" />
+              <value name="EXTERNAL_FAULT_EF" value="49" />
+              <value name="EMERGENCY_STOP_EF1" value="50" />
+              <value name="EXTERNAL_BASE_BLOCK_bb" value="51" />
+              <value name="PASSWORD_IS_LOCKED_Pcod" value="52" />
+              <value name="SW_CODE_ERROR_ccod" value="53" />
+              <value name="ILLEGAL_COMMAND_CE1" value="54" />
+              <value name="ILLEGAL_DATA_ADRESS_CE2" value="55" />
+              <value name="ILLEGAL_DATA_VALUE_CE3" value="56" />
+              <value name="DATA_IS_WRITTEN_TO_READ_ONLY_ADRESS_CE4" value="57" />
+              <value name="MODBUS_TRANSMISSION_TIMEOUT_CE10" value="58" />
+              <value name="BRAKE_TRANSISTOR_ERROR_bF" value="60" />
+              <value name="Y_D_CONNECTION_SWITCH_ERROR_ydc" value="61" />
+              <value name="DECELERATION_ENERGY_BACKUP_ERROR_dEb" value="62" />
+              <value name="OVER_SLIP_ERROR_oSL" value="63" />
+              <value name="ELECTRIC_VALVE_SWITCH_ERROR_ryF" value="64" />
+              <value name="HARDWARE_ERROR_OF_PG_CARD_PGF5" value="65" />
+              <value name="REVERSE_DIRECTION_OF_THE_SPEED_FEEDBACK_SdRv" value="68" />
+              <value name="OVER_SPEED_ROTATION_FEEDBACK_SdOr" value="69" />
+              <value name="LARGE_DEVIATION_OF_SPEED_FEEDBACK_SdDe" value="70" />
+              <value name="WATCHDOG_WDTT" value="71" />
+              <value name="STO_LOSS_1_STL1" value="72" />
+              <value name="EMERGENCY_STOP_FOR_EXTERNAL_SAFETY_S1" value="73" />
+              <value name="EXTERNAL_BRAKE_ERROR_Brk" value="75" />
+              <value name="STO_STO" value="76" />
+              <value name="STO_LOSS_2_STL2" value="77" />
+              <value name="STO_LOSS_3_STL3" value="78" />
+              <value name="U_PHASE_OVER_CURRENT_BEFORE_RUN_Aoc" value="79" />
+              <value name="V_PHASE_OVER_CURRENT_BEFORE_RUN_boc" value="80" />
+              <value name="W_PHASE_OVER_CURRENT_BEFORE_RUN_coc" value="81" />
+              <value name="OUTPUT_PHASE_LOSS_U_PHASE_OPHL" value="82" />
+              <value name="OUTPUT_PHASE_LOSS_V_PHASE_OPHL" value="83" />
+              <value name="OUTPUT_PHASE_LOSS_W_PHASE_OPHL" value="84" />
+              <value name="PG_ABZ_LINE_OFF_AboF" value="85" />
+              <value name="PG_UVW_LINE_OFF_UvoF" value="86" />
+              <value name="OVERLOAD_PROTECTION_AT_LOW_FREQUENCY_oL3" value="87" />
+              <value name="ROTOR_POSITION_DETECTION_ERROR_RoPd" value="89" />
+              <value name="FORCE_TO_STOP_FStp" value="90" />
+              <value name="PULSE_TUNING_INDUCTANCE_L_ERROR_LEr" value="92" />
+              <value name="CPU_ERROR_0_TRAP" value="93" />
+              <value name="CANOPEN_GUARDING_ERROR_CGdE" value="101" />
+              <value name="CANOPEN_HEARTBEAT_ERROR_CHbE" value="102" />
+              <value name="CANOPEN_BUS_OFF_ERROR_CbFE" value="104" />
+              <value name="CANOPEN_INDEX_ERROR_CidE" value="105" />
+              <value name="CANOPEN_STATION_ADRESS_ERROR_CAdE" value="106" />
+              <value name="CANOPEN_MEMORY_ERROR_CFrE" value="107" />
+              <value name="INRCOM_TIMEOUT_ERROR_ictE" value="111" />
+              <value name="PMLESS_SHAFT_LOCK_SfLK" value="112" />
+              <value name="INTERNAL_COMMUNICATION_ERROR_CP20" value="121" />
+              <value name="INTERNAL_COMMUNICATION_ERROR_CP22" value="123" />
+              <value name="INTERNAL_COMMUNICATION_ERROR_CP30" value="124" />
+              <value name="INTERNAL_COMMUNICATION_ERROR_CP32" value="126" />
+              <value name="INTERNAL_COMMUNICATION_ERROR_CP33" value="127" />
+              <value name="OVER_TORQUE_3_ot3" value="128" />
+              <value name="OVER_TORQUE_4_ot4" value="129" />
+              <value name="INTERNAL_COMMUNICATION_ERROR_EoL3" value="134" />
+              <value name="INTERNAL_COMMUNICATION_ERROR_EoL4" value="135" />
+              <value name="oc_HARDWARE_ERROR_Hd6" value="140" />
+              <value name="GFF_OCCURS_BEFORE_RUN_b4GFF" value="141" />
+              <value name="AUTOTUNE_ERROR_1_AUE1" value="142" />
+              <value name="AUTOTUNE_ERROR_2_AUE2" value="143" />
+              <value name="AUTOTUNE_ERROR_3_AUE3" value="144" />
+              <value name="AUTOTUNE_ERROR_4_AUE4" value="148" />
+              <value name="TOTAL_RESISTANCE_MEASUREMENT_FAULT_AUE5" value="149" />
+              <value name="NO_LOAD_CURRENT_IO_MEASUREMENT_FAULT_AUE6" value="150" />
+              <value name="dq_AXIS_INDUCTANCE_MEASUREMENT_FAULT_AUE7" value="151" />
+              <value name="HIGH_FREQUENCY_INJECTION_MEASUREMENT_FAULT_AUE8" value="152" />
+              <value name="PUMP_PID_FEEDBACK_ERROR_dEv" value="157" />
+              <value name="CB_MISMATCH_CBM" value="170" />
+              <value name="OVERPOSITION_ERROR_LIMIT_oPEE" value="171" />
+            </values>
+          </enum>
+        </baseType>
+        <addData>
+          <data name="http://www.3s-software.com/plcopenxml/attributes" handleUnknown="implementation">
+            <Attributes>
+              <Attribute Name="qualified_only" Value="" />
+              <Attribute Name="strict" Value="" />
+              <Attribute Name="to_string" Value="" />
+            </Attributes>
+          </data>
+          <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+            <ObjectId>920b3fd2-8012-41ab-b0ae-173aa31fcb51</ObjectId>
+          </data>
+        </addData>
+      </dataType>
+      <dataType name="DriveVFDWarning">
+        <baseType>
+          <enum>
+            <values>
+              <value name="NO_WARNING" value="0" />
+              <value name="COMMUNICATION_ERROR_1_CE1" value="1" />
+              <value name="COMMUNICATION_ERROR_2_CE2" value="2" />
+              <value name="COMMUNICATION_ERROR_3_CE3" value="3" />
+              <value name="COMMUNICATION_ERROR_4_CE4" value="4" />
+              <value name="COMMUNICATION_ERROR_10_CE10" value="5" />
+              <value name="SAVE_ERROR_1_SE1" value="7" />
+              <value name="SAVE_ERROR_2_SE2" value="8" />
+              <value name="IGBT_OVERHEATING_WARNING_oH1" value="9" />
+              <value name="CAPACITOR_OVERHEAT_WARNING_oH2" value="10" />
+              <value name="PID_FEEDBACK_ERROR_PID" value="11" />
+              <value name="ACI_ANALOG_SIGNAL_LOSS_AnL" value="12" />
+              <value name="UNDER_CURRENT_uC" value="13" />
+              <value name="PG_FEEDBACK_WARNING_PGFb" value="15" />
+              <value name="OVER_SPEED_WARNING_oSPd" value="17" />
+              <value name="DEVIATION_WARNING_dAvE" value="18" />
+              <value name="PHASE_LOSS_PHL" value="19" />
+              <value name="OVER_TORQUE_1_ot1" value="20" />
+              <value name="OVER_TORQUE_2_ot2" value="21" />
+              <value name="MOTOR_OVERHEATING_oH3" value="22" />
+              <value name="OVER_SLIP_ERROR_oSL" value="24" />
+              <value name="AUTO_TUNING_tUn" value="25" />
+              <value name="OUTPUT_PHASE_LOSS_OPHL" value="28" />
+              <value name="COPY_MODEL_ERROR_3_SE3" value="30" />
+              <value name="OVER_TORQUE_ot3" value="31" />
+              <value name="OVER_TORQUE_ot4" value="32" />
+              <value name="CANOPEN_GUARDING_TIMEOUT_CGdn" value="36" />
+              <value name="CANOPEN_HEARTBEAT_ERROR_CHbn" value="37" />
+              <value name="CANOPEN_BUS_OFF_ERROR_CbFn" value="39" />
+              <value name="CANOPEN_INDEX_ERROR_Cldn" value="40" />
+              <value name="CANOPEN_STATION_ADRESS_ERROR_CAdn" value="41" />
+              <value name="CANOPEN_MEMORY_ERROR_CFrn" value="42" />
+              <value name="CANOPEN_SDO_TIMEOUT_CSdn" value="43" />
+              <value name="CANOPEN_SDO_RECIEVES_REGISTER_OVERFLOW_CSbn" value="44" />
+              <value name="CANOPEN_STARTUP_ERROR_WARNING_Cbtn" value="45" />
+              <value name="CANOPEN_FORMAT_ERROR_CPtn" value="46" />
+              <value name="RTC_ADJUST_PLrA" value="47" />
+              <value name="INTERCOM_ERROR_PLiC" value="48" />
+              <value name="KEYPAD_RTC_TIMEOUT" value="49" />
+              <value name="PLC_OPPOSITE_DEFECT_PLod" value="50" />
+              <value name="PLC_SAVE_MEMORY_ERROR_PLSv" value="51" />
+              <value name="DATA_DEFECT_PLdA" value="52" />
+              <value name="FUNCTION_DEFECT_PLFn" value="53" />
+              <value name="PLC_BUFFER_OVERFLOW_PLor" value="54" />
+              <value name="FUNCTION_DEFECT_PLFF" value="55" />
+              <value name="CHECKSUM_ERROR_PLSn" value="56" />
+              <value name="NO_END_COMMAND_PLEd" value="57" />
+              <value name="PLC_MCR_ERROR_PLCr" value="58" />
+              <value name="PLCS_DOWNLOAD_FAIL_PLdF" value="59" />
+              <value name="PLC_SCAN_TIME_FAIL_PLSF" value="60" />
+              <value name="CAN_M_GUARDING_ERROR_PCGd" value="61" />
+              <value name="CAN_M_BUS_OFF_PCbF" value="62" />
+              <value name="CAN_M_NODE_LACK_PCnL" value="63" />
+              <value name="CAN_M_CYCLE_TIMEOUT_PCCt" value="64" />
+              <value name="CAN_M_SDO_OVER_PCSF" value="65" />
+              <value name="CAN_M_SDO_TIMEOUT_PCSd" value="66" />
+              <value name="CAN_M_ADRESS_ERROR_PCAd" value="67" />
+              <value name="CAN_M_TIMEOUT_PCTo" value="68" />
+              <value name="EXCOM_ID_FAIL_ECid" value="70" />
+              <value name="EXCOM_POWER_LOSS_EXLv" value="71" />
+              <value name="EXCOM_TEST_ECtt" value="72" />
+              <value name="EXCOM_BUS_OFF_ECbF" value="73" />
+              <value name="EXCOM_NO_POWER_ECnP" value="74" />
+              <value name="EXCOM_FACTORY_DEFECT_ECFF" value="75" />
+              <value name="EXCOM_INNER_ERROR_ECiF" value="76" />
+              <value name="EXCOM_IO_NET_BREAK_ECio" value="77" />
+              <value name="EXCOM_PARAMETER_DATA_ERROR_ECPP" value="78" />
+              <value name="EXCOM_CONFIGURATION_DATA_ERROR_ECPi" value="79" />
+              <value name="ETHERNET_LINK_FAIL_ECEF" value="80" />
+              <value name="COMMUNICATION_TIME_OUT_ECto" value="81" />
+              <value name="CHECKSUM_ERROR_ECCS" value="82" />
+              <value name="RETURN_DEFECT_ECrF" value="83" />
+              <value name="MODBUS_TCP_OVER_Eco0" value="84" />
+              <value name="ETHERNET_IP_OVER_ECo1" value="85" />
+              <value name="IP_FAIL_ECiP" value="86" />
+              <value name="MAIL_FAIL_EC3F" value="87" />
+              <value name="EXCOM_BUSY_ECbY" value="88" />
+              <value name="EXCOM_CARD_BREAK_ECCb" value="89" />
+              <value name="COPY_PLC_PASSWORD_ERROR_CPLP" value="90" />
+              <value name="COPY_PLC_READ_MODE_ERROR_CPL0" value="91" />
+              <value name="COPY_PLC_WRITE_MODE_CPL1" value="92" />
+              <value name="COPY_CPL_VERSION_ERROR_CPLv" value="93" />
+              <value name="COPY_PLC_SIZE_ERROR_CPLS" value="94" />
+              <value name="COPY_PLC_PLC_FUNCTION_CPLF" value="95" />
+              <value name="COPY_PLC_TIMEOUT_CPLt" value="96" />
+              <value name="INCROM_TIMEOUT_ictn" value="101" />
+              <value name="DECELERATION_ENERGY_BACKUP_ERROR_dEb" value="102" />
+              <value name="PID_FEEDBACK_FAULT_dEv" value="103" />
+              <value name="EXTIMATED_SPEED_REVERSE_SpdR" value="105" />
+              <value name="DECELERATION_ENERGY_BACKUP_dEb" value="123" />
+              <value name="INDEX_PULSE_FAIL_INDX" value="125" />
+              <value name="NOT_HOME_YET_nHoY" value="126" />
+              <value name="HW_POS_LIMIT_HPL" value="127" />
+              <value name="HW_NEG_LIMIT_HnL" value="128" />
+              <value name="SW_POS_LIMIT_SPL" value="129" />
+              <value name="SW_NEG_LIMIT_SnL" value="130" />
+              <value name="POSN_OVERFLOW_PoF" value="131" />
+              <value name="HOME_PROC_FAULT_HPF" value="132" />
+              <value name="OVER_POS_ERR_LIM_Ope" value="133" />
+            </values>
+          </enum>
+        </baseType>
+        <addData>
+          <data name="http://www.3s-software.com/plcopenxml/attributes" handleUnknown="implementation">
+            <Attributes>
+              <Attribute Name="qualified_only" Value="" />
+              <Attribute Name="strict" Value="" />
+            </Attributes>
+          </data>
+          <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+            <ObjectId>a18ef828-4b90-4714-8558-5dc0e17e90df</ObjectId>
+          </data>
+        </addData>
+      </dataType>
+    </dataTypes>
+    <pous />
+  </types>
+  <instances>
+    <configurations />
+  </instances>
+  <addData>
+    <data name="http://www.3s-software.com/plcopenxml/libraries" handleUnknown="implementation">
+      <Libraries>
+        <Library Name="#CAA Types" Namespace="CAA" HideWhenReferencedAsDependency="false" PublishSymbolsInContainer="false" SystemLibrary="false" LinkAllContent="false" DefaultResolution="CAA Types Extern, * (CAA Technical Workgroup)" />
+        <Library Name="#CAA FB Factory" Namespace="FBF" HideWhenReferencedAsDependency="false" PublishSymbolsInContainer="false" SystemLibrary="false" LinkAllContent="false" DefaultResolution="CAA FB Factory, * (CAA Technical Workgroup)" />
+        <Library Name="#CBML" Namespace="CBML" HideWhenReferencedAsDependency="false" PublishSymbolsInContainer="false" SystemLibrary="false" LinkAllContent="false" DefaultResolution="Common Behaviour Model, * (3S - Smart Software Solutions GmbH)" />
+        <addData>
+          <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+            <ObjectId>8c1463b5-02f2-427d-bd06-9e39d42fcbff</ObjectId>
+          </data>
+        </addData>
+      </Libraries>
+    </data>
+    <data name="http://www.3s-software.com/plcopenxml/projectstructure" handleUnknown="discard">
+      <ProjectStructure>
+        <Folder Name="Libname">
+          <Folder Name="Enums">
+            <Object Name="DriveA2Error" ObjectId="78d149a6-edb4-4f89-aea7-ddf63de254c2" />
+            <Object Name="DriveVFDError" ObjectId="920b3fd2-8012-41ab-b0ae-173aa31fcb51" />
+            <Object Name="DriveVFDWarning" ObjectId="a18ef828-4b90-4714-8558-5dc0e17e90df" />
+          </Folder>
+        </Folder>
+        <Object Name="Library Manager" ObjectId="8c1463b5-02f2-427d-bd06-9e39d42fcbff" />
+        <Object Name="Project Information" ObjectId="11c0fc3a-9bcf-4dd8-ac38-efb93363e521" />
+      </ProjectStructure>
+    </data>
+  </addData>
+</project>
