@@ -5,7 +5,7 @@ This library allows to control inverters via CiA402 supported communications (ie
 Below you may find a full list and description of all blocks supported by this library. As said above, all blocks function similarly as standard PLCOpen MC blocks, thus the IC prefix, which basically stand for Inverter Control.
 
 ### IC_Power
-Administrative function block, that allows for controlling power stage of a drive. The block is enabled if the input **Enable** is `TRUE`, then the body of block is executed. If **bRegulatorON** is `TRUE` - drive power stage is enabled (in other words Servo ON). If **bDriveStart** is `TRUE` - drive quick stop is disabled. Quick stop input allows to stop a drive with quick stop deceleration ramps (that can be changed via communication) without triggering stop command.
+Administrative function block, that allows controlling power stage of a drive. The block is enabled if the input **Enable** is `TRUE`, then the body of block is executed. If **bRegulatorON** is `TRUE` - drive power stage is enabled (in other words Servo ON). If **bDriveStart** is `TRUE` - drive quick stop is disabled. Quick stop input allows to stop a drive with quick stop deceleration ramps (that can be changed via communication) without triggering stop command.
 
 When the block is executing outputs **Busy** will be enabled (`TRUE`), if axis is ready to move **Status** will be `TRUE`. Outputs **bRegulatorRealState** and **bDriveStartRealState** indicate real states of servo ON and quick stop functions. If any error occur output **Error** will be set to `TRUE`, error code will be indicated with **ErrorID** output.
 
@@ -25,7 +25,7 @@ When the block is executing outputs **Busy** will be enabled (`TRUE`), if axis i
 |        | ErrorID              | `IC_Error`          | Error identification - see description of type IC_Error           |
 
 ### IC_Reset
-Administrative function block, that allows for reseting drive errors if such occur. The block is executed once, when rising edge of input **Execute** is detected. 
+Administrative function block, that allows reseting drive errors if such occur. The block is executed once, when rising edge of input **Execute** is detected. 
 
 When block is being executed output **Busy** is `TRUE`, when axis is reset succesfully output changes it's value to `FALSE` and output **Done** is set to `TRUE`. If error during execution of block occur output **Error** will be set to `TRUE`. Error code will be indicated in output **ErrorID**.
 
@@ -41,7 +41,7 @@ When block is being executed output **Busy** is `TRUE`, when axis is reset succe
 |        | ErrorID              | `IC_Error`          | Error identification - see description of type IC_Error           |
 
 ### IC_SetVelocityUnits
-Configuration function block, that allows for switching velocity units of Inverter_Axis_Ref. The block is executed once, when rising edge of input **Execute** is detected. Velocity units are set with input VelocityUnits.
+Configuration function block, that allows switching velocity units of Inverter_Axis_Ref. The block is executed once, when rising edge of input **Execute** is detected. Velocity units are set with input VelocityUnits.
 
 When block is being executed output **Busy** is `TRUE`, when axis is reset succesfully output changes it's value to `FALSE` and output **Done** is set to `TRUE`. If error during execution of block occur output **Error** will be set to `TRUE`. Error code will be indicated in output **ErrorID**.
 
@@ -58,7 +58,7 @@ When block is being executed output **Busy** is `TRUE`, when axis is reset succe
 |        | ErrorID              | `IC_Error`          | Error identification - see description of type IC_Error           |
 
 ### IC_SetControllerMode
-Configuration function block, that allows for switching controller mode (velocity, position, torque) of Inverter_Axis_Ref. The block is executed once, when rising edge of input **Execute** is detected. Velocity units are set with input VelocityUnits.
+Configuration function block, that allows switching controller mode (velocity, position, torque) of Inverter_Axis_Ref. The block is executed once, when rising edge of input **Execute** is detected. Velocity units are set with input VelocityUnits.
 
 When block is being executed output **Busy** is `TRUE`, when axis has set the controller mode succesfully, output changes it's value to `FALSE` and output **Done** is set to `TRUE`. If error during execution of block occur output **Error** will be set to `TRUE`. Error code will be indicated in output **ErrorID**.
 
@@ -74,7 +74,7 @@ When block is being executed output **Busy** is `TRUE`, when axis has set the co
 |        | ErrorID              | `IC_Error`           | Error identification - see description of type IC_Error           |
 
 ### IC_ReadActualPosition
-Diagnostic function block, that allows for reading actual position of inverter axis. Actual position is read in milimeters - distance per revolution and encoder pulses are used for scaling (see `Inverter_Axis_Ref` for further details).
+Diagnostic function block, that allows reading actual position of inverter axis. Actual position is read in milimeters - distance per revolution and encoder pulses are used for scaling (see `Inverter_Axis_Ref` for further details).
 
 Block is being executed when **Enable** input is `TRUE`. When block is executing **Busy** output is `TRUE`, whena position has actual value - **Valid** output is `TRUE`. Position is written to output **Position** in `LREAL` value. If any error occur during execution of this block **Error** output will be `TRUE` and error code could be checked in **ErrorID**
 
@@ -90,7 +90,7 @@ Block is being executed when **Enable** input is `TRUE`. When block is executing
 |        | ErrorID              | `IC_Error`           | Error identification - see description of type IC_Error           |
 
 ### IC_ReadActualVelocity
-Diagnostic function block, that allows for reading actual velocity of inverter axis. Actual velocity may be read in different units - unit selection is defined by velocityUnit input of inverter axis ref data type. For more information see description of `Inverter_Axis_Ref` data type below.
+Diagnostic function block, that allows reading actual velocity of inverter axis. Actual velocity may be read in different units - unit selection is defined by velocityUnit input of inverter axis ref data type. For more information see description of `Inverter_Axis_Ref` data type below.
 
 Block is being executed when **Enable** input is `TRUE`. When block is executing **Busy** output is `TRUE`, whena velocity has actual value - **Valid** output is `TRUE`. Velocity is written to output **Velocity** in `LREAL` value. If any error occur during execution of this block **Error** output will be `TRUE` and error code could be checked in **ErrorID**
 
@@ -106,9 +106,9 @@ Block is being executed when **Enable** input is `TRUE`. When block is executing
 |        | ErrorID              | `IC_Error`           | Error identification - see description of type IC_Error           |
 
 ### IC_ReadActualTorque
-Diagnostic function block, that allows for reading actual torque of inverter axis. Actual torque is scaled in 0.1%.
+Diagnostic function block, that allows reading actual torque of inverter axis. Actual torque is scaled in 0.1%.
 
-Block is being executed when **Enable** input is `TRUE`. When block is executing **Busy** output is `TRUE`, whena velocity has actual value - **Valid** output is `TRUE`. Torque is written to output **Torque** in `LREAL` value. If any error occur during execution of this block **Error** output will be `TRUE` and error code could be checked in **ErrorID**
+Block is being executed when **Enable** input is `TRUE`. When block is executing **Busy** output is `TRUE`, when **Torque** has actual value - **Valid** output is `TRUE`. Torque is written to output **Torque** in `LREAL` value. If any error occur during execution of this block **Error** output will be `TRUE` and error code could be checked in **ErrorID**
 
 ![obraz](https://user-images.githubusercontent.com/109360131/200336624-e2a443de-bf85-4da8-9187-3741671bfffa.png)
 | Scope  | Name                 | Type                 | Comment                                                           |
@@ -120,6 +120,23 @@ Block is being executed when **Enable** input is `TRUE`. When block is executing
 |        | Torque               | `LREAL`              | Actual torque read from a drive                                   |
 |        | Error                | `BOOL`               | `TRUE`: Error has occured during function block execution         |
 |        | ErrorID              | `IC_Error`           | Error identification - see description of type IC_Error           |
+
+### IC_ReadAxisError
+Diagnostic function block, that allows reading inverter warning and error codes.
+
+Block is being executed when **Enable** input is `TRUE`. When block is executing **Busy** output is `TRUE`, when outputs have actual values - **Valid** output is `TRUE`. Error code is written to output **AxisErrorID** in `BYTE` value. Warning code is written to output **AxisWarningID**. If any error occur during execution of this block **Error** output will be `TRUE` and error code could be checked in **ErrorID**
+
+![obraz](https://user-images.githubusercontent.com/109360131/209980049-fc7f55d1-ba29-4615-a19a-8bab88241c2a.png)
+| Scope  | Name                 | Type                 | Comment                                                           |
+| ------ | -------------------- | -------------------- | -------------                                                     |
+| InOut  | Inverter             | `Inverter_Axis_Ref`  | Reference to inverter - see description of type Inverter_Axis_Ref |
+| Input  | Enable               | `BOOL`               | `TRUE`: Block is being executed                                   |
+| Output | Valid                | `BOOL`               | `TRUE`: Reset has been succesfully executed                       |
+|        | Busy                 | `BOOL`               | `TRUE`: Function block is executing                               |
+|        | Error                | `BOOL`               | `TRUE`: Error has occured during function block execution         |
+|        | ErrorID              | `IC_Error`           | Error identification - see description of type IC_Error           |
+|        | AxisErrorID          | `BYTE`               | Error code of inverter axis                                       |
+|        | AxisWarningI         | `BYTE`               | Warning code of inverter axis                                     |
 
 ## Library defined data types
 Library defines several data types. Their descripition you may find below.
