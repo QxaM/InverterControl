@@ -138,6 +138,30 @@ Block is being executed when **Enable** input is `TRUE`. When block is executing
 |        | AxisErrorID          | `BYTE`               | Error code of inverter axis                                       |
 |        | AxisWarningI         | `BYTE`               | Warning code of inverter axis                                     |
 
+### IC_ReadStatus
+Diagnostic function block, returns detailed informations about status of the axis.
+
+Block is being executed when **Enable** input is `TRUE`. When block is executing **Busy** output is `TRUE`, when outputs have actual values - **Valid** output is `TRUE`. If any error occur during execution of this block **Error** output will be `TRUE` and error code could be checked in **ErrorID**
+
+![obraz](https://user-images.githubusercontent.com/109360131/210090406-766fd687-84bb-4b68-8561-60ce367f205a.png)
+| Scope  | Name                 | Type                 | Comment                                                           |
+| ------ | -------------------- | -------------------- | -------------                                                     |
+| InOut  | Inverter             | `Inverter_Axis_Ref`  | Reference to inverter - see description of type Inverter_Axis_Ref |
+| Input  | Enable               | `BOOL`               | `TRUE`: Block is being executed                                   |
+| Output | Valid                | `BOOL`               | `TRUE`: Reset has been succesfully executed                       |
+|        | Busy                 | `BOOL`               | `TRUE`: Function block is executing                               |
+|        | Error                | `BOOL`               | `TRUE`: Error has occured during function block execution         |
+|        | ErrorID              | `IC_Error`           | Error identification - see description of type IC_Error           |
+|        | Disabled             | `BOOL`               | Power stage of an axis is disabled and no errors occur            |
+|        | Errorstop            | `BOOL`               | Error occurs on the axis                                          |
+|        | Standstill           | `BOOL`               | Power stage of an axis is enabled, axis is not moving             |
+|        | DiscreteMotion       | `BOOL`               | Axis is moving in Position Mode                                   |
+|        | ContinuousMotion     | `BOOL`               | Axis is moving in Velocity Mode                                   |
+|        | Homing               | `BOOL`               | Axis is moving and is being homed                                 |
+|        | ConstantVelocity     | `BOOL`               | Axis is moving with constant velocity                             |
+|        | Accelerating         | `BOOL`               | Axis is accelerating                                              |
+|        | Decelerating         | `BOOL`               | Axis is decelerating                                              |
+
 ## Library defined data types
 Library defines several data types. Their descripition you may find below.
 
