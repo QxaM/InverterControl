@@ -2,7 +2,7 @@
 This library allows to control inverters via CiA402 supported communications (ie. EtherCAT) in advanced applications eg. position control or torque control. Library recreates PLCOpen motion control blocks for inverters, that does not support AXIS_REFs elements in CODESYS or CODESYS based softwares. At all times durign creating this library, the goal was to keep those motion blocks as close to the originals as possible, so user will not have to learn new functionality. If any difference occurs - suitable note will be included near block description.
 
 ## Function Blocks
-Below you may find a full list and description of all blocks supported by this library. As said above, all blocks function similarly as standard PLCOpen MC blocks, thus the IC prefix, which basically stand for Inverter Control.
+Below you may find a full list and description of all blocks supported by this library. As said above, all blocks function similarly as standard PLCOpen MC blocks, thus the IC prefix, which basically stands for Inverter Control.
 
 ### IC_Power
 Administrative function block, that allows controlling power stage of a drive. The block is enabled if the input **Enable** is `TRUE`, then the body of block is executed. If **bRegulatorON** is `TRUE` - drive power stage is enabled (in other words Servo ON). If **bDriveStart** is `TRUE` - drive quick stop is disabled. Quick stop input allows to stop a drive with quick stop deceleration ramps (that can be changed via communication) without triggering stop command.
@@ -162,6 +162,39 @@ Block is being executed when **Enable** input is `TRUE`. When block is executing
 |        | Accelerating         | `BOOL`               | Axis is accelerating                                              |
 |        | Decelerating         | `BOOL`               | Axis is decelerating                                              |
 
+###IC_MoveVelocity
+This function block causes an endless motion at a specified velocity. Inverter has to be set in velocity mode to be controlled with this function block. **Velocity** units depend on velocity unit set in inverter. **Acceleration** and **deceleration** ramps are both scaled in seconds and entered as `LREAL` values.
+
+It is possible to change velocity on the fly, block is executed based on **Enable** state. 
+
+Timing diagram is shown on a diagram below. When input **Enable** is `TRUE` inverter accelerates to set velocity. When it reaches the set velocity output **InVelocity** is set to `TRUE`. When velocity is changed inverter automatically changes it's velocity to new set velocity. If intput **Enable** changes to `FALSE` inverter continuous motion with last velocity.
+
+![IC_MoveVelocityTimingDiagram drawio(1)](https://user-images.githubusercontent.com/109360131/210220906-b54c6a2b-c8b2-4a7e-ad5e-d8a60d584154.png)
+
+![obraz](https://user-images.githubusercontent.com/109360131/210218220-97c6fba5-1a23-4a52-b0e6-9bd960cbf0fc.png)
+
+| Scope  | Name                 | Type                 | Comment                                                             |
+| ------ | -------------------- | -------------------- | -------------                                                       |
+| InOut  | Inverter             | `Inverter_Axis_Ref`  | Reference to inverter - see description of type Inverter_Axis_Ref   |
+| Input  | Enable               | `BOOL`               | `TRUE`: Block is being executed                                     |
+|        | Velocity             | `LREAL`              | Maximum velocity in units set in Inverter. Is always positive       |
+|        | AccelerationTime     | `LREAL`              | Acceleration time in seconds in which motor will reach maximum velocity. Is always positive |
+|        | DecelerationTime     | `LREAL`              | Deceleration time in seconds in which motor will reach full stop from  maximum velocity. Is always positive |
+|        | Direction            | `IMC_Direction`      | Direction of the set motion - see description of type IMC_Direction |
+| Output | Valid                | `BOOL`               | `TRUE`: Reset has been succesfully executed                         |
+|        | Busy                 | `BOOL`               | `TRUE`: Function block is executing                                 |
+|        | Error                | `BOOL`               | `TRUE`: Error has occured during function block execution           |
+|        | ErrorID              | `IC_Error`           | Error identification - see description of type IC_Error             |
+|        | Disabled             | `BOOL`               | Power stage of an axis is disabled and no errors occur              |
+|        | Errorstop            | `BOOL`               | Error occurs on the axis                                            |
+|        | Standstill           | `BOOL`               | Power stage of an axis is enabled, axis is not moving               |
+|        | DiscreteMotion       | `BOOL`               | Axis is moving in Position Mode                                     |
+|        | ContinuousMotion     | `BOOL`               | Axis is moving in Velocity Mode                                     |
+|        | Homing               | `BOOL`               | Axis is moving and is being homed                                   |
+|        | ConstantVelocity     | `BOOL`               | Axis is moving with constant velocity                               |
+|        | Accelerating         | `BOOL`               | Axis is accelerating                                                |
+|        | Decelerating         | `BOOL`               | Axis is decelerating                                                |
+
 ## Library defined data types
 Library defines several data types. Their descripition you may find below.
 
@@ -214,3 +247,11 @@ Enumeration data type, represents drive controller mode in text values. Controll
 | IMC_Velocity    | 2       | Drive is set in velocity controller mode - velocity blocks are available to use                                    |
 | IMC_Torque      | 3       | Drive is set in torque controller mode - torque control blocks are available to use                                |
 | IMC_Home        | 6       | Automatically set only for triggering IC_Home. Can be set by the user, but only IC_Home could be used in this mode |
+
+### IMC_Direction (Enum)
+Enumeration data type, represents direction of set motion.
+
+| Name            | Initial | Comment                                                                                                            |
+| --------------- | ------- | ------------------------------------------------------------------------------------------------------------------ |
+| IMC_Positive    | 1       | Drive is moving in positive direction                                                                              |
+| IMC_Negative    | 3       | Drive is moving in negative direction                                                                              |
