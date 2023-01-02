@@ -224,6 +224,7 @@ Enumeration data type, allows indentification of function block error codes. Des
 | IMC_Drive_NotReady_For_Switch_ON  | 6       | Drive reports "Not ready for switch ON" state when trying to set power ON     |
 | IMC_Operation_Not_Enabled         | 7       | Operation was not enabled when trying to set power ON                         |
 | IMC_Voltage_Disabled              | 8       | Drives voltage is disabled whetn trygin to set power ON                       |
+| IMC_Wrong_Ramp_Times              | 9       | Could not write ramps to the drive. Wrong ramps ie. 0 or negative             |
 
 ### Inverter_Axis_Ref (Struct)
 Structured data type, that serves as a representation of inverter axis. Every function block, described aobve, need this kind of variable declared and mapped to the real equipements' data mapping. Ususally, this needs to be passed as pass by reference VAR_IN_OUT variable. Below you may find description of every element of this data type.
@@ -267,3 +268,25 @@ Enumeration data type, represents direction of set motion.
 | --------------- | ------- | ------------------------------------------------------------------------------------------------------------------ |
 | IMC_Positive    | 1       | Drive is moving in positive direction                                                                              |
 | IMC_Negative    | 3       | Drive is moving in negative direction                                                                              |
+
+### IMC_MotionState (Enum)
+Enumeration data type, represents direction of set motion.
+
+| Name                    | Initial | Comment                                                                                                            |
+| ----------------------- | ------- | ------------------------------------------------------------------------------------------------------------------ |
+| IMC_ConstantVelocity    | 1       | Drive is moving with constant velocity                                                                             |
+| IMC_Accelerating        | 2       | Drive is accelerating                                                                                              |
+| IMC_Decelerating        | 3       | Drive is decelerating                                                                                              |
+| IMC_Standstill          | 4       | Drive has zero velocity                                                                                            |
+
+##TODO
+[x] Testing velocity mode
+[ ] Add reading ControllerMode and VelocityUnits
+[ ] Switch to Inverter Function Block from structure
+[ ] Add Positioning mode
+[ ] Test position mode
+[ ] Add jog
+[ ] Add Torque mode
+[ ] Test torque mode
+[ ] Test mode switching on the fly
+[ ] Testing on AX3 (different library for ETC_SDO)
