@@ -52,7 +52,7 @@ When block is being executed output **Busy** is `TRUE`, when axis is reset succe
 | InOut  | Inverter             | `Inverter_Axis_Ref` | Reference to inverter - see description of type Inverter_Axis_Ref |
 | Input  | Execute              | `BOOL`              | Rising edge: Starts the execution of the function block           |
 |        | VelocityUnits        | `IMC_VelocityUnits` | Allows for selection of velocity units of axis ref. Available units are RPM, Pulse/s, mm/min. See `IMC_VelocityUnits` data type description for further details |
-| Output | Done                 | `BOOL`              | `TRUE`: Reset has been succesfully executed                       |
+| Output | Done                 | `BOOL`              | `TRUE`: Velocity units has been succesfully set                   |
 |        | Busy                 | `BOOL`              | `TRUE`: Function block is executing                               |
 |        | Error                | `BOOL`              | `TRUE`: Error has occured during function block execution         |
 |        | ErrorID              | `IC_Error`          | Error identification - see description of type IC_Error           |
@@ -68,7 +68,7 @@ When block is being executed output **Busy** is `TRUE`, when axis has set the co
 | InOut  | Inverter             | `Inverter_Axis_Ref`  | Reference to inverter - see description of type Inverter_Axis_Ref |
 | Input  | Execute              | `BOOL`               | Rising edge: Starts the execution of the function block           |
 |        | ControllerMode       | `IMC_ControllerMode` | Allows for selection of controller mode of axis. Available controller modes are velocity, position, torque and home control. For further details see `IMC_ControllerMode` description |
-| Output | Done                 | `BOOL`               | `TRUE`: Reset has been succesfully executed                       |
+| Output | Done                 | `BOOL`               | `TRUE`: Controller mode has been succesfully set                  |
 |        | Busy                 | `BOOL`               | `TRUE`: Function block is executing                               |
 |        | Error                | `BOOL`               | `TRUE`: Error has occured during function block execution         |
 |        | ErrorID              | `IC_Error`           | Error identification - see description of type IC_Error           |
@@ -83,7 +83,7 @@ Block is being executed when **Enable** input is `TRUE`. When block is executing
 | ------ | -------------------- | -------------------- | -------------                                                     |
 | InOut  | Inverter             | `Inverter_Axis_Ref`  | Reference to inverter - see description of type Inverter_Axis_Ref |
 | Input  | Enable               | `BOOL`               | `TRUE`: Block is being executed                                   |
-| Output | Valid                | `BOOL`               | `TRUE`: Reset has been succesfully executed                       |
+| Output | Valid                | `BOOL`               | `TRUE`: Values are up to date                                     |
 |        | Busy                 | `BOOL`               | `TRUE`: Function block is executing                               |
 |        | Position             | `LREAL`              | Actual posiiton read from a drive                                 |
 |        | Error                | `BOOL`               | `TRUE`: Error has occured during function block execution         |
@@ -99,7 +99,7 @@ Block is being executed when **Enable** input is `TRUE`. When block is executing
 | ------ | -------------------- | -------------------- | -------------                                                     |
 | InOut  | Inverter             | `Inverter_Axis_Ref`  | Reference to inverter - see description of type Inverter_Axis_Ref |
 | Input  | Enable               | `BOOL`               | `TRUE`: Block is being executed                                   |
-| Output | Valid                | `BOOL`               | `TRUE`: Reset has been succesfully executed                       |
+| Output | Valid                | `BOOL`               | `TRUE`: Values are up to date                                     |
 |        | Busy                 | `BOOL`               | `TRUE`: Function block is executing                               |
 |        | Velocity             | `LREAL`              | Actual velocity read from a drive                                 |
 |        | Error                | `BOOL`               | `TRUE`: Error has occured during function block execution         |
@@ -115,7 +115,7 @@ Block is being executed when **Enable** input is `TRUE`. When block is executing
 | ------ | -------------------- | -------------------- | -------------                                                     |
 | InOut  | Inverter             | `Inverter_Axis_Ref`  | Reference to inverter - see description of type Inverter_Axis_Ref |
 | Input  | Enable               | `BOOL`               | `TRUE`: Block is being executed                                   |
-| Output | Valid                | `BOOL`               | `TRUE`: Reset has been succesfully executed                       |
+| Output | Valid                | `BOOL`               | `TRUE`: Values are up to date                                     |
 |        | Busy                 | `BOOL`               | `TRUE`: Function block is executing                               |
 |        | Torque               | `LREAL`              | Actual torque read from a drive                                   |
 |        | Error                | `BOOL`               | `TRUE`: Error has occured during function block execution         |
@@ -131,7 +131,7 @@ Block is being executed when **Enable** input is `TRUE`. When block is executing
 | ------ | -------------------- | -------------------- | -------------                                                     |
 | InOut  | Inverter             | `Inverter_Axis_Ref`  | Reference to inverter - see description of type Inverter_Axis_Ref |
 | Input  | Enable               | `BOOL`               | `TRUE`: Block is being executed                                   |
-| Output | Valid                | `BOOL`               | `TRUE`: Reset has been succesfully executed                       |
+| Output | Valid                | `BOOL`               | `TRUE`: Values are up to date                                     |
 |        | Busy                 | `BOOL`               | `TRUE`: Function block is executing                               |
 |        | Error                | `BOOL`               | `TRUE`: Error has occured during function block execution         |
 |        | ErrorID              | `IC_Error`           | Error identification - see description of type IC_Error           |
@@ -148,7 +148,7 @@ Block is being executed when **Enable** input is `TRUE`. When block is executing
 | ------ | -------------------- | -------------------- | -------------                                                     |
 | InOut  | Inverter             | `Inverter_Axis_Ref`  | Reference to inverter - see description of type Inverter_Axis_Ref |
 | Input  | Enable               | `BOOL`               | `TRUE`: Block is being executed                                   |
-| Output | Valid                | `BOOL`               | `TRUE`: Reset has been succesfully executed                       |
+| Output | Valid                | `BOOL`               | `TRUE`: Values are up to date                                     |
 |        | Busy                 | `BOOL`               | `TRUE`: Function block is executing                               |
 |        | Error                | `BOOL`               | `TRUE`: Error has occured during function block execution         |
 |        | ErrorID              | `IC_Error`           | Error identification - see description of type IC_Error           |
@@ -167,7 +167,7 @@ This function block causes an endless motion at a specified velocity. Inverter h
 
 It is possible to change velocity on the fly, block is executed based on **Enable** state. 
 
-Timing diagram is shown on a diagram below. When input **Enable** is `TRUE` inverter accelerates to set velocity. When it reaches the set velocity output **InVelocity** is set to `TRUE`. When velocity is changed inverter automatically changes it's velocity to new set velocity. If intput **Enable** changes to `FALSE` inverter continuous motion with last velocity.
+Timing execution of this function block is shown on a diagram below. When input **Enable** is `TRUE` inverter accelerates to set velocity. When it reaches the set velocity output **InVelocity** is set to `TRUE`. When velocity is changed inverter automatically changes it's velocity to new set velocity. If intput **Enable** changes to `FALSE` inverter continuous motion with last velocity.
 
 ![IC_MoveVelocityTimingDiagram drawio(1)](https://user-images.githubusercontent.com/109360131/210220906-b54c6a2b-c8b2-4a7e-ad5e-d8a60d584154.png)
 
@@ -181,19 +181,31 @@ Timing diagram is shown on a diagram below. When input **Enable** is `TRUE` inve
 |        | AccelerationTime     | `LREAL`              | Acceleration time in seconds in which motor will reach maximum velocity. Is always positive |
 |        | DecelerationTime     | `LREAL`              | Deceleration time in seconds in which motor will reach full stop from  maximum velocity. Is always positive |
 |        | Direction            | `IMC_Direction`      | Direction of the set motion - see description of type IMC_Direction |
-| Output | Valid                | `BOOL`               | `TRUE`: Reset has been succesfully executed                         |
+| Output | InVelocity           | `BOOL`               | `TRUE`: Axis has reached set velocity                               |
+|        | Busy                 | `BOOL`               | `TRUE`: Function block is executing                                 |
+|        | Active               | `BOOL`               | `TRUE`: Function block is controlling axis motion                   |
+|        | CommandAborted       | `BOOL`               | `TRUE`: Comand was aborted during execution                         |
+|        | Error                | `BOOL`               | `TRUE`: Error has occured during function block execution           |
+|        | ErrorID              | `IC_Error`           | Error identification - see description of type IC_Error             |
+
+### IC_Stop
+This function block causes the axis to stop. As long as **Execute** input is `TRUE` no other motion blocks could be executed. If the velocity reaches zero, block output **Done** is set to `TRUE`. Deceleration values are scaled as seconds and enter as `LREAL` value.
+
+Timing execution of this function block is shown in diagram below. When **Execute** changes to `TRUE` axis starts to decelerate. When actual velocity reaches value zero. Output **Done** is set to `TRUE`.
+
+![IC_StopTimingDiagram drawio](https://user-images.githubusercontent.com/109360131/210226347-df44b41c-ea88-488e-ae2e-6d2ee6bb87ec.png)
+
+![obraz](https://user-images.githubusercontent.com/109360131/210225565-cc9123dc-0b87-4af9-9b31-094bfaab269e.png)
+
+| Scope  | Name                 | Type                 | Comment                                                             |
+| ------ | -------------------- | -------------------- | -------------                                                       |
+| InOut  | Inverter             | `Inverter_Axis_Ref`  | Reference to inverter - see description of type Inverter_Axis_Ref   |
+| Input  | Execute              | `BOOL`               | `TRUE`: Block is being executed                                     |
+|        | DecelerationTime     | `LREAL`              | Deceleration time in seconds in which motor will reach full stop from  maximum velocity. Is always positive |
+| Output | Done                 | `BOOL`               | `TRUE`: Axis has reached a stop                                     |
 |        | Busy                 | `BOOL`               | `TRUE`: Function block is executing                                 |
 |        | Error                | `BOOL`               | `TRUE`: Error has occured during function block execution           |
 |        | ErrorID              | `IC_Error`           | Error identification - see description of type IC_Error             |
-|        | Disabled             | `BOOL`               | Power stage of an axis is disabled and no errors occur              |
-|        | Errorstop            | `BOOL`               | Error occurs on the axis                                            |
-|        | Standstill           | `BOOL`               | Power stage of an axis is enabled, axis is not moving               |
-|        | DiscreteMotion       | `BOOL`               | Axis is moving in Position Mode                                     |
-|        | ContinuousMotion     | `BOOL`               | Axis is moving in Velocity Mode                                     |
-|        | Homing               | `BOOL`               | Axis is moving and is being homed                                   |
-|        | ConstantVelocity     | `BOOL`               | Axis is moving with constant velocity                               |
-|        | Accelerating         | `BOOL`               | Axis is accelerating                                                |
-|        | Decelerating         | `BOOL`               | Axis is decelerating                                                |
 
 ## Library defined data types
 Library defines several data types. Their descripition you may find below.
