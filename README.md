@@ -280,13 +280,13 @@ Enumeration data type, represents direction of set motion.
 | IMC_Standstill          | 4       | Drive has zero velocity                                                                                            |
 
 ##TODO
-[x] Testing velocity mode
-[ ] Add reading ControllerMode and VelocityUnits
-[ ] Switch to Inverter Function Block from structure
-[ ] Add Positioning mode
-[ ] Test position mode
-[ ] Add jog
-[ ] Add Torque mode
-[ ] Test torque mode
-[ ] Test mode switching on the fly
-[ ] Testing on AX3 (different library for ETC_SDO)
+- [x] Testing velocity mode
+- [ ] Add reading ControllerMode and VelocityUnits
+- [ ] Switch to Inverter Function Block from structure
+- [ ] Add Positioning mode
+- [ ] Test position mode
+- [ ] Add jog
+- [ ] Add Torque mode
+- [ ] Test torque mode
+- [ ] Test mode switching on the fly
+- [ ] Testing on AX3 (different library for ETC_SDO)
