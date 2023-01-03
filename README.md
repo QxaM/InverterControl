@@ -282,7 +282,8 @@ Enumeration data type, represents direction of set motion.
 ##TODO
 - [x] Testing velocity mode
 - [ ] Add reading ControllerMode and VelocityUnits
-- [ ] Switch to Inverter Function Block from structure
+- [x] Switch to Inverter Function Block from structure
+- [ ] Test Inverter class
 - [ ] Add Positioning mode
 - [ ] Test position mode
 - [ ] Add jog
