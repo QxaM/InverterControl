@@ -85,9 +85,9 @@ Block is being executed when **Enable** input is `TRUE`. When block is executing
 | Input  | Enable               | `BOOL`               | `TRUE`: Block is being executed                                   |
 | Output | Valid                | `BOOL`               | `TRUE`: Values are up to date                                     |
 |        | Busy                 | `BOOL`               | `TRUE`: Function block is executing                               |
-|        | Position             | `LREAL`              | Actual posiiton read from a drive                                 |
 |        | Error                | `BOOL`               | `TRUE`: Error has occured during function block execution         |
 |        | ErrorID              | `IC_Error`           | Error identification - see description of type IC_Error           |
+|        | Position             | `LREAL`              | Actual posiiton read from a drive                                 |
 
 ### IC_ReadActualVelocity
 Diagnostic function block, that allows reading actual velocity of inverter axis. Actual velocity may be read in different units - unit selection is defined by velocityUnit input of inverter axis ref data type. For more information see description of `Inverter_Axis_Ref` data type below.
@@ -101,9 +101,10 @@ Block is being executed when **Enable** input is `TRUE`. When block is executing
 | Input  | Enable               | `BOOL`               | `TRUE`: Block is being executed                                   |
 | Output | Valid                | `BOOL`               | `TRUE`: Values are up to date                                     |
 |        | Busy                 | `BOOL`               | `TRUE`: Function block is executing                               |
-|        | Velocity             | `LREAL`              | Actual velocity read from a drive                                 |
 |        | Error                | `BOOL`               | `TRUE`: Error has occured during function block execution         |
 |        | ErrorID              | `IC_Error`           | Error identification - see description of type IC_Error           |
+|        | Velocity             | `LREAL`              | Actual velocity read from a drive                                 |
+|        | VelocityUnits        | `IMC_VelocityUnits`  | Information in which units velocity was read from drive (actual set velocity units) |
 
 ### IC_ReadActualTorque
 Diagnostic function block, that allows reading actual torque of inverter axis. Actual torque is scaled in 0.1%.
@@ -117,9 +118,9 @@ Block is being executed when **Enable** input is `TRUE`. When block is executing
 | Input  | Enable               | `BOOL`               | `TRUE`: Block is being executed                                   |
 | Output | Valid                | `BOOL`               | `TRUE`: Values are up to date                                     |
 |        | Busy                 | `BOOL`               | `TRUE`: Function block is executing                               |
-|        | Torque               | `LREAL`              | Actual torque read from a drive                                   |
 |        | Error                | `BOOL`               | `TRUE`: Error has occured during function block execution         |
 |        | ErrorID              | `IC_Error`           | Error identification - see description of type IC_Error           |
+|        | Torque               | `LREAL`              | Actual torque read from a drive                                   |
 
 ### IC_ReadAxisError
 Diagnostic function block, that allows reading inverter warning and error codes.
@@ -226,20 +227,43 @@ Enumeration data type, allows indentification of function block error codes. Des
 | IMC_Voltage_Disabled              | 8       | Drives voltage is disabled whetn trygin to set power ON                       |
 | IMC_Wrong_Ramp_Times              | 9       | Could not write ramps to the drive. Wrong ramps ie. 0 or negative             |
 
-### Inverter_Axis_Ref (Struct)
-Structured data type, that serves as a representation of inverter axis. Every function block, described aobve, need this kind of variable declared and mapped to the real equipements' data mapping. Ususally, this needs to be passed as pass by reference VAR_IN_OUT variable. Below you may find description of every element of this data type.
+### Inverter_Axis_Ref (Class)
+The function block serves as drives interface, containing routines as controlling inverter drives. Every drive should be extension of this function block. Function block have to be declared and called in task synchronized with communication (ie. EtherCAT Task). All InOut variables are mandatory for proper inverter control - other input/outputs are not necessary, but certain functionality might not be fully working.
 
-| Name                              | Type                  | Comment                                                                       |
-| --------------------------------- | --------------------- | ----------------------------------------------------------------------------  |
-| velocityUnits                     | `IMC_VelocityUnits`   | Variable allows switching velocity units of an axis. Default: `IMC_RPM`. See description of `IMC_VelocityUnits` data type       |
-| distancePerRevolution             | `LREAL`               | Variable allows to change distance per revolution of an axis, thus user can automatically scale from PUU to engineering units (ie. mm)   |
-| modeOfOperation                   | `SINT`                | Mode of Operation setting, mapped to `6060h`                                    |
-| modeOfOperationDisplay            | `SINT`                | Mode of Operation display, mapped to `6061h`                                    |
-| controlWord                       | `UINT`                | Register used for sending control to the drive, mapped to `6040h`               |
-| statusWord                        | `UINT`                | Register used for recieving status from the drive, mapped to `6041h`            |
-| actVelocity                       | `INT`                 | Feedback from drive with its' actual rotating speed, mapped to `6043h`          |
-| actPosition                       | `DINT`                | Feedback from drive with its' actual position, mapped too `6064h`               |
-| targetVelocity                    | `INT`                 | Target velocity sent to the drive in velocity mode, mapped to `6042h`           |
+| Scope  | Name                              | Type                  | Comment                                                                         |
+| ------ | --------------------------------- | --------------------- | ------------------------------------------------------------------------------- |
+| InOut  | ETCSlave                          | `ETCSlave`            | See description https://content.helpme-codesys.com/en/libs/IODrvEtherCATDriver/Current/ETCSlave.html      |
+|        | modeOfOperation                   | `SINT`                | Mode of Operation setting, mapped to `6060h`                                    |
+|        | modeOfOperationDisplay            | `SINT`                | Mode of Operation display, mapped to `6061h`                                    |
+|        | controlWord                       | `UINT`                | Register used for sending control to the drive, mapped to `6040h`               |
+|        | statusWord                        | `UINT`                | Register used for recieving status from the drive, mapped to `6041h`            |
+| Input  | actVelocity                       | `INT`                 | Feedback from drive with its' actual rotating speed, mapped to `6043h`          |
+|        | actPosition                       | `DINT`                | Feedback from drive with its' actual position, mapped too `6064h`               |
+| Output | targetVelocity                    | `INT`                 | Target velocity sent to the drive in velocity mode, mapped to `6042h`           |
+| Inter  | velocityUnits                     | `IMC_VelocityUnits`   | Variable allows switching velocity units of an axis. Default: `IMC_RPM`. See description of `IMC_VelocityUnits` data type       |
+|        | distancePerRevolution             | `LREAL`               | Variable allows to change distance per revolution of an axis, thus user can automatically scale from PUU to engineering units (ie. mm)   |
+|        | encoderPulses                     | `DINT`                | Variable allows to change encoder pulses per revolution of a motor (if it has one), and thus scale from PUU to engineering units (ie. mm)                    |
+|        | controllerMode                    | `IMC_ControllerMode`  | Controller mode set by the class. See description on IMC_ControllerMode         |
+|        | realControllerMode                | `IMC_ControllerMode`  | Real controller mode feedback by inverter drive. See description of IMC_ControllerMode            |
+|        | xActDirection                     | `IMC Direction`       | Real direction feedback by inverter drive. See description of IMC_Direction     |
+|        | xSetDirection                     | `IMC Direction`       | Set dircetion by the function block to inverter drive. See description of IMC_Direction            |
+|        | motionStatus                      | `IMC_Motion_State`    | Actual motion status of the inverter drive. See description of IMC_Motion_State |
+|        | axisStatus                        | `IMC_Axis_State`      | Axis state with regard to PLCOpen axis state - with some exclusion, that are not possible to execute on inverter drives (ie. syncrhonized motion). See description of IMC_Axis_State               |
+|        | FBError                           | `BOOL`                | Error happend during execution of function block that used this Axis            |
+|        | FBErrorID                         | `IMC_Error`           | Error code, that happend during execution of function block that used this Axis |
+|        | fActVelocity                      | `LREAL`               | Actual velocity feedback by inverter drive. Scaled regarding variable `velocityUnits`              |
+|        | fActPosition                      | `LREAL`               | Actual position feedback by inverter drive.                                     |
+|        | fActTorque                        | `LREAL`               | Actual torque feedback by inverter drive. Scale in %                            |
+|        | fSetAcceleration                  | `LREAL`               | Set acceleration by the function block to inverter drive                        |
+|        | fSetAcceleration                  | `LREAL`               | Set acceleration by the function block to inverter drive                        |
+|        | fSetVelocity                      | `LREAL`               | Set velocity bu the block to inverter drive. Scaled regarding variable `velocityUnits`            |
+|        | fPrevVelocity                     | `LREAL`               | Velocity feedback in previous iteration of the function block. Scaled regarding variable `velocityUnits`                              |
+|        | iActTorque                        | `INT`                 | Actual torque feedback by inverter drive. Scaled in 0.1% integer value          |
+|        | diSetAcceleration                 | `UDINT`               | Set acceleration by the function block to inverter drive. Scaled in unsigned integer value    |
+|        | diSetDeceleration                 | `UDINT`               | Set deceleration by the function block to inverter drive. Scaled in unsigned integer value    |
+|        | byAxisError                       | `BYTE`                | Error code read from inverter axis                                              |
+|        | byAxisWarning                     | `BYTE`                | Warning code read from inverter axis                                            |
+
 
 
 ### IMC_VelocityUnits (Enum)
@@ -269,7 +293,7 @@ Enumeration data type, represents direction of set motion.
 | IMC_Positive    | 1       | Drive is moving in positive direction                                                                              |
 | IMC_Negative    | 3       | Drive is moving in negative direction                                                                              |
 
-### IMC_MotionState (Enum)
+### IMC_Motion_State (Enum)
 Enumeration data type, represents direction of set motion.
 
 | Name                    | Initial | Comment                                                                                                            |
@@ -283,7 +307,7 @@ Enumeration data type, represents direction of set motion.
 - [x] Testing velocity mode
 - [ ] Add reading ControllerMode and VelocityUnits
 - [x] Switch to Inverter Function Block from structure
-- [ ] Test Inverter class
+- [x] Test Inverter class
 - [ ] Add Positioning mode
 - [ ] Test position mode
 - [ ] Add jog
