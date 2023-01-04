@@ -122,6 +122,39 @@ Block is being executed when **Enable** input is `TRUE`. When block is executing
 |        | ErrorID              | `IC_Error`           | Error identification - see description of type IC_Error           |
 |        | Torque               | `LREAL`              | Actual torque read from a drive                                   |
 
+### IC_ReadControllerMode
+Diagnostic function block, that allows reading actual controller mode set on inverter axis.
+
+Block is being executed when **Enable** input is `TRUE`. When block is executing **Busy** output is `TRUE`, when **ControllerMode** has actual value - **Valid** output is `TRUE`. Actual controller mode is written to **ControllerMode** output. If any error occur during execution of this block **Error** output will be `TRUE` and error code could be checked in **ErrorID**
+
+![obraz](https://user-images.githubusercontent.com/109360131/210572333-03028a3a-0e8a-4b6d-a697-31431059e206.png)
+| Scope  | Name                 | Type                 | Comment                                                           |
+| ------ | -------------------- | -------------------- | -------------                                                     |
+| InOut  | Inverter             | `Inverter_Axis_Ref`  | Reference to inverter - see description of type Inverter_Axis_Ref |
+| Input  | Enable               | `BOOL`               | `TRUE`: Block is being executed                                   |
+| Output | Valid                | `BOOL`               | `TRUE`: Values are up to date                                     |
+|        | Busy                 | `BOOL`               | `TRUE`: Function block is executing                               |
+|        | Error                | `BOOL`               | `TRUE`: Error has occured during function block execution         |
+|        | ErrorID              | `IC_Error`           | Error identification - see description of type IC_Error           |
+|        | ControllerMode       | `IC_ControllerMode`  | Actual controller mode read form device                           |
+
+
+### IC_ReadVelocityUnits
+Diagnostic function block, that allows reading actual velocity units set on inverter axis.
+
+Block is being executed when **Enable** input is `TRUE`. When block is executing **Busy** output is `TRUE`, when **VelocityUnits** has actual value - **Valid** output is `TRUE`. Actual controller mode is written to **VelocityUnits** output. If any error occur during execution of this block **Error** output will be `TRUE` and error code could be checked in **ErrorID**
+
+![obraz](https://user-images.githubusercontent.com/109360131/210572619-084e2247-56d2-4ff6-9c98-66ad1c114c43.png)
+| Scope  | Name                 | Type                 | Comment                                                           |
+| ------ | -------------------- | -------------------- | -------------                                                     |
+| InOut  | Inverter             | `Inverter_Axis_Ref`  | Reference to inverter - see description of type Inverter_Axis_Ref |
+| Input  | Enable               | `BOOL`               | `TRUE`: Block is being executed                                   |
+| Output | Valid                | `BOOL`               | `TRUE`: Values are up to date                                     |
+|        | Busy                 | `BOOL`               | `TRUE`: Function block is executing                               |
+|        | Error                | `BOOL`               | `TRUE`: Error has occured during function block execution         |
+|        | ErrorID              | `IC_Error`           | Error identification - see description of type IC_Error           |
+|        | VelocityUnits        | `IC_VelocityUnits `  | Actual velocity units read form device                            |
+
 ### IC_ReadAxisError
 Diagnostic function block, that allows reading inverter warning and error codes.
 
