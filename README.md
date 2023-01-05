@@ -275,6 +275,52 @@ This function block causes the axis to perform the "search home" sequence. Detai
 |        | Error                | `BOOL`               | `TRUE`: Error has occured during function block execution           |
 |        | ErrorID              | `IC_Error`           | Error identification - see description of type IC_Error             |
 
+### IC_MoveRelative
+The function block commands a motion of a specified distance. The motion ends in standstill. 
+
+The motion starts when **Execute** changes from `False` to true. Distance moved is set with input **Distance** in engineering units. Finished position will be sum of actual position of an axis and **Distance**. Motion profile could be set with inputs **Velocity**, **Acceleration** and **Deceleration**. When motion is finished output **Done** will be set to `TRUE`. When block is operating output **Busy** is `TRUE` and if block is controlling the motion output **Active** is `TRUE` If error occurs during execution of this block output **Error** is set to `TRUE`, error ID can be checked with output **ErrorID**. If motion of an axis is interrupted output **CommandAborted** is set to `TRUE`.
+
+![obraz](https://user-images.githubusercontent.com/109360131/210819616-29da858e-b5be-4dae-88b9-6ed3e5e2e89e.png)
+
+
+| Scope  | Name                 | Type                 | Comment                                                                            |
+| ------ | -------------------- | -------------------- | -------------                                                                      |
+| InOut  | Inverter             | `Inverter_Axis_Ref`  | Reference to inverter - see description of type Inverter_Axis_Ref                  |
+| Input  | Execute              | `BOOL`               | `TRUE`: Block is being executed                                                    |
+|        | Distance             | `LREAL`              | Offset distance to which axis will be moved                                        |
+|        | Velocity             | `LREAL`              | Maximum velocity to which axis will accelerate                                     |
+|        | Acceleration         | `LREAL`              | Acceleration time in second in which axis will reach `Velocity`                    |
+|        | Deceleration         | `LREAL`              | Deceleration time in second in which axis will reach full stop from `Velocity`     |
+| Output | Done                 | `BOOL`               | `TRUE`: Motion is finished                                                         |
+|        | Busy                 | `BOOL`               | `TRUE`: Function block is executing                                                |
+|        | Active               | `BOOL`               | `TRUE`: Block is controlling motion of an axis                                     |
+|        | CommandAborted       | `BOOL`               | `TRUE`: Execution of function block was interrupted                                |
+|        | Error                | `BOOL`               | `TRUE`: Error has occured during function block execution                          |
+|        | ErrorID              | `IC_Error`           | Error identification - see description of type IC_Error                            |
+
+### IC_MoveAbsolute
+The function block commands a motion to the specifed location. The motion ends in standstill. 
+
+The motion starts when **Execute** changes from `False` to true. Distance moved is set with input **Position** in engineering units. Finished position will be position set with input **Position**. Motion profile could be set with inputs **Velocity**, **Acceleration** and **Deceleration**. When motion is finished output **Done** will be set to `TRUE`. When block is operating output **Busy** is `TRUE` and if block is controlling the motion output **Active** is `TRUE` If error occurs during execution of this block output **Error** is set to `TRUE`, error ID can be checked with output **ErrorID**. If motion of an axis is interrupted output **CommandAborted** is set to `TRUE`.
+
+![obraz](https://user-images.githubusercontent.com/109360131/210819616-29da858e-b5be-4dae-88b9-6ed3e5e2e89e.png)
+
+
+| Scope  | Name                 | Type                 | Comment                                                                            |
+| ------ | -------------------- | -------------------- | -------------                                                                      |
+| InOut  | Inverter             | `Inverter_Axis_Ref`  | Reference to inverter - see description of type Inverter_Axis_Ref                  |
+| Input  | Execute              | `BOOL`               | `TRUE`: Block is being executed                                                    |
+|        | Distance             | `LREAL`              | Target position of the motion                                                      |
+|        | Velocity             | `LREAL`              | Maximum velocity to which axis will accelerate                                     |
+|        | Acceleration         | `LREAL`              | Acceleration time in second in which axis will reach `Velocity`                    |
+|        | Deceleration         | `LREAL`              | Deceleration time in second in which axis will reach full stop from `Velocity`     |
+| Output | Done                 | `BOOL`               | `TRUE`: Motion is finished                                                         |
+|        | Busy                 | `BOOL`               | `TRUE`: Function block is executing                                                |
+|        | Active               | `BOOL`               | `TRUE`: Block is controlling motion of an axis                                     |
+|        | CommandAborted       | `BOOL`               | `TRUE`: Execution of function block was interrupted                                |
+|        | Error                | `BOOL`               | `TRUE`: Error has occured during function block execution                          |
+|        | ErrorID              | `IC_Error`           | Error identification - see description of type IC_Error                            |
+
 ## Library defined data types
 Library defines several data types. Their descripition you may find below.
 
