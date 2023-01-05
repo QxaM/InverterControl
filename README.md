@@ -461,8 +461,8 @@ Enumeration data type, represents homing sequences introduced by CoE402 standard
 - [x] Test Inverter class
 - [x] Add Homing mode
 - [x] Tested Homing mode
-- [ ] Add Positioning mode
-- [ ] Test position mode
+- [x] Add Positioning mode
+- [x] Test position mode
 - [ ] Add jog
 - [ ] Add Torque mode
 - [ ] Test torque mode
