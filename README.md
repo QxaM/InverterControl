@@ -73,6 +73,24 @@ When block is being executed output **Busy** is `TRUE`, when axis has set the co
 |        | Error                | `BOOL`               | `TRUE`: Error has occured during function block execution         |
 |        | ErrorID              | `IC_Error`           | Error identification - see description of type IC_Error           |
 
+### IC_HomingConfig
+This function block, allows to configure search home sequence. To configure the sequence function block inputs are used. Input **HomingMode** allows to choose homing sequence. Homing sequence is generally defined by manufacturers. You may see the description of `IMC_Homing_Mode` for general sequence introduced by CoE402 standard. **FirstHomingSpeed** allows to set homing speed in `IMC_VelocityUnits` when looking for reference signal. **SecondHomingSpeed** allows to set homing speed in `IMC_VelocityUnits` when looking for Z phase. Input **Acceleration** allows to set acceleration times when homing.
+
+![obraz](https://user-images.githubusercontent.com/109360131/210771882-f95705ce-45ad-4032-b87b-86a41b4fcda3.png)
+
+| Scope  | Name                 | Type                 | Comment                                                                                       |
+| ------ | -------------------- | -------------------- | -------------                                                                                 |
+| InOut  | Inverter             | `Inverter_Axis_Ref`  | Reference to inverter - see description of type Inverter_Axis_Ref                             |
+| Input  | Execute              | `BOOL`               | `TRUE`: Block is being executed                                                               |
+|        | HomingMode           | `IMC_Homing_Mode`    | Sequence of homing procedure. See description of IMC_Homin_Mode.                              |
+|        | FirstHomingSpeed     | `LREAL`              | Speed while looking for reference signal. Scaled in IMC_VelocityUnits actually set on drive.  |
+|        | SecondHomingSpeed    | `LREAL`              | Speed while looking for Z-phase signal. Scaled in IMC_VelocityUnits actually set on drive.    |
+|        | AccelerationTime     | `LREAL`              | Acceleration time in which drive will reach `FirstHomingSpeed` in seconds                     |
+| Output | Done                 | `BOOL`               | `TRUE`: Finished homing sequence                                                              |
+|        | Busy                 | `BOOL`               | `TRUE`: Function block is executing                                                           |
+|        | Error                | `BOOL`               | `TRUE`: Error has occured during function block execution                                     |
+|        | ErrorID              | `IC_Error`           | Error identification - see description of type IC_Error                                       |
+
 ### IC_ReadActualPosition
 Diagnostic function block, that allows reading actual position of inverter axis. Actual position is read in milimeters - distance per revolution and encoder pulses are used for scaling (see `Inverter_Axis_Ref` for further details).
 
@@ -196,7 +214,7 @@ Block is being executed when **Enable** input is `TRUE`. When block is executing
 |        | Accelerating         | `BOOL`               | Axis is accelerating                                              |
 |        | Decelerating         | `BOOL`               | Axis is decelerating                                              |
 
-###IC_MoveVelocity
+### IC_MoveVelocity
 This function block causes an endless motion at a specified velocity. Inverter has to be set in velocity mode to be controlled with this function block. **Velocity** units depend on velocity unit set in inverter. **Acceleration** and **deceleration** ramps are both scaled in seconds and entered as `LREAL` values.
 
 It is possible to change velocity on the fly, block is executed based on **Enable** state. 
@@ -237,6 +255,22 @@ Timing execution of this function block is shown in diagram below. When **Execut
 | Input  | Execute              | `BOOL`               | `TRUE`: Block is being executed                                     |
 |        | DecelerationTime     | `LREAL`              | Deceleration time in seconds in which motor will reach full stop from  maximum velocity. Is always positive |
 | Output | Done                 | `BOOL`               | `TRUE`: Axis has reached a stop                                     |
+|        | Busy                 | `BOOL`               | `TRUE`: Function block is executing                                 |
+|        | Error                | `BOOL`               | `TRUE`: Error has occured during function block execution           |
+|        | ErrorID              | `IC_Error`           | Error identification - see description of type IC_Error             |
+
+### IC_Home
+This function block causes the axis to perform the "search home" sequence. Details of this sequence might be changed with `IC_HomingConfig` function block and generally are defined by manufacturer. The **Position** input is used to set the absolute position offset when reference signal is detected.
+
+![obraz](https://user-images.githubusercontent.com/109360131/210769433-09ddcea4-d518-4eae-b2d8-a9f670cf3e17.png)
+
+
+| Scope  | Name                 | Type                 | Comment                                                             |
+| ------ | -------------------- | -------------------- | -------------                                                       |
+| InOut  | Inverter             | `Inverter_Axis_Ref`  | Reference to inverter - see description of type Inverter_Axis_Ref   |
+| Input  | Execute              | `BOOL`               | `TRUE`: Block is being executed                                     |
+|        | Position             | `LREAL`              | Absolute position offset when the refernce signal is detected       |
+| Output | Done                 | `BOOL`               | `TRUE`: Search home procedure is finished                           |
 |        | Busy                 | `BOOL`               | `TRUE`: Function block is executing                                 |
 |        | Error                | `BOOL`               | `TRUE`: Error has occured during function block execution           |
 |        | ErrorID              | `IC_Error`           | Error identification - see description of type IC_Error             |
