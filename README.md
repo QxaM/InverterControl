@@ -370,11 +370,51 @@ Enumeration data type, represents direction of set motion.
 | IMC_Decelerating        | 3       | Drive is decelerating                                                                                              |
 | IMC_Standstill          | 4       | Drive has zero velocity                                                                                            |
 
+### IMC_Homing_Mode (Enum)
+Enumeration data type, represents homing sequences introduced by CoE402 standard. For more information seek description of CoE402 or DS402 standard or manual for device (ie. Delta C2000).
+
+| Name                                                                          | Initial | Comment                                                                                                                                                                            |
+| ----------------------------------------------------------------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| NEGATIVE_DIRECTION_LIMIT_AND_Z_PHASE                                          | 1       | Execute homing in the negative direction until encountering negative limit switch. Then, direction is reversed to locate Z-phase                                                                           |
+| POSITIVE_DIRECTION_LIMIT_AND_Z_PHASE                                          | 2       | Execute homing in the positive direction until encountering positive limit switch. Then, direction is reversed to locate Z-phase                                                                           |
+| POSITIVE_DIRECTION_ORIGIN_AND_Z_PHASE_IN_NEGATIVE_DIRECTION                   | 3       | Execute homing in the positive direction until encountering reference signal. Then, direction is reversed to locate Z-phase. Stops when encountering positive limit switch                        |
+| POSITIVE_DIRECTION_ORIGIN_AND_Z_PHASE_IN_POSITIVE_DIRECTION                   | 4       | Execute homing in the positive direction until encountering reference signal. Then continue to locate Z-phase. Stops when encountering positive limit switch                                      |
+| NEGATIVE_DIRECTION_ORIGIN_AND_Z_PHASE_IN_POSITIVE_DIRECTION                   | 5       | Execute homing in the negative direction until encountering reference signal. Then, direction is reversed to locate Z-phase. Stops when encountering negative limit switch                        |
+| NEGATIVE_DIRECTION_ORIGIN_AND_Z_PHASE_IN_NEGATIVE_DIRECTION                   | 6       | Execute homing in the negative direction until encountering reference signal. Then continue to locate Z-phase. Stops when encountering negative limit switch                                      |
+| POSITIVE_DIRECTION_ORIGIN_AND_Z_PHASE_IN_NEGATIVE_DIRECTION_LIMIT_REVERSING   | 7       | Execute homing in the positive direction until encountering reference signal. Then, direction is reversed to locate Z-phase. Direction is reversed when positive limit is encountered             |
+| POSITIVE_DIRECTION_ORIGIN_AND_Z_PHASE_IN_POSITIVE_DIRECTION_LIMIT_REVERSING   | 8       | Execute homing in the positive direction until encountering reference signal. Then continue to locate Z-phase. Direction is reversed when positive limit is encountered                           |
+| POSITIVE_DIRECTION_ORIGIN_AND_Z_PHASE_IN_NEGATIVE_DIRECTION_LIMIT_REVERSING_2 | 9       | Execute homing in the positive direction until encountering reference signal. Then, direction is reversed to locate Z-phase. Direction is reversed when positive limit is encountered             |
+| POSITIVE_DIRECTION_ORIGIN_AND_Z_PHASE_IN_POSITIVE_DIRECTION_LIMIT_REVERSING_2 | 10       | Execute homing in the positive direction until encountering reference signal. Then continue to locate Z-phase. Direction is reversed when positive limit is encountered                           |
+| NEGATIVE_DIRECTION_ORIGIN_AND_Z_PHASE_IN_POSITVE_DIRECTION_LIMIT_REVERSING    | 11       | Execute homing in the negative direction until encountering reference signal. Then, direction is reversed to locate Z-phase. Direction is reversed when negative limit is encountered             |
+| NEGATIVE_DIRECTION_ORIGIN_AND_Z_PHASE_IN_NEGATIVE_DIRECTION_LIMIT_REVERSING   | 12       | Execute homing in the negative direction until encountering reference signal. Then continue to locate Z-phase. Direction is reversed when negative limit is encountered                           |
+| NEGATIVE_DIRECTION_ORIGIN_AND_Z_PHASE_IN_POSITIVE_DIRECTION_LIMIT_REVERSING_2 | 13       | Execute homing in the negative direction until encountering reference signal. Then, direction is reversed to locate Z-phase. Direction is reversed when negative limit is encountered             |
+| NEGATIVE_DIRECTION_ORIGIN_AND_Z_PHASE_IN_NEGATIVE_DIRECTION_LIMIT_REVERSING_2 | 14       | xecute homing in the negative direction until encountering reference signal. Then continue to locate Z-phase. Direction is reversed when negative limit is encountered                           |
+| NEGATIVE_DIRECTION_LIMIT                                                      | 17       | Execute homing in the negative direction until encountering negative limit switch. Use negative limit swtich as the origin                                                                        |
+| POSITIVE_DIRECTION_LIMIT                                                      | 18       | Execute homing in the positive direction until encountering positive limit switch. Use positive limit swtich as the origin                                                                        |
+| POSITIVE_DIRECTION_ORIGIN                                                     | 19       | Execute homing in the positive direction until encountering reference signal. Use reference signal swtich as the origin after reversing. Stops when encountering positive limit switch            |
+| POSITIVE_DIRECTION_ORIGIN_2                                                   | 20       | Execute homing in the positive direction until encountering reference signal. Use reference signal swtich as the origin after reversing. Stops when encountering positive limit switch            |
+| NEGATIVE_DIRECTION_ORIGIN                                                     | 21       | Execute homing in the negative direction until encountering reference signal. Use reference signal swtich as the origin after reversing. Stops when encountering negative limit switch            |
+| NEGATIVE_DIRECTION_ORIGIN_2                                                   | 22       | Execute homing in the negative direction until encountering reference signal. Use reference signal swtich as the origin after reversing. Stops when encountering negative limit switch            |
+| POSITIVE_DIRECTION_ORIGIN_REVERS_LIMIT_REVERSING                              | 23       | Execute homing in the positive direction until encountering reference signal. Use reference signal swtich as the origin after reversing. Direction is reversed when positive limit is encountered |
+| POSITIVE_DIRECTION_ORIGIN_REVERSE_LIMIT_REVERSING_2                           | 24       | Execute homing in the positive direction until encountering reference signal. Use reference signal swtich as the origin after reversing. Direction is reversed when positive limit is encountered |
+| POSITIVE_DIRECTION_ORIGIN_CONTINUE_LIMIT_REVERSING                            | 25       | Execute homing in the positive direction until encountering reference signal. Use reference signal swtich as the origin after continuing. Direction is reversed when positve limit is encountered |
+| POSITIVE_DIRECTION_ORIGIN_CONTINUE_LIMIT_REVERSING_2                          | 26       | Execute homing in the positive direction until encountering reference signal. Use reference signal swtich as the origin after continuing. Direction is reversed when positve limit is encountered |
+| NEGATIVE_DIRECTION_ORIGIN_REVERS_LIMIT_REVERSING                              | 27       | Execute homing in the negative direction until encountering reference signal. Use reference signal swtich as the origin after reversing. Direction is reversed when negative limit is encountered |
+| NEGATIVE_DIRECTION_ORIGIN_REVERSE_LIMIT_REVERSING_2                           | 28       | Execute homing in the negative direction until encountering reference signal. Use reference signal swtich as the origin after reversing. Direction is reversed when negative limit is encountered |
+| NEGATIVE_DIRECTION_ORIGIN_CONTINUE_LIMIT_REVERSING                            | 29       | Execute homing in the negative direction until encountering reference signal. Use reference signal swtich as the origin after continuing. Direction is reversed when negative limit is encountered|
+| NEGATIVE_DIRECTION_ORIGIN_CONTINUE_LIMIT_REVERSING_2                          | 30       | Execute homing in the negative direction until encountering reference signal. Use reference signal swtich as the origin after continuing. Direction is reversed when negative limit is encountered|
+| Z_PHASE_IN_NEGATIVE_DIRECTION                                                 | 33       | Execute homing in the negative direction unitl Z-phase is detected and used as the origin. Stops when encountering negative limit                                                                        |
+| Z_PHASE_IN_POSITIVE_DIRECTION                                                 | 34       | Execute homing in the negative direction unitl Z-phase is detected and used as the origin. Stops when encountering negative limit                                                                        |
+| CURRENT_POSITION_AS_ORIGIN                                                    | 35       | Actual position is set as the origin     |
+
+
 ##TODO
 - [x] Testing velocity mode
-- [ ] Add reading ControllerMode and VelocityUnits
+- [x] Add reading ControllerMode and VelocityUnits
 - [x] Switch to Inverter Function Block from structure
 - [x] Test Inverter class
+- [x] Add Homing mode
+- [x] Tested Homing mode
 - [ ] Add Positioning mode
 - [ ] Test position mode
 - [ ] Add jog
