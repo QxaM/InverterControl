@@ -321,6 +321,24 @@ The motion starts when **Execute** changes from `False` to true. Distance moved 
 |        | Error                | `BOOL`               | `TRUE`: Error has occured during function block execution                          |
 |        | ErrorID              | `IC_Error`           | Error identification - see description of type IC_Error                            |
 
+### IC_TorqueControl
+The function block cammands a motion with the specified torque and speed limit. 
+
+The motion starts when axis is set to Servo ON using IC_Power function block. Set values are sent to drive when input **Enable** is `TRUE`. When enable changes from `TRUE` to `FALSE` inverter is controlled with last values written by the function block. To stop movement of an axis, axis has to be set to Servo OFF using IC_Power.
+
+![obraz](https://user-images.githubusercontent.com/109360131/211329937-e9645f20-760c-4445-9a0d-e4c9930f8ac8.png)
+
+| Scope  | Name                 | Type                 | Comment                                                                            |
+| ------ | -------------------- | -------------------- | -------------                                                                      |
+| InOut  | Inverter             | `Inverter_Axis_Ref`  | Reference to inverter - see description of type Inverter_Axis_Ref                  |
+| Input  | Enable               | `BOOL`               | `TRUE`: Block is being executed                                                    |
+|        | Torque               | `LREAL`              | Target torque for an axis in % and `LREAL` value                                   |
+|        | MaxSpeed             | `LREAL`              | Maximum velocity to which axis will accelerate if axis cannot reach set torque. Scaled in VelocityUnits.                  |
+| Output | InTorque             | `BOOL`               | `TRUE`: Axis has reached it's set torque                                           |
+|        | Busy                 | `BOOL`               | `TRUE`: Block is being executed                                                    |
+|        | Error                | `BOOL`               | `TRUE`: Error has occured during function block execution                          |
+|        | ErrorID              | `IC_Error`           | Error identification - see description of type IC_Error                            |
+
 ## Library defined data types
 Library defines several data types. Their descripition you may find below.
 
@@ -353,6 +371,10 @@ The function block serves as drives interface, containing routines as controllin
 | Input  | actVelocity                       | `INT`                 | Feedback from drive with its' actual rotating speed, mapped to `6043h`          |
 |        | actPosition                       | `DINT`                | Feedback from drive with its' actual position, mapped too `6064h`               |
 | Output | targetVelocity                    | `INT`                 | Target velocity sent to the drive in velocity mode, mapped to `6042h`           |
+|        | targetPosition                    | `DINT`                | Target position sent to the drive in position mode, mapped to `607Ah`           |
+|        | targetTorque                      | `INT`                 | Target torque sent to the drive in torque mode, mapped to `6071h`               |
+|        | maxTorque                         | `INT`                 | Maximum torque the axis can reach in torque mode, mapped to `6072h`. Right now set by default to 150%                              |
+|        | maxSpeed                          | `INT`                 | Maximum velocity the axis can reach in torque mode, mapped to `6080h`.          |
 | Inter  | velocityUnits                     | `IMC_VelocityUnits`   | Variable allows switching velocity units of an axis. Default: `IMC_RPM`. See description of `IMC_VelocityUnits` data type       |
 |        | distancePerRevolution             | `LREAL`               | Variable allows to change distance per revolution of an axis, thus user can automatically scale from PUU to engineering units (ie. mm)   |
 |        | encoderPulses                     | `DINT`                | Variable allows to change encoder pulses per revolution of a motor (if it has one), and thus scale from PUU to engineering units (ie. mm)                    |
@@ -369,11 +391,14 @@ The function block serves as drives interface, containing routines as controllin
 |        | fActTorque                        | `LREAL`               | Actual torque feedback by inverter drive. Scale in %                            |
 |        | fSetAcceleration                  | `LREAL`               | Set acceleration by the function block to inverter drive                        |
 |        | fSetAcceleration                  | `LREAL`               | Set acceleration by the function block to inverter drive                        |
-|        | fSetVelocity                      | `LREAL`               | Set velocity bu the block to inverter drive. Scaled regarding variable `velocityUnits`            |
+|        | fSetVelocity                      | `LREAL`               | Velocity set by the block to inverter drive. Scaled regarding variable `velocityUnits`            |
+|        | fSetPosition                      | `LREAL`               | Position set by the block to inverter drive.                                    |
+|        | fSetTorque                        | `LREAL`               | Torque set by the block to inverter drive.                                      |
+|        | fMaxVelocity                      | `LREAL`               | Maximum velocity scaled in VelocityUnits, that axis will accelerate in Torque Mode.                |
 |        | fPrevVelocity                     | `LREAL`               | Velocity feedback in previous iteration of the function block. Scaled regarding variable `velocityUnits`                              |
 |        | iActTorque                        | `INT`                 | Actual torque feedback by inverter drive. Scaled in 0.1% integer value          |
-|        | diSetAcceleration                 | `UDINT`               | Set acceleration by the function block to inverter drive. Scaled in unsigned integer value    |
-|        | diSetDeceleration                 | `UDINT`               | Set deceleration by the function block to inverter drive. Scaled in unsigned integer value    |
+|        | udiSetAcceleration                | `UDINT`               | Set acceleration by the function block to inverter drive. Scaled in unsigned integer value    |
+|        | udiSetDeceleration                | `UDINT`               | Set deceleration by the function block to inverter drive. Scaled in unsigned integer value    |
 |        | byAxisError                       | `BYTE`                | Error code read from inverter axis                                              |
 |        | byAxisWarning                     | `BYTE`                | Warning code read from inverter axis                                            |
 
@@ -464,7 +489,7 @@ Enumeration data type, represents homing sequences introduced by CoE402 standard
 - [x] Add Positioning mode
 - [x] Test position mode
 - [ ] Add jog
-- [ ] Add Torque mode
-- [ ] Test torque mode
+- [x] Add Torque mode
+- [x] Test torque mode
 - [ ] Test mode switching on the fly
-- [ ] Testing on AX3 (different library for ETC_SDO)
+- [ ] Tests on AX3 (different library for ETC_SDO)
